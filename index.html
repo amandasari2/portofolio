@@ -1,0 +1,1531 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="AS.png" type="image/png" />
+    <link rel="shortcut icon" href="AS.png" type="image/png" />
+    <title>Portofolio - Amanda Sari</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- Tautan Font Awesome untuk ikon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#165DFF",
+              dark: "#1E293B",
+            },
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .content-auto {
+          content-visibility: auto;
+        }
+        .card-hover {
+          transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+          transform: translateY(-5px);
+          box-shadow:
+            0 10px 25px -5px rgba(0, 0, 0, 0.1),
+            0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+      }
+
+      /* Gaya kursor kedap-kedip */
+      .kursor {
+        display: inline-block;
+        width: 3px;
+        height: 1em;
+        background-color: #165dff; /* Warna sesuai kelas text-primary */
+        margin-left: 2px;
+        animation: kedip 0.7s infinite;
+        vertical-align: middle;
+      }
+
+      @keyframes kedip {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-700 leading-relaxed">
+    <!-- Navigasi -->
+    <nav class="bg-white shadow-sm fixed w-full z-50">
+      <div
+        class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center"
+      >
+        <a
+          href="#"
+          class="flex items-center gap-2 text-xl font-bold text-primary"
+        >
+          <!-- Logo Inisial AS -->
+          <span
+            class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm"
+          >
+            AS
+          </span>
+          Amanda<span class="text-dark"> Sari</span>
+        </a>
+
+        <div class="hidden md:flex items-center space-x-8">
+          <a
+            href="#tentang"
+            class="font-medium hover:text-primary transition-colors"
+            >Tentang Saya</a
+          >
+          <a
+            href="#pendidikan"
+            class="font-medium hover:text-primary transition-colors"
+            >Pendidikan</a
+          >
+          <a
+            href="#pengalaman"
+            class="font-medium hover:text-primary transition-colors"
+            >Pengalaman</a
+          >
+          <a
+            href="#sertifikat"
+            class="font-medium hover:text-primary transition-colors"
+            >Sertifikat</a
+          >
+          <a
+            href="#proyek"
+            class="font-medium hover:text-primary transition-colors"
+            >Proyek</a
+          >
+          <a
+            href="#keahlian"
+            class="font-medium hover:text-primary transition-colors"
+            >Keahlian</a
+          >
+          <a
+            href="#kontak"
+            class="font-medium hover:text-primary transition-colors"
+            >Kontak</a
+          >
+        </div>
+
+        <button id="menuToggle" class="md:hidden text-gray-700 z-50 relative">
+          <i class="fa fa-bars text-xl"></i>
+        </button>
+
+        <!-- Menu Samping untuk HP -->
+        <div
+          id="mobileMenu"
+          class="fixed top-0 left-0 h-full w-4/5 max-w-xs bg-white shadow-2xl z-[60] transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden"
+        >
+          <div class="p-5 flex flex-col h-full">
+            <div class="flex justify-between items-center border-b pb-4 mb-4">
+              <span class="text-lg font-bold text-primary">Menu</span>
+              <button id="closeMenu" class="text-gray-500 hover:text-red-500">
+                <i class="fa fa-times text-xl"></i>
+              </button>
+            </div>
+            <div class="flex flex-col space-y-4">
+              <a
+                href="#tentang"
+                class="font-medium py-2 px-3 rounded hover:bg-blue-50 hover:text-primary transition-colors"
+                >Tentang Saya</a
+              >
+              <a
+                href="#pendidikan"
+                class="font-medium py-2 px-3 rounded hover:bg-blue-50 hover:text-primary transition-colors"
+                >Pendidikan</a
+              >
+              <a
+                href="#pengalaman"
+                class="font-medium py-2 px-3 rounded hover:bg-blue-50 hover:text-primary transition-colors"
+                >Pengalaman</a
+              >
+              <a
+                href="#sertifikat"
+                class="font-medium py-2 px-3 rounded hover:bg-blue-50 hover:text-primary transition-colors"
+                >Sertifikat</a
+              >
+              <a
+                href="#proyek"
+                class="font-medium py-2 px-3 rounded hover:bg-blue-50 hover:text-primary transition-colors"
+                >Proyek</a
+              >
+              <a
+                href="#keahlian"
+                class="font-medium py-2 px-3 rounded hover:bg-blue-50 hover:text-primary transition-colors"
+                >Keahlian</a
+              >
+              <a
+                href="#kontak"
+                class="font-medium py-2 px-3 rounded hover:bg-blue-50 hover:text-primary transition-colors"
+                >Kontak</a
+              >
+            </div>
+            <div
+              class="mt-auto pt-4 border-t text-center text-sm text-gray-500"
+            >
+              Amanda Sari © 2026
+            </div>
+          </div>
+        </div>
+
+        <!-- Latar belakang gelap saat menu terbuka -->
+        <div
+          id="overlay"
+          class="fixed inset-0 bg-black/50 z-[55] hidden md:hidden"
+        ></div>
+      </div>
+    </nav>
+
+    <!-- Bagian Pahlawan -->
+    <header
+      class="pt-28 pb-16 md:pt-36 md:pb-24 bg-gradient-to-b from-blue-50 to-gray-50"
+    >
+      <div class="container mx-auto px-4 md:px-8">
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="order-2 md:order-1">
+            <h1
+              class="text-[clamp(2rem,5vw,3.2rem)] font-bold text-gray-800 leading-tight mb-4"
+            >
+              Halo, Saya <br />
+              <span class="text-primary" id="teks-diketik"></span
+              ><span class="kursor"></span>
+            </h1>
+
+            <h2
+              class="text-[clamp(1.1rem,2.5vw,1.5rem)] font-medium text-gray-600 mb-6"
+            >
+              Pengembang Web & Lulusan Sistem Informasi
+            </h2>
+            <p class="text-gray-600 text-lg mb-8 max-w-xl">
+              Saya memiliki ketertarikan besar dalam dunia teknologi, baik dalam
+              pengembangan sistem berbasis web maupun pengelolaan data.
+              Berpengalaman menciptakan solusi digital yang rapi, efisien, dan
+              mudah digunakan sehari-hari.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a
+                href="#kontak"
+                class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg font-medium transition-colors shadow-lg shadow-primary/20"
+              >
+                Hubungi Saya
+              </a>
+              <a
+                href="#proyek"
+                class="bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 px-8 py-3 rounded-lg font-medium transition-colors shadow-md"
+              >
+                Lihat Karya Saya
+              </a>
+            </div>
+          </div>
+          <div class="order-1 md:order-2 flex justify-center">
+            <div class="relative w-[280px] h-[280px] md:w-[380px] md:h-[380px]">
+              <div
+                class="absolute inset-0 rounded-full bg-primary/10 -z-10 transform translate-x-4 translate-y-4"
+              ></div>
+              <img
+                src="foto.jpg"
+                alt="Foto Profil Amanda Sari"
+                class="w-full h-full object-cover rounded-full border-8 border-white shadow-xl"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-8 py-12">
+      <!-- Bagian Tentang Saya -->
+      <section id="tentang" class="mb-12 md:mb-16">
+        <div class="bg-white rounded-xl shadow-md p-6 md:p-8 card-hover">
+          <h2
+            class="text-[clamp(1.4rem,3vw,1.8rem)] font-bold text-gray-800 border-l-4 border-primary pl-4 mb-6"
+          >
+            Tentang Saya
+          </h2>
+          <div class="space-y-4 text-gray-600">
+            <p>
+              Saya merupakan lulusan Sarjana Sistem Informasi dari Universitas
+              Royal Kisaran. Selama menempuh pendidikan maupun pengalaman kerja,
+              saya telah terbiasa berurusan dengan pengolahan data, penyusunan
+              dokumen, hingga pembuatan aplikasi berbasis web. Saya selalu
+              berusaha mengerjakan segala sesuatu dengan teliti, rapi, dan
+              terstruktur agar hasilnya maksimal.
+            </p>
+            <p>
+              Saya memiliki bekal kemampuan teknis yang beragam, mulai dari
+              penguasaan perangkat lunak perkantoran seperti Microsoft Office
+              hingga berbagai teknologi pengembangan web seperti PHP, Laravel,
+              HTML, CSS, dan JavaScript. Kombinasi kemampuan ini membuat saya
+              mampu menjembatani kebutuhan administrasi dengan solusi teknologi
+              yang tepat.
+            </p>
+            <p>
+              Dengan latar belakang dan keahlian yang saya miliki, saya siap
+              berkontribusi dan beradaptasi baik dalam lingkungan kerja yang
+              berfokus pada pengelolaan administrasi maupun dalam tim
+              pengembangan sistem informasi untuk mendukung kemajuan operasional
+              perusahaan atau instansi.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian Pendidikan -->
+      <section id="pendidikan" class="mb-12 md:mb-16">
+        <div class="bg-white rounded-xl shadow-md p-6 md:p-8 card-hover">
+          <h2
+            class="text-[clamp(1.4rem,3vw,1.8rem)] font-bold text-gray-800 border-l-4 border-primary pl-4 mb-6"
+          >
+            Riwayat Pendidikan
+          </h2>
+
+          <div class="space-y-8">
+            <!-- Pendidikan 1 -->
+            <div class="flex gap-5">
+              <div class="flex flex-col items-center">
+                <div
+                  class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                >
+                  <i class="fa fa-graduation-cap"></i>
+                </div>
+                <div class="h-full w-0.5 bg-gray-200 mt-3"></div>
+              </div>
+              <div class="pb-2">
+                <div class="flex flex-wrap items-center gap-2 mb-1">
+                  <h3 class="text-lg font-semibold text-gray-800">
+                    Universitas Royal Kisaran
+                  </h3>
+                  <span
+                    class="text-sm bg-blue-50 text-primary px-2 py-0.5 rounded"
+                    >2021 - 2025</span
+                  >
+                </div>
+                <p class="text-gray-500 mb-2">
+                  Sarjana Sistem Informasi - Fakultas Ilmu Komputer
+                </p>
+                <p class="text-gray-600">
+                  Menyelesaikan pendidikan dengan fokus pada pengembangan
+                  perangkat lunak, basis data, dan sistem informasi. Mengerjakan
+                  tugas akhir berupa pembangunan sistem E-CRM untuk Usaha Mikro.
+                </p>
+              </div>
+            </div>
+
+            <!-- Pendidikan 2 -->
+            <div class="flex gap-5">
+              <div class="flex flex-col items-center">
+                <div
+                  class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                >
+                  <i class="fa fa-school"></i>
+                </div>
+                <div class="h-full w-0.5 bg-gray-200 mt-3"></div>
+              </div>
+              <div class="pb-2">
+                <div class="flex flex-wrap items-center gap-2 mb-1">
+                  <h3 class="text-lg font-semibold text-gray-800">
+                    Madrasah Aliyah Negeri Asahan
+                  </h3>
+                  <span
+                    class="text-sm bg-blue-50 text-primary px-2 py-0.5 rounded"
+                    >2018 - 2021</span
+                  >
+                </div>
+                <p class="text-gray-500 mb-2">Ilmu Pengetahuan Sosial (IPS)</p>
+                <p class="text-gray-600">
+                  Mempelajari dasar-dasar ilmu sosial, ekonomi, administrasi,
+                  dan pengolahan informasi. Memperoleh keterampilan dalam
+                  analisis data, komunikasi, serta pemahaman tata kelola
+                  organisasi yang mendukung kemampuan saya dalam dunia kerja
+                  maupun pengembangan sistem informasi.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian Pengalaman Kerja & Magang -->
+      <section id="pengalaman" class="mb-12 md:mb-16">
+        <div class="bg-white rounded-xl shadow-md p-6 md:p-8 card-hover">
+          <h2
+            class="text-[clamp(1.4rem,3vw,1.8rem)] font-bold text-gray-800 border-l-4 border-primary pl-4 mb-6"
+          >
+            Pengalaman Kerja & Magang
+          </h2>
+
+          <div class="space-y-8">
+            <!-- Pengalaman 1: Staff Administrasi -->
+            <div class="flex gap-5">
+              <div class="flex flex-col items-center">
+                <div
+                  class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                >
+                  <i class="fa fa-briefcase"></i>
+                </div>
+                <div class="h-full w-0.5 bg-gray-200 mt-3"></div>
+              </div>
+              <div class="pb-2">
+                <div class="flex flex-wrap items-center gap-2 mb-1">
+                  <h3 class="text-lg font-semibold text-gray-800">
+                    Staf Administrasi
+                  </h3>
+                  <span
+                    class="text-sm bg-blue-50 text-primary px-2 py-0.5 rounded"
+                    >Juni 2025 – September 2025</span
+                  >
+                </div>
+                <p class="text-gray-500 mb-2">Fotokopi Panca, Kisaran</p>
+                <p class="text-gray-600 mb-3">
+                  Bertanggung jawab dalam mendukung kelancaran operasional
+                  harian usaha, khususnya yang berkaitan dengan pengelolaan
+                  dokumen dan data.
+                </p>
+                <ul class="list-disc pl-5 text-gray-600 space-y-1">
+                  <li>
+                    Menginput berbagai jenis data administrasi serta mengelola
+                    sistem pengarsipan agar tertata rapi dan terstruktur
+                  </li>
+                  <li>
+                    Menyusun dan mencetak laporan kegiatan harian sebagai bahan
+                    evaluasi operasional
+                  </li>
+                  <li>
+                    Membantu kebutuhan pelanggan, mulai dari pemrosesan hingga
+                    pengecekan kelengkapan dokumen
+                  </li>
+                  <li>
+                    Memastikan seluruh data dan berkas tersimpan dengan rapi
+                    sehingga mudah ditemukan kembali saat diperlukan
+                  </li>
+                  <li>
+                    Terbiasa bekerja secara disiplin untuk menyelesaikan tugas
+                    sesuai target dan batas waktu yang ditentukan
+                  </li>
+                  <li>
+                    Memberikan pelayanan yang ramah, sopan, dan profesional
+                    kepada setiap pelanggan yang datang
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Pengalaman 2: KKL BPS -->
+            <div class="flex gap-5">
+              <div class="flex flex-col items-center">
+                <div
+                  class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                >
+                  <i class="fa fa-building"></i>
+                </div>
+                <div class="h-full w-0.5 bg-gray-200 mt-3"></div>
+              </div>
+              <div class="pb-2">
+                <div class="flex flex-wrap items-center gap-2 mb-1">
+                  <h3 class="text-lg font-semibold text-gray-800">
+                    Kuliah Kerja Lapangan (KKL)
+                  </h3>
+                  <span
+                    class="text-sm bg-blue-50 text-primary px-2 py-0.5 rounded"
+                    >Agustus 2024 – September 2024</span
+                  >
+                </div>
+                <p class="text-gray-500 mb-2">
+                  Badan Pusat Statistik (BPS) Kabupaten Asahan
+                </p>
+                <p class="text-gray-600 mb-3">
+                  Melaksanakan kegiatan praktik lapangan di instansi
+                  pemerintahan, di mana saya belajar dan terlibat langsung dalam
+                  proses pengolahan data berskala besar.
+                </p>
+                <ul class="list-disc pl-5 text-gray-600 space-y-1">
+                  <li>
+                    Membantu proses pengumpulan, pengolahan, serta pemeriksaan
+                    keabsahan data statistik wilayah
+                  </li>
+                  <li>
+                    Menyusun ringkasan informasi dan laporan berkala harian
+                    maupun mingguan berdasarkan data yang telah diolah
+                  </li>
+                  <li>
+                    Mendukung kelancaran kegiatan administrasi serta
+                    mendokumentasikan arsip instansi dengan baik
+                  </li>
+                  <li>
+                    Bekerja sama dengan anggota tim untuk menjamin tingkat
+                    ketelitian dan keakuratan data yang dihasilkan
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Pengalaman 3: MSIB Nurul Fikri -->
+            <div class="flex gap-5">
+              <div class="flex flex-col items-center">
+                <div
+                  class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                >
+                  <i class="fa fa-code"></i>
+                </div>
+                <div class="h-full w-0.5 bg-gray-200 mt-3"></div>
+              </div>
+              <div class="pb-2">
+                <div class="flex flex-wrap items-center gap-2 mb-1">
+                  <h3 class="text-lg font-semibold text-gray-800">
+                    Program MSIB – Akademi Fullstack Web Developer
+                  </h3>
+                  <span
+                    class="text-sm bg-blue-50 text-primary px-2 py-0.5 rounded"
+                    >Februari 2024 – Juni 2024</span
+                  >
+                </div>
+                <p class="text-gray-500 mb-2">PT. Nurul Fikri Cipta Inovasi</p>
+                <p class="text-gray-600 mb-3">
+                  Mengikuti program pelatihan dan magang bersertifikat tingkat
+                  nasional, di mana saya mendalami keterampilan pengembangan
+                  perangkat lunak dari tahap perancangan hingga penerapan.
+                </p>
+                <ul class="list-disc pl-5 text-gray-600 space-y-1">
+                  <li>
+                    Membangun dan mengembangkan berbagai jenis aplikasi berbasis
+                    web menggunakan bahasa pemrograman PHP dan kerangka kerja
+                    Laravel
+                  </li>
+                  <li>
+                    Merancang serta membuat tampilan antarmuka situs web yang
+                    menarik dan mudah digunakan dengan bantuan HTML, CSS, dan
+                    JavaScript
+                  </li>
+                  <li>
+                    Mengelola dan merancang struktur basis data menggunakan
+                    sistem manajemen MySQL agar data tersimpan dengan aman dan
+                    terorganisir
+                  </li>
+                  <li>
+                    Terbiasa menggunakan sistem pengendalian versi Git untuk
+                    memudahkan kerja sama tim dalam pengembangan proyek
+                    perangkat lunak
+                  </li>
+                  <li>
+                    Memahami dan menerapkan tahapan serta alur kerja standar
+                    dalam pembangunan sebuah sistem informasi berbasis web
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian Sertifikat & Pelatihan -->
+      <section id="sertifikat" class="mb-12 md:mb-16">
+        <div class="bg-white rounded-xl shadow-md p-6 md:p-8 card-hover">
+          <h2
+            class="text-[clamp(1.4rem,3vw,1.8rem)] font-bold text-gray-800 border-l-4 border-primary pl-4 mb-6"
+          >
+            Sertifikat & Pelatihan
+          </h2>
+
+          <!-- SERTIFIKAT MSIB -->
+          <div class="mb-10">
+            <h3
+              class="text-lg font-semibold text-gray-800 mb-6 flex items-center gap-2"
+            >
+              <i class="fa fa-certificate text-primary"></i> Sertifikat Program
+              MSIB
+            </h3>
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
+            >
+              <!-- Sertifikat 1 -->
+              <div
+                class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+              >
+                <img
+                  src="Sertifikat_page-0001.jpg"
+                  alt="Sertifikat Program MSIB"
+                  class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+                <h5 class="font-medium text-gray-800 text-center text-sm">
+                  Sertifikat Kelulusan Program MSIB
+                </h5>
+              </div>
+              <!-- Sertifikat 2 -->
+              <div
+                class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+              >
+                <img
+                  src="Sertifikat_page-0002.jpg"
+                  alt="Sertifikat Program MSIB"
+                  class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+                <h5 class="font-medium text-gray-800 text-center text-sm">
+                  Sertifikat Kelulusan Program MSIB
+                </h5>
+              </div>
+              <!-- Sertifikat 3 -->
+              <div
+                class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+              >
+                <img
+                  src="Sertifikat_page-0003.jpg"
+                  alt="Sertifikat Program MSIB"
+                  class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+                <h5 class="font-medium text-gray-800 text-center text-sm">
+                  Sertifikat Kelulusan Program MSIB
+                </h5>
+              </div>
+              <!-- Sertifikat 4 -->
+              <div
+                class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+              >
+                <img
+                  src="Sertifikat_page-0004.jpg"
+                  alt="Sertifikat Program MSIB"
+                  class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+                <h5 class="font-medium text-gray-800 text-center text-sm">
+                  Sertifikat Kelulusan Program MSIB
+                </h5>
+              </div>
+              <!-- Sertifikat 5 -->
+              <div
+                class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+              >
+                <img
+                  src="Sertifikat_page-0005.jpg"
+                  alt="Sertifikat Program MSIB"
+                  class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+                <h5 class="font-medium text-gray-800 text-center text-sm">
+                  Sertifikat Kelulusan Program MSIB
+                </h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- SERTIFIKAT BNSP -->
+          <div class="mb-10">
+            <h3
+              class="text-lg font-semibold text-gray-800 mb-6 flex items-center gap-2"
+            >
+              <i class="fa fa-award text-yellow-600"></i> Sertifikat Kompetensi
+              BNSP
+            </h3>
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
+            >
+              <!-- Sertifikat 1 -->
+              <div
+                class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+              >
+                <img
+                  src="Sertifikat_page-0006.jpg"
+                  alt="Sertifikat Kompetensi BNSP"
+                  class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+                <h5 class="font-medium text-gray-800 text-center text-sm">
+                  Sertifikat Kompetensi BNSP
+                </h5>
+              </div>
+              <!-- Sertifikat 2 -->
+              <div
+                class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+              >
+                <img
+                  src="Sertifikat_page-0007.jpg"
+                  alt="Sertifikat Kompetensi BNSP"
+                  class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+                <h5 class="font-medium text-gray-800 text-center text-sm">
+                  Sertifikat Kompetensi BNSP
+                </h5>
+              </div>
+            </div>
+          </div>
+
+          <!-- SERTIFIKAT CODEPOLITAN -->
+          <div class="mt-12 pt-8 border-t border-gray-100">
+            <h3
+              class="text-lg font-semibold text-gray-800 mb-6 flex items-center gap-2"
+            >
+              <i class="fa fa-graduation-cap text-primary"></i> Sertifikat
+              Pelatihan & Kelas Online
+            </h3>
+
+            <div class="mb-8">
+              <h4
+                class="font-semibold text-gray-700 mb-4 flex items-center gap-2"
+              >
+                <i class="fa fa-book text-green-600"></i> Codepolitan
+                <span class="text-sm font-normal text-gray-500"
+                  >(September 2024)</span
+                >
+              </h4>
+              <div
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
+              >
+                <!-- Sertifikat 1 -->
+                <div
+                  class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+                >
+                  <img
+                    src="5.jpg"
+                    alt="Sertifikat Kelas Fitur Baru Laravel 7"
+                    class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                  />
+                  <h5 class="font-medium text-gray-800 text-center text-sm">
+                    Kelas Fitur Baru Laravel 7
+                  </h5>
+                </div>
+                <!-- Sertifikat 2 -->
+                <div
+                  class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+                >
+                  <img
+                    src="1.jpg"
+                    alt="Sertifikat Kelas Mengenal Pemrograman Komputer"
+                    class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                  />
+                  <h5 class="font-medium text-gray-800 text-center text-sm">
+                    Kelas Mengenal Pemrograman Komputer
+                  </h5>
+                </div>
+                <!-- Sertifikat 3 -->
+                <div
+                  class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+                >
+                  <img
+                    src="2.jpg"
+                    alt="Sertifikat Kelas Belajar JQuery Dasar"
+                    class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                  />
+                  <h5 class="font-medium text-gray-800 text-center text-sm">
+                    Kelas Belajar JQuery Dasar
+                  </h5>
+                </div>
+                <!-- Sertifikat 4 -->
+                <div
+                  class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+                >
+                  <img
+                    src="3.jpg"
+                    alt="Sertifikat Kelas Belajar GIT untuk Pemula"
+                    class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                  />
+                  <h5 class="font-medium text-gray-800 text-center text-sm">
+                    Kelas Belajar GIT untuk Pemula
+                  </h5>
+                </div>
+                <!-- Sertifikat 5 -->
+                <div
+                  class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+                >
+                  <img
+                    src="4.jpg"
+                    alt="Sertifikat Kelas Belajar Dasar-dasar HTML dan CSS"
+                    class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                  />
+                  <h5 class="font-medium text-gray-800 text-center text-sm">
+                    Kelas Belajar Dasar-dasar HTML dan CSS
+                  </h5>
+                </div>
+              </div>
+            </div>
+
+            <!-- SERTIFIKAT DICODING -->
+            <div class="mb-8">
+              <h4
+                class="font-semibold text-gray-700 mb-4 flex items-center gap-2"
+              >
+                <i class="fa fa-code text-blue-600"></i> Dicoding
+              </h4>
+
+              <!-- Bagian Juni 2024 -->
+              <div class="mb-6">
+                <h5 class="text-sm font-normal text-gray-500 mb-3 pl-4">
+                  Juni 2024
+                </h5>
+                <div
+                  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4"
+                >
+                  <!-- Sertifikat 1 -->
+                  <div
+                    class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+                  >
+                    <img
+                      src="0001.jpg"
+                      alt="Sertifikat Belajar Prinsip Pemrograman SOLID"
+                      class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                    />
+                    <h5 class="font-medium text-gray-800 text-center text-sm">
+                      Belajar Prinsip Pemrograman SOLID
+                    </h5>
+                  </div>
+                  <!-- Sertifikat 2 -->
+                  <div
+                    class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+                  >
+                    <img
+                      src="00011.jpg"
+                      alt="Sertifikat Memulai Pemrograman Dengan Java"
+                      class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                    />
+                    <h5 class="font-medium text-gray-800 text-center text-sm">
+                      Memulai Pemrograman Dengan Java
+                    </h5>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bagian Juli 2023 -->
+              <div class="mb-6">
+                <h5 class="text-sm font-normal text-gray-500 mb-3 pl-4">
+                  Juli 2023
+                </h5>
+                <div
+                  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4"
+                >
+                  <!-- Sertifikat 1 -->
+                  <div
+                    class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+                  >
+                    <img
+                      src="1111.jpg"
+                      alt="Sertifikat Belajar Dasar Manajemen Proyek"
+                      class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                    />
+                    <h5 class="font-medium text-gray-800 text-center text-sm">
+                      Belajar Dasar Manajemen Proyek
+                    </h5>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bagian September 2023 -->
+              <div class="mb-6">
+                <h5 class="text-sm font-normal text-gray-500 mb-3 pl-4">
+                  September 2023
+                </h5>
+                <div
+                  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4"
+                >
+                  <!-- Sertifikat 1 -->
+                  <div
+                    class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+                  >
+                    <img
+                      src="11111.jpg"
+                      alt="Sertifikat Belajar Dasar Structured Query Language (SQL)"
+                      class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                    />
+                    <h5 class="font-medium text-gray-800 text-center text-sm">
+                      Belajar Dasar Structured Query Language (SQL)
+                    </h5>
+                  </div>
+                  <!-- Sertifikat 2 -->
+                  <div
+                    class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+                  >
+                    <img
+                      src="1111111.jpg"
+                      alt="Sertifikat Memulai Dasar Pemrograman untuk Menjadi Pengembang Software"
+                      class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                    />
+                    <h5 class="font-medium text-gray-800 text-center text-sm">
+                      Memulai Dasar Pemrograman untuk Menjadi Pengembang
+                      Software
+                    </h5>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bagian Oktober 2023 -->
+              <div>
+                <h5 class="text-sm font-normal text-gray-500 mb-3 pl-4">
+                  Oktober 2023
+                </h5>
+                <div
+                  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4"
+                >
+                  <!-- Sertifikat 1 -->
+                  <div
+                    class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+                  >
+                    <img
+                      src="111.jpg"
+                      alt="Sertifikat Memulai Pemrograman Dengan C"
+                      class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                    />
+                    <h5 class="font-medium text-gray-800 text-center text-sm">
+                      Memulai Pemrograman Dengan C
+                    </h5>
+                  </div>
+                  <!-- Sertifikat 2 -->
+                  <div
+                    class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+                  >
+                    <img
+                      src="111111.jpg"
+                      alt="Sertifikat Belajar Dasar Pemrograman JavaScript"
+                      class="w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                    />
+                    <h5 class="font-medium text-gray-800 text-center text-sm">
+                      Belajar Dasar Pemrograman JavaScript
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian Proyek -->
+      <section id="proyek" class="mb-12 md:mb-16">
+        <div class="bg-white rounded-xl shadow-md p-6 md:p-8 card-hover">
+          <h2
+            class="text-[clamp(1.4rem,3vw,1.8rem)] font-bold text-gray-800 border-l-4 border-primary pl-4 mb-6"
+          >
+            Proyek Unggulan
+          </h2>
+
+          <!-- Proyek 1 -->
+          <div
+            class="mb-12 pb-8 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0"
+          >
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">
+              Sistem E-CRM Berbasis Web Menggunakan Laravel 11
+            </h3>
+            <p class="text-gray-500 italic mb-4">
+              Studi Kasus: Usaha Mikro Wiwit Hijab
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="md:col-span-2">
+                <h4 class="font-medium text-gray-700 mb-2">
+                  Deskripsi Proyek:
+                </h4>
+                <ul class="space-y-2 pl-5 list-disc text-gray-600 mb-4">
+                  <li>
+                    Membangun sistem manajemen hubungan pelanggan yang lengkap
+                    untuk membantu pengusaha mengelola data dan interaksi dengan
+                    pelanggan secara efektif.
+                  </li>
+                  <li>
+                    Meliputi fitur manajemen data pelanggan, pencatatan
+                    transaksi, riwayat pembelian, dan program loyalitas berbasis
+                    poin serta kupon diskon.
+                  </li>
+                  <li>
+                    Terintegrasi dengan sistem notifikasi otomatis untuk
+                    meningkatkan kualitas layanan dan keterlibatan pelanggan.
+                  </li>
+                  <li>
+                    Menggunakan basis data MySQL yang terstruktur untuk menjamin
+                    keamanan dan aksesibilitas data.
+                  </li>
+                </ul>
+                <div class="flex flex-wrap gap-2 mt-3">
+                  <span
+                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                    >Laravel 11</span
+                  >
+                  <span
+                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                    >PHP</span
+                  >
+                  <span
+                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                    >MySQL</span
+                  >
+                  <span
+                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                    >JavaScript</span
+                  >
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <img
+                  src="home.png"
+                  alt="Halaman Utama Sistem"
+                  class="w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+                <img
+                  src="dashboard.png"
+                  alt="Panel Kendali Sistem"
+                  class="w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+                <img
+                  src="chat.png"
+                  alt="Fitur Komunikasi"
+                  class="w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+                <img
+                  src="resi.png"
+                  alt="Cetak Bukti Pengiriman"
+                  class="w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Proyek 2 -->
+          <div
+            class="mb-12 pb-8 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0"
+          >
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">
+              Sistem Buku Tamu Digital
+            </h3>
+            <p class="text-gray-500 italic mb-4">
+              Penggunaan: Kantor Kementerian Agama
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="md:col-span-2">
+                <h4 class="font-medium text-gray-700 mb-2">
+                  Deskripsi Proyek:
+                </h4>
+                <ul class="space-y-2 pl-5 list-disc text-gray-600 mb-4">
+                  <li>
+                    Mengembangkan sistem pencatatan kunjungan berbasis web untuk
+                    menggantikan buku tamu konvensional, sehingga proses
+                    pendaftaran menjadi lebih cepat dan efisien.
+                  </li>
+                  <li>
+                    Menyimpan seluruh data tamu secara terstruktur dalam basis
+                    data digital, memudahkan pencarian informasi kapan saja.
+                  </li>
+                  <li>
+                    Memiliki fitur rekapitulasi dan pembuatan laporan kunjungan
+                    secara otomatis untuk keperluan administrasi instansi.
+                  </li>
+                  <li>
+                    Dibangun menggunakan bahasa pemrograman PHP dan basis data
+                    MySQL dengan antarmuka yang sederhana namun fungsional.
+                  </li>
+                </ul>
+                <div class="flex flex-wrap gap-2 mt-3">
+                  <span
+                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                    >PHP</span
+                  >
+                  <span
+                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                    >MySQL</span
+                  >
+                  <span
+                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                    >HTML5</span
+                  >
+                  <span
+                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                    >CSS3</span
+                  >
+                  <span
+                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                    >CodeIgniter</span
+                  >
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <img
+                  src="bukutamu.png"
+                  alt="Formulir Pendaftaran Tamu"
+                  class="w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+                <img
+                  src="tamu2.png"
+                  alt="Daftar Data Tamu"
+                  class="w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+                <img
+                  src="dashboardb.png"
+                  alt="Panel Kendali Admin"
+                  class="w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+                <img
+                  src="lapor.png"
+                  alt="Laporan Data Kunjungan"
+                  class="w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Proyek 3 -->
+          <div
+            class="mb-12 pb-8 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0"
+          >
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">
+              Sistem Survei Kepegawaian
+            </h3>
+            <p class="text-gray-500 italic mb-4">
+              Penggunaan: Kantor Kementerian Agama
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="md:col-span-2">
+                <h4 class="font-medium text-gray-700 mb-2">
+                  Deskripsi Proyek:
+                </h4>
+                <ul class="space-y-2 pl-5 list-disc text-gray-600 mb-4">
+                  <li>
+                    Membuat sistem pengumpulan data berbasis web untuk mendukung
+                    kegiatan survei kepuasan dan evaluasi kinerja pegawai di
+                    lingkungan instansi pemerintah.
+                  </li>
+                  <li>
+                    Menyediakan formulir isian yang mudah diakses dan diisi oleh
+                    responden secara mandiri maupun dibantu oleh petugas
+                    administrasi.
+                  </li>
+                  <li>
+                    Memproses dan menyimpan seluruh hasil survei secara otomatis
+                    ke dalam basis data yang aman dan terorganisir.
+                  </li>
+                  <li>
+                    Menampilkan hasil analisis dalam bentuk tabel dan grafik
+                    sederhana guna mempermudah pengambilan keputusan pimpinan.
+                  </li>
+                  <li>
+                    Dikembangkan menggunakan teknologi PHP dan MySQL dengan
+                    fokus pada kemudahan penggunaan dan keandalan sistem.
+                  </li>
+                </ul>
+                <div class="flex flex-wrap gap-2 mt-3">
+                  <span
+                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                    >PHP</span
+                  >
+                  <span
+                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                    >CodeIgniter</span
+                  >
+                  <span
+                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                    >MySQL</span
+                  >
+                  <span
+                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                    >JavaScript</span
+                  >
+                  <span
+                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                    >HTML & CSS</span
+                  >
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <img
+                  src="survei.png"
+                  alt="Halaman Utama Survei"
+                  class="w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+                <img
+                  src="layanan.png"
+                  alt="Hasil dan Analisis Data"
+                  class="w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+                <img
+                  src="form.png"
+                  alt="Contoh Formulir Survei"
+                  class="w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+                <img
+                  src="dashboardk.png"
+                  alt="Panel Kendali Sistem"
+                  class="w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian Keahlian -->
+      <section id="keahlian" class="mb-12 md:mb-16">
+        <div class="bg-white rounded-xl shadow-md p-6 md:p-8 card-hover">
+          <h2
+            class="text-[clamp(1.4rem,3vw,1.8rem)] font-bold text-gray-800 border-l-4 border-primary pl-4 mb-6"
+          >
+            Keahlian & Kemampuan
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Keahlian Teknis -->
+            <div>
+              <h3
+                class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2"
+              >
+                <i class="fa fa-code text-primary"></i> Keahlian Teknis
+              </h3>
+              <div class="flex flex-wrap gap-3">
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-brands fa-php"></i> PHP
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-brands fa-laravel"></i> Laravel
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-code-branch"></i> CodeIgniter
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-brands fa-html5"></i> HTML5
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-brands fa-css3-alt"></i> CSS3
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-brands fa-js"></i> JavaScript
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-database"></i> MySQL
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-paper-plane"></i> Postman
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-database"></i> MySQL Workbench
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-brands fa-java"></i> Java
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-c"></i> C
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-brands fa-jsfiddle"></i> JQuery
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-brands fa-git-alt"></i> GIT
+                </span>
+              </div>
+            </div>
+
+            <!-- Keahlian Administrasi & Umum -->
+            <div>
+              <h3
+                class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2"
+              >
+                <i class="fa fa-briefcase text-primary"></i> Keahlian
+                Administrasi & Umum
+              </h3>
+              <div class="flex flex-wrap gap-3">
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-file-excel"></i> Microsoft Excel
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-file-word"></i> Microsoft Word
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-file-powerpoint"></i> Microsoft
+                  PowerPoint
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-table"></i> Pengolahan Data
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-archive"></i> Manajemen Arsip
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-file-alt"></i> Pelaporan
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-comments"></i> Komunikasi Efektif
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-users"></i> Kerja Sama Tim
+                </span>
+                <span
+                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-clock"></i> Manajemen Waktu
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian Kontak -->
+      <section id="kontak" class="mb-12 md:mb-16">
+        <div class="bg-white rounded-xl shadow-md p-6 md:p-8 card-hover">
+          <h2
+            class="text-[clamp(1.4rem,3vw,1.8rem)] font-bold text-gray-800 border-l-4 border-primary pl-4 mb-6"
+          >
+            Informasi Kontak
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <p class="text-gray-600 mb-6">
+                Jika Anda tertarik untuk bekerja sama atau membutuhkan informasi
+                lebih lanjut, silakan hubungi saya melalui kontak di bawah ini.
+                Saya terbuka untuk peluang kerja, proyek, maupun diskusi seputar
+                bidang keahlian saya.
+              </p>
+              <div class="space-y-4">
+                <div class="flex items-center gap-3 text-gray-700">
+                  <div
+                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                  >
+                    <i class="fa fa-phone"></i>
+                  </div>
+                  <span>0813-7505-2211</span>
+                </div>
+                <div class="flex items-center gap-3 text-gray-700">
+                  <div
+                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                  >
+                    <i class="fa fa-envelope"></i>
+                  </div>
+                  <span>amandasari968@gmail.com</span>
+                </div>
+                <div class="flex items-center gap-3 text-gray-700">
+                  <div
+                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                  >
+                    <i class="fa fa-map-marker"></i>
+                  </div>
+                  <span>Kisaran, Sumatera Utara, Indonesia</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-100">
+              <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                Jam Kerja
+              </h3>
+              <ul class="space-y-2 text-gray-600">
+                <li class="flex justify-between">
+                  <span>Senin - Jumat:</span>
+                  <span>08.00 - 17.00 WIB</span>
+                </li>
+                <li class="flex justify-between">
+                  <span>Sabtu:</span>
+                  <span>08.00 - 12.00 WIB</span>
+                </li>
+                <li class="flex justify-between">
+                  <span>Minggu & Hari Libur:</span>
+                  <span>Tutup</span>
+                </li>
+              </ul>
+              <div class="mt-6 pt-4 border-t border-gray-200">
+                <p class="text-gray-600 text-sm">
+                  Saya berusaha merespons setiap pesan dalam waktu kurang dari
+                  1x24 jam pada hari kerja.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bagian Kaki -->
+    <footer class="bg-dark text-white py-8">
+      <div class="container mx-auto px-4 md:px-8 text-center">
+        <div class="flex justify-center space-x-4 mb-4">
+          <a
+            href="https://github.com/amandasari2"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
+          >
+            <!-- Perbaiki kelas ikon -->
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a
+            href="https://linkedin.com/in/amandasari"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
+          >
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <a
+            href="mailto:amandasari968@gmail.com"
+            class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
+          >
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+          <a
+            href="https://wa.me/6281375052211"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
+          >
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+        <p class="text-gray-400 text-sm md:text-base">
+          © 2026 Amanda Sari. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Skrip untuk Menu Mobile & Efek Gulir -->
+    <script>
+      // Ambil elemen yang dibutuhkan
+      const menuToggle = document.getElementById("menuToggle");
+      const closeMenu = document.getElementById("closeMenu");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const overlay = document.getElementById("overlay");
+      const mobileLinks = mobileMenu.querySelectorAll("a");
+
+      // Fungsi buka menu
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.remove("-translate-x-full");
+        overlay.classList.remove("hidden");
+        document.body.style.overflow = "hidden"; // Mencegah latar bergulir
+      });
+
+      // Fungsi tutup menu
+      function tutupMenu() {
+        mobileMenu.classList.add("-translate-x-full");
+        overlay.classList.add("hidden");
+        document.body.style.overflow = ""; // Kembalikan gulir
+      }
+
+      closeMenu.addEventListener("click", tutupMenu);
+      overlay.addEventListener("click", tutupMenu);
+
+      // Tutup menu kalau salah satu tautan diklik
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", tutupMenu);
+      });
+
+      // Efek aktif pada tautan navigasi saat menggulir halaman
+      const sections = document.querySelectorAll("section[id]");
+      const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+      window.addEventListener("scroll", () => {
+        const scrollY = window.pageYOffset;
+
+        sections.forEach((section) => {
+          const sectionHeight = section.offsetHeight;
+          const sectionTop = section.offsetTop - 100;
+          const sectionId = section.getAttribute("id");
+
+          if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            navLinks.forEach((link) => {
+              link.classList.remove("text-primary", "font-semibold");
+              if (link.getAttribute("href") === `#${sectionId}`) {
+                link.classList.add("text-primary", "font-semibold");
+              }
+            });
+          }
+        });
+      });
+
+      // Pengaturan teks dan kecepatan
+      const teks = "Amanda Sari";
+      const kecepatanKetik = 150; // Kecepatan saat mengetik
+      const kecepatanHapus = 100; // Kecepatan saat menghapus
+      const jeda = 1000; // Jeda sebentar setelah selesai ngetik sebelum dihapus
+
+      let indeks = 0;
+      let sedangMenghapus = false;
+      const elemen = document.getElementById("teks-diketik");
+
+      // Fungsi efek ketik dan hapus berulang
+      function ketikTerus() {
+        // Kalau sedang TIDAK menghapus
+        if (!sedangMenghapus) {
+          // Ngetik huruf satu per satu
+          if (indeks < teks.length) {
+            elemen.textContent = teks.substring(0, indeks + 1);
+            indeks++;
+            setTimeout(ketikTerus, kecepatanKetik);
+          } else {
+            // Kalau sudah selesai ngetik, tunggu sebentar baru mulai hapus
+            sedangMenghapus = true;
+            setTimeout(ketikTerus, jeda);
+          }
+        }
+        // Kalau SEDANG menghapus
+        else {
+          // Hapus huruf satu per satu
+          if (indeks > 0) {
+            elemen.textContent = teks.substring(0, indeks - 1);
+            indeks--;
+            setTimeout(ketikTerus, kecepatanHapus);
+          } else {
+            // Kalau sudah habis dihapus, mulai ngetik lagi dari awal
+            sedangMenghapus = false;
+            setTimeout(ketikTerus, kecepatanKetik);
+          }
+        }
+      }
+
+      // Jalankan saat halaman dimuat
+      window.onload = ketikTerus;
+    </script>
+  </body>
+</html>
