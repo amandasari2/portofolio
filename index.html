@@ -4,60 +4,65 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="AS.png" type="image/png" />
-    <link rel="shortcut icon" href="AS.png" type="image/png" />
     <title>Portofolio - Amanda Sari</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <!-- Tautan Font Awesome untuk ikon -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              primary: "#165DFF",
-              dark: "#1E293B",
+              primary: "#1A56DB",
+              primaryDark: "#1240A8",
+              dark: "#0F172A",
+              accent: "#06B6D4",
             },
             fontFamily: {
-              sans: ["Inter", "system-ui", "sans-serif"],
+              sans: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
+              serif: ["Lora", "Georgia", "serif"],
             },
           },
         },
       };
     </script>
-    <style type="text/tailwindcss">
-      @layer utilities {
-        .content-auto {
-          content-visibility: auto;
-        }
-        .card-hover {
-          transition: all 0.3s ease;
-        }
-        .card-hover:hover {
-          transform: translateY(-5px);
-          box-shadow:
-            0 10px 25px -5px rgba(0, 0, 0, 0.1),
-            0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
+    <style>
+      :root {
+        --primary: #1a56db;
+        --primary-dark: #1240a8;
+        --accent: #06b6d4;
+        --dark: #0f172a;
       }
 
-      /* Gaya kursor kedap-kedip */
+      * {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+        background: #f8faff;
+        color: #334155;
+      }
+
+      /* ── TYPING CURSOR ── */
       .kursor {
         display: inline-block;
         width: 3px;
         height: 1em;
-        background-color: #165dff; /* Warna sesuai kelas text-primary */
+        background: var(--primary);
         margin-left: 2px;
         animation: kedip 0.7s infinite;
         vertical-align: middle;
+        border-radius: 2px;
       }
-
       @keyframes kedip {
         0%,
         100% {
@@ -67,294 +72,756 @@
           opacity: 0;
         }
       }
+
+      /* ── CARD HOVER ── */
+      .card-hover {
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px -10px rgba(26, 86, 219, 0.12);
+      }
+
+      /* ── HERO BLOB ── */
+      .hero-blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.18;
+        pointer-events: none;
+      }
+
+      /* ── SECTION TITLE ── */
+      .section-title {
+        font-family: "Lora", serif;
+        font-weight: 600;
+      }
+
+      /* ── SKILL BADGE ── */
+      .skill-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: linear-gradient(135deg, #eef2ff 0%, #e0f2fe 100%);
+        color: var(--primary);
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        border: 1px solid rgba(26, 86, 219, 0.1);
+        transition: all 0.2s ease;
+        cursor: default;
+      }
+      .skill-badge:hover {
+        background: linear-gradient(135deg, #dbeafe 0%, #bae6fd 100%);
+        border-color: rgba(26, 86, 219, 0.25);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(26, 86, 219, 0.15);
+      }
+
+      /* ── NAV ACTIVE ── */
+      .nav-active {
+        color: var(--primary);
+        font-weight: 700;
+      }
+
+      /* ── TIMELINE LINE ── */
+      .timeline-line {
+        flex: 1;
+        width: 2px;
+        background: linear-gradient(to bottom, #dbeafe, #e2e8f0);
+        margin-top: 12px;
+        margin-left: 19px;
+      }
+
+      /* ── ACCORDION ── */
+      .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
+      .accordion-content.open {
+        max-height: 9999px;
+      }
+      .accordion-icon {
+        transition: transform 0.3s ease;
+      }
+      .accordion-icon.rotated {
+        transform: rotate(180deg);
+      }
+
+      /* ── PROGRESS BAR ── */
+      .progress-bar {
+        height: 6px;
+        border-radius: 3px;
+        background: #e2e8f0;
+        overflow: hidden;
+      }
+      .progress-fill {
+        height: 100%;
+        border-radius: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        width: 0;
+        transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* ── MODAL ── */
+      #imageModal {
+        backdrop-filter: blur(8px);
+      }
+
+      /* ── FORM ── */
+      .form-input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        font-family: inherit;
+        font-size: 0.95rem;
+        color: #1e293b;
+        background: #fff;
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+        outline: none;
+      }
+      .form-input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.1);
+      }
+      .form-input::placeholder {
+        color: #94a3b8;
+      }
+
+      /* ── BUTTON PRIMARY ── */
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #1a56db !important;
+        color: #ffffff !important;
+        padding: 14px 28px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 14px rgba(26, 86, 219, 0.35);
+        cursor: pointer;
+        border: none !important;
+        text-decoration: none;
+      }
+      .btn-primary:hover {
+        background: #1240a8 !important;
+        color: #ffffff !important;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(26, 86, 219, 0.45);
+      }
+      .btn-primary:active {
+        transform: translateY(0);
+      }
+
+      /* ── BUTTON OUTLINE ── */
+      .btn-outline {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #ffffff !important;
+        color: #1e293b !important;
+        padding: 13px 28px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        border: 2px solid #cbd5e1 !important;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .btn-outline:hover {
+        border-color: #1a56db !important;
+        color: #1a56db !important;
+        background: #eff6ff !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(26, 86, 219, 0.12);
+      }
+
+      /* ── SCROLL TO TOP ── */
+      #scrollTop {
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        width: 46px;
+        height: 46px;
+        background: var(--primary);
+        color: #fff;
+        border-radius: 50%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 999;
+        box-shadow: 0 4px 14px rgba(26, 86, 219, 0.4);
+        transition: all 0.2s ease;
+        border: none;
+      }
+      #scrollTop:hover {
+        transform: translateY(-3px);
+      }
+      #scrollTop.show {
+        display: flex;
+      }
+
+      /* ── CERT GRID ── */
+      .cert-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 12px;
+      }
+
+      /* ── NOTIFICATION TOAST ── */
+      #toast {
+        position: fixed;
+        bottom: 90px;
+        right: 28px;
+        background: #10b981;
+        color: #fff;
+        padding: 14px 20px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        box-shadow: 0 4px 20px rgba(16, 185, 129, 0.35);
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        gap: 8px;
+        animation: slideIn 0.3s ease;
+      }
+      @keyframes slideIn {
+        from {
+          transform: translateX(40px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      /* ── MOBILE MENU OVERLAY ── */
+      #overlay {
+        transition: opacity 0.3s ease;
+      }
+
+      /* ── NAV UNDERLINE ── */
+      nav a {
+        position: relative;
+      }
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        border-radius: 2px;
+        transition: width 0.25s ease;
+      }
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      /* ── PHOTO RING ── */
+      .photo-ring {
+        background: conic-gradient(
+          var(--primary) 0deg,
+          var(--accent) 90deg,
+          #8b5cf6 180deg,
+          var(--primary) 360deg
+        );
+        animation: spin 8s linear infinite;
+        border-radius: 50%;
+        padding: 4px;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .photo-inner {
+        background: #fff;
+        border-radius: 50%;
+        padding: 6px;
+      }
+
+      /* ── STAT CARD ── */
+      .stat-card {
+        background: linear-gradient(135deg, #eef2ff 0%, #f0f9ff 100%);
+        border: 1px solid rgba(26, 86, 219, 0.1);
+        border-radius: 14px;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.2s ease;
+      }
+      .stat-card:hover {
+        transform: translateY(-3px);
+      }
+
+      /* ── TAG ── */
+      .tag-tech {
+        font-size: 0.78rem;
+        font-weight: 600;
+        background: #eff6ff;
+        color: var(--primary);
+        padding: 4px 12px;
+        border-radius: 20px;
+        border: 1px solid rgba(26, 86, 219, 0.15);
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 640px) {
+        .cert-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* ── FADE IN ANIMATION ── */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
     </style>
   </head>
-  <body class="bg-gray-50 text-gray-700 leading-relaxed">
-    <!-- Navigasi -->
-    <nav class="bg-white shadow-sm fixed w-full z-50">
+
+  <body>
+    <!-- ════════════════════════════
+         NAVIGASI
+    ════════════════════════════ -->
+    <nav
+      class="bg-white/90 backdrop-blur-md shadow-sm fixed w-full z-50 border-b border-gray-100"
+    >
       <div
         class="container mx-auto px-4 md:px-8 py-3 flex justify-between items-center"
       >
-        <a href="#" class="flex items-center gap-2 text-xl font-bold">
-          <!-- Logo Inisial AS -->
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-2.5 text-xl font-bold">
           <span
-            class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm"
+            class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-blue-700 text-white flex items-center justify-center font-bold text-sm shadow-md"
+            >AS</span
           >
-            AS
-          </span>
-          <span class="text-primary !important">Amanda</span
-          ><span class="text-dark !important"> Sari</span>
+          <span class="text-primary">Amanda</span
+          ><span class="text-dark"> Sari</span>
         </a>
 
-        <div class="hidden md:flex items-center space-x-8">
+        <!-- Desktop menu -->
+        <div class="hidden md:flex items-center space-x-7">
           <a
             href="#tentang"
-            class="font-medium hover:text-primary transition-colors"
-            >Tentang Saya</a
+            class="font-medium text-gray-600 hover:text-primary transition-colors text-sm"
+            >Tentang</a
           >
           <a
             href="#pendidikan"
-            class="font-medium hover:text-primary transition-colors"
+            class="font-medium text-gray-600 hover:text-primary transition-colors text-sm"
             >Pendidikan</a
           >
           <a
             href="#pengalaman"
-            class="font-medium hover:text-primary transition-colors"
+            class="font-medium text-gray-600 hover:text-primary transition-colors text-sm"
             >Pengalaman</a
           >
           <a
             href="#sertifikat"
-            class="font-medium hover:text-primary transition-colors"
+            class="font-medium text-gray-600 hover:text-primary transition-colors text-sm"
             >Sertifikat</a
           >
           <a
             href="#proyek"
-            class="font-medium hover:text-primary transition-colors"
+            class="font-medium text-gray-600 hover:text-primary transition-colors text-sm"
             >Proyek</a
           >
           <a
             href="#keahlian"
-            class="font-medium hover:text-primary transition-colors"
+            class="font-medium text-gray-600 hover:text-primary transition-colors text-sm"
             >Keahlian</a
           >
           <a
             href="#kontak"
-            class="font-medium hover:text-primary transition-colors"
+            class="font-medium text-gray-600 hover:text-primary transition-colors text-sm"
             >Kontak</a
           >
         </div>
 
-        <button id="menuToggle" class="md:hidden text-gray-700 z-50 relative">
+        <!-- Download CV (desktop) -->
+        <a
+          href="CV_Amanda_Sari.pdf"
+          download
+          class="hidden md:inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primaryDark transition-colors shadow-md shadow-primary/20"
+        >
+          <i class="fa fa-download text-xs"></i> Download CV
+        </a>
+
+        <!-- Hamburger -->
+        <button
+          id="menuToggle"
+          class="md:hidden text-gray-700 z-50 relative p-2"
+        >
           <i class="fa fa-bars text-xl"></i>
         </button>
-
-        <!-- Menu Samping untuk HP -->
-        <div
-          id="mobileMenu"
-          class="fixed top-0 left-0 h-full w-4/5 max-w-xs bg-white shadow-2xl z-[60] transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden"
-        >
-          <div class="p-5 flex flex-col h-full">
-            <div class="flex justify-between items-center border-b pb-4 mb-4">
-              <span class="text-lg font-bold text-primary">Menu</span>
-              <button id="closeMenu" class="text-gray-500 hover:text-red-500">
-                <i class="fa fa-times text-xl"></i>
-              </button>
-            </div>
-            <div class="flex flex-col space-y-4">
-              <a
-                href="#tentang"
-                class="font-medium py-2 px-3 rounded hover:bg-blue-50 hover:text-primary transition-colors"
-                >Tentang Saya</a
-              >
-              <a
-                href="#pendidikan"
-                class="font-medium py-2 px-3 rounded hover:bg-blue-50 hover:text-primary transition-colors"
-                >Pendidikan</a
-              >
-              <a
-                href="#pengalaman"
-                class="font-medium py-2 px-3 rounded hover:bg-blue-50 hover:text-primary transition-colors"
-                >Pengalaman</a
-              >
-              <a
-                href="#sertifikat"
-                class="font-medium py-2 px-3 rounded hover:bg-blue-50 hover:text-primary transition-colors"
-                >Sertifikat</a
-              >
-              <a
-                href="#proyek"
-                class="font-medium py-2 px-3 rounded hover:bg-blue-50 hover:text-primary transition-colors"
-                >Proyek</a
-              >
-              <a
-                href="#keahlian"
-                class="font-medium py-2 px-3 rounded hover:bg-blue-50 hover:text-primary transition-colors"
-                >Keahlian</a
-              >
-              <a
-                href="#kontak"
-                class="font-medium py-2 px-3 rounded hover:bg-blue-50 hover:text-primary transition-colors"
-                >Kontak</a
-              >
-            </div>
-            <div
-              class="mt-auto pt-4 border-t text-center text-sm text-gray-500"
-            >
-              Amanda Sari © 2026
-            </div>
-          </div>
-        </div>
-
-        <!-- Latar belakang gelap saat menu terbuka -->
-        <div
-          id="overlay"
-          class="fixed inset-0 bg-black/50 z-[55] hidden md:hidden"
-        ></div>
       </div>
     </nav>
 
-    <!-- Bagian Pahlawan -->
-    <header
-      class="pt-28 pb-16 md:pt-36 md:pb-24 bg-gradient-to-b from-blue-50 to-gray-50"
+    <!-- Mobile Drawer -->
+    <div
+      id="mobileMenu"
+      class="fixed top-0 left-0 h-full w-4/5 max-w-xs bg-white shadow-2xl z-[60] transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden"
     >
-      <div class="container mx-auto px-4 md:px-8">
-        <div class="grid md:grid-cols-2 gap-10 items-center">
-          <div class="order-2 md:order-1">
-            <h1
-              class="text-[clamp(2rem,5vw,3.2rem)] font-bold text-gray-800 leading-tight mb-4"
+      <div class="p-6 flex flex-col h-full">
+        <div class="flex justify-between items-center border-b pb-4 mb-5">
+          <div class="flex items-center gap-2">
+            <span
+              class="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-xs"
+              >AS</span
             >
-              Halo, Saya <br />
-              <span class="text-primary" id="teks-diketik"></span
+            <span class="font-bold text-primary">Amanda Sari</span>
+          </div>
+          <button
+            id="closeMenu"
+            class="text-gray-400 hover:text-red-500 transition-colors"
+          >
+            <i class="fa fa-times text-xl"></i>
+          </button>
+        </div>
+        <div class="flex flex-col space-y-1">
+          <a
+            href="#tentang"
+            class="mobile-link font-medium py-2.5 px-4 rounded-lg hover:bg-blue-50 hover:text-primary transition-colors"
+            >Tentang Saya</a
+          >
+          <a
+            href="#pendidikan"
+            class="mobile-link font-medium py-2.5 px-4 rounded-lg hover:bg-blue-50 hover:text-primary transition-colors"
+            >Pendidikan</a
+          >
+          <a
+            href="#pengalaman"
+            class="mobile-link font-medium py-2.5 px-4 rounded-lg hover:bg-blue-50 hover:text-primary transition-colors"
+            >Pengalaman</a
+          >
+          <a
+            href="#sertifikat"
+            class="mobile-link font-medium py-2.5 px-4 rounded-lg hover:bg-blue-50 hover:text-primary transition-colors"
+            >Sertifikat</a
+          >
+          <a
+            href="#proyek"
+            class="mobile-link font-medium py-2.5 px-4 rounded-lg hover:bg-blue-50 hover:text-primary transition-colors"
+            >Proyek</a
+          >
+          <a
+            href="#keahlian"
+            class="mobile-link font-medium py-2.5 px-4 rounded-lg hover:bg-blue-50 hover:text-primary transition-colors"
+            >Keahlian</a
+          >
+          <a
+            href="#kontak"
+            class="mobile-link font-medium py-2.5 px-4 rounded-lg hover:bg-blue-50 hover:text-primary transition-colors"
+            >Kontak</a
+          >
+        </div>
+        <div class="mt-auto pt-4 border-t">
+          <a
+            href="CV_Amanda_Sari.pdf"
+            download
+            class="flex items-center justify-center gap-2 bg-primary text-white py-3 rounded-lg font-semibold text-sm"
+          >
+            <i class="fa fa-download"></i> Download CV
+          </a>
+          <p class="text-center text-xs text-gray-400 mt-4">
+            Amanda Sari © 2026
+          </p>
+        </div>
+      </div>
+    </div>
+    <div id="overlay" class="fixed inset-0 bg-black/50 z-[55] hidden"></div>
+
+    <!-- ════════════════════════════
+         HERO
+    ════════════════════════════ -->
+    <header
+      class="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden bg-gradient-to-br from-blue-50 via-white to-cyan-50"
+    >
+      <!-- Decorative blobs -->
+      <div
+        class="hero-blob w-[500px] h-[500px] bg-blue-400 -top-20 -right-32"
+      ></div>
+      <div
+        class="hero-blob w-[300px] h-[300px] bg-cyan-400 bottom-0 -left-16"
+      ></div>
+
+      <div class="container mx-auto px-4 md:px-8 relative">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <!-- Text -->
+          <div class="order-2 md:order-1 fade-in">
+            <div
+              class="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-primary text-sm font-semibold px-4 py-1.5 rounded-full mb-5"
+            >
+              <span
+                class="w-2 h-2 rounded-full bg-green-400 animate-pulse"
+              ></span>
+              Tersedia untuk Peluang Baru
+            </div>
+
+            <h1
+              class="text-[clamp(2rem,5vw,3.2rem)] font-extrabold text-gray-900 leading-tight mb-4"
+            >
+              Halo, Saya<br />
+              <span
+                class="text-primary font-serif italic"
+                id="teks-diketik"
+              ></span
               ><span class="kursor"></span>
             </h1>
 
             <h2
-              class="text-[clamp(1.1rem,2.5vw,1.5rem)] font-medium text-gray-600 mb-6"
+              class="text-[clamp(1rem,2.2vw,1.3rem)] font-medium text-gray-500 mb-6 tracking-wide"
             >
-              Pengembang Web & Lulusan Sistem Informasi
+              Pengembang Web &nbsp;·&nbsp; Sarjana Sistem Informasi
             </h2>
-            <p class="text-gray-600 text-lg mb-8 max-w-xl">
-              Saya memiliki ketertarikan besar dalam dunia teknologi, baik dalam
+
+            <p
+              class="text-gray-600 text-base md:text-lg mb-8 max-w-xl leading-relaxed"
+            >
+              Saya memiliki ketertarikan besar dalam dunia teknologi, baik
               pengembangan sistem berbasis web maupun pengelolaan data.
               Berpengalaman menciptakan solusi digital yang rapi, efisien, dan
-              mudah digunakan sehari-hari.
+              mudah digunakan.
             </p>
-            <div class="flex flex-wrap gap-4">
-              <a
-                href="#kontak"
-                class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg font-medium transition-colors shadow-lg shadow-primary/20"
-              >
-                Hubungi Saya
+
+            <div class="flex flex-wrap gap-3 mb-10">
+              <a href="#kontak" class="btn-primary">
+                <i class="fa fa-envelope"></i> Hubungi Saya
               </a>
-              <a
-                href="#proyek"
-                class="bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 px-8 py-3 rounded-lg font-medium transition-colors shadow-md"
-              >
-                Lihat Karya Saya
+              <a href="#proyek" class="btn-outline">
+                <i class="fa fa-eye"></i> Lihat Proyek
+              </a>
+              <a href="CV_Amanda_Sari.pdf" download class="btn-outline">
+                <i class="fa fa-download"></i> Download CV
               </a>
             </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-3">
+              <div class="stat-card">
+                <div class="text-2xl font-extrabold text-primary mb-1">4+</div>
+                <div class="text-xs text-gray-500 font-medium">
+                  Proyek Selesai
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="text-2xl font-extrabold text-primary mb-1">20+</div>
+                <div class="text-xs text-gray-500 font-medium">Sertifikat</div>
+              </div>
+              <div class="stat-card">
+                <div class="text-2xl font-extrabold text-primary mb-1">2+</div>
+                <div class="text-xs text-gray-500 font-medium">
+                  Tahun Belajar
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="order-1 md:order-2 flex justify-center">
-            <div class="relative w-[280px] h-[280px] md:w-[380px] md:h-[380px]">
+
+          <!-- Photo -->
+          <div class="order-1 md:order-2 flex justify-center fade-in">
+            <div class="relative w-[260px] h-[260px] md:w-[360px] md:h-[360px]">
+              <div class="photo-ring w-full h-full absolute inset-0"></div>
+              <div class="photo-inner absolute inset-[4px]">
+                <img
+                  src="foto.jpg"
+                  alt="Foto Profil Amanda Sari"
+                  class="w-full h-full object-cover rounded-full"
+                  onerror="
+                    this.src =
+                      'https://ui-avatars.com/api/?name=Amanda+Sari&size=360&background=1A56DB&color=fff&bold=true'
+                  "
+                />
+              </div>
+              <!-- Badge -->
               <div
-                class="absolute inset-0 rounded-full bg-primary/10 -z-10 transform translate-x-4 translate-y-4"
-              ></div>
-              <img
-                src="foto.jpg"
-                alt="Foto Profil Amanda Sari"
-                class="w-full h-full object-cover rounded-full border-8 border-white shadow-xl"
-              />
+                class="absolute -bottom-4 -right-4 bg-white shadow-lg rounded-xl px-4 py-2.5 flex items-center gap-2 border border-gray-100"
+              >
+                <span class="text-xl">💻</span>
+                <div>
+                  <div class="text-xs font-bold text-gray-800">
+                    Web Developer
+                  </div>
+                  <div class="text-xs text-gray-500">Full Stack</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </header>
 
-    <main class="container mx-auto px-4 md:px-8 py-12">
-      <!-- Bagian Tentang Saya -->
-      <section id="tentang" class="mb-12 md:mb-16">
-        <div class="bg-white rounded-xl shadow-md p-6 md:p-8 card-hover">
+    <main class="container mx-auto px-4 md:px-8 py-12 space-y-10">
+      <!-- ════════════════════════════
+           TENTANG SAYA
+      ════════════════════════════ -->
+      <section id="tentang" class="fade-in">
+        <div
+          class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-10 card-hover"
+        >
           <h2
-            class="text-[clamp(1.4rem,3vw,1.8rem)] font-bold text-gray-800 border-l-4 border-primary pl-4 mb-6"
+            class="section-title text-[clamp(1.3rem,3vw,1.8rem)] text-gray-900 border-l-4 border-primary pl-4 mb-7"
           >
             Tentang Saya
           </h2>
-          <div class="space-y-4 text-gray-600">
-            <p>
-              Saya merupakan lulusan Sarjana Sistem Informasi dari Universitas
-              Royal Kisaran. Selama menempuh pendidikan maupun pengalaman kerja,
-              saya telah terbiasa berurusan dengan pengolahan data, penyusunan
-              dokumen, hingga pembuatan aplikasi berbasis web. Saya selalu
-              berusaha mengerjakan segala sesuatu dengan teliti, rapi, dan
-              terstruktur agar hasilnya maksimal.
-            </p>
-            <p>
-              Saya memiliki bekal kemampuan teknis yang beragam, mulai dari
-              penguasaan perangkat lunak perkantoran seperti Microsoft Office
-              hingga berbagai teknologi pengembangan web seperti PHP, Laravel,
-              HTML, CSS, dan JavaScript. Kombinasi kemampuan ini membuat saya
-              mampu menjembatani kebutuhan administrasi dengan solusi teknologi
-              yang tepat.
-            </p>
-            <p>
-              Dengan latar belakang dan keahlian yang saya miliki, saya siap
-              berkontribusi dan beradaptasi baik dalam lingkungan kerja yang
-              berfokus pada pengelolaan administrasi maupun dalam tim
-              pengembangan sistem informasi untuk mendukung kemajuan operasional
-              perusahaan atau instansi.
-            </p>
+          <div class="grid md:grid-cols-3 gap-8 items-start">
+            <div class="md:col-span-2 space-y-4 text-gray-600 leading-relaxed">
+              <p>
+                Saya merupakan lulusan Sarjana Sistem Informasi dari
+                <strong class="text-gray-800">Universitas Royal Kisaran</strong
+                >. Selama menempuh pendidikan maupun pengalaman kerja, saya
+                telah terbiasa berurusan dengan pengolahan data, penyusunan
+                dokumen, hingga pembuatan aplikasi berbasis web. Saya selalu
+                berusaha mengerjakan segala sesuatu dengan teliti, rapi, dan
+                terstruktur agar hasilnya maksimal.
+              </p>
+              <p>
+                Saya memiliki bekal kemampuan teknis yang beragam, mulai dari
+                penguasaan perangkat lunak perkantoran seperti
+                <strong class="text-gray-800">Microsoft Office</strong> hingga
+                berbagai teknologi pengembangan web seperti
+                <strong class="text-gray-800">PHP, Laravel, HTML, CSS,</strong>
+                dan <strong class="text-gray-800">JavaScript</strong>. Kombinasi
+                ini membuat saya mampu menjembatani kebutuhan administrasi
+                dengan solusi teknologi yang tepat.
+              </p>
+              <p>
+                Dengan latar belakang dan keahlian yang saya miliki, saya siap
+                berkontribusi dan beradaptasi baik dalam lingkungan kerja yang
+                berfokus pada pengelolaan administrasi maupun dalam tim
+                pengembangan sistem informasi.
+              </p>
+            </div>
+            <div class="space-y-3">
+              <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
+                <div class="text-xs text-gray-500 font-medium mb-1">
+                  Nama Lengkap
+                </div>
+                <div class="font-semibold text-gray-800">Amanda Sari</div>
+              </div>
+              <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
+                <div class="text-xs text-gray-500 font-medium mb-1">Lokasi</div>
+                <div class="font-semibold text-gray-800">
+                  Kisaran, Sumatera Utara
+                </div>
+              </div>
+              <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
+                <div class="text-xs text-gray-500 font-medium mb-1">Email</div>
+                <div class="font-semibold text-gray-800 text-sm">
+                  amandasari968@gmail.com
+                </div>
+              </div>
+              <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
+                <div class="text-xs text-gray-500 font-medium mb-1">Status</div>
+                <div
+                  class="font-semibold text-green-600 flex items-center gap-1.5"
+                >
+                  <span
+                    class="w-2 h-2 bg-green-400 rounded-full animate-pulse"
+                  ></span>
+                  Aktif Mencari Peluang
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- Bagian Pendidikan -->
-      <section id="pendidikan" class="mb-12 md:mb-16">
-        <div class="bg-white rounded-xl shadow-md p-6 md:p-8 card-hover">
+      <!-- ════════════════════════════
+           PENDIDIKAN
+      ════════════════════════════ -->
+      <section id="pendidikan" class="fade-in">
+        <div
+          class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-10 card-hover"
+        >
           <h2
-            class="text-[clamp(1.4rem,3vw,1.8rem)] font-bold text-gray-800 border-l-4 border-primary pl-4 mb-6"
+            class="section-title text-[clamp(1.3rem,3vw,1.8rem)] text-gray-900 border-l-4 border-primary pl-4 mb-7"
           >
             Riwayat Pendidikan
           </h2>
-
           <div class="space-y-8">
             <!-- Pendidikan 1 -->
             <div class="flex gap-5">
-              <div class="flex flex-col items-center">
+              <div class="flex flex-col items-center min-w-[40px]">
                 <div
-                  class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                  class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center shadow-md shadow-primary/30"
                 >
-                  <i class="fa fa-graduation-cap"></i>
+                  <i class="fa fa-graduation-cap text-sm"></i>
                 </div>
-                <div class="h-full w-0.5 bg-gray-200 mt-3"></div>
+                <div class="timeline-line"></div>
               </div>
-              <div class="pb-2">
+              <div class="pb-4">
                 <div class="flex flex-wrap items-center gap-2 mb-1">
-                  <h3 class="text-lg font-semibold text-gray-800">
+                  <h3 class="text-base font-bold text-gray-900">
                     Universitas Royal Kisaran
                   </h3>
                   <span
-                    class="text-sm bg-blue-50 text-primary px-2 py-0.5 rounded"
-                    >2021 - 2025</span
+                    class="text-xs bg-blue-50 text-primary px-2.5 py-0.5 rounded-full font-semibold border border-blue-100"
+                    >2021 – 2025</span
                   >
                 </div>
-                <p class="text-gray-500 mb-2">
-                  Sarjana Sistem Informasi - Fakultas Ilmu Komputer
+                <p class="text-sm text-gray-500 font-medium mb-2">
+                  Sarjana Sistem Informasi · Fakultas Ilmu Komputer
                 </p>
-                <p class="text-gray-600">
+                <p class="text-sm text-gray-600 leading-relaxed">
                   Menyelesaikan pendidikan dengan fokus pada pengembangan
                   perangkat lunak, basis data, dan sistem informasi. Mengerjakan
-                  tugas akhir berupa pembangunan sistem E-CRM untuk Usaha Mikro.
+                  tugas akhir berupa pembangunan
+                  <strong class="text-gray-800"
+                    >sistem E-CRM untuk Usaha Mikro</strong
+                  >.
                 </p>
               </div>
             </div>
 
             <!-- Pendidikan 2 -->
             <div class="flex gap-5">
-              <div class="flex flex-col items-center">
+              <div class="flex flex-col items-center min-w-[40px]">
                 <div
-                  class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                  class="w-10 h-10 rounded-xl bg-cyan-500 text-white flex items-center justify-center shadow-md shadow-cyan-500/30"
                 >
-                  <i class="fa fa-school"></i>
+                  <i class="fa fa-school text-sm"></i>
                 </div>
-                <div class="h-full w-0.5 bg-gray-200 mt-3"></div>
               </div>
-              <div class="pb-2">
+              <div class="pb-4">
                 <div class="flex flex-wrap items-center gap-2 mb-1">
-                  <h3 class="text-lg font-semibold text-gray-800">
+                  <h3 class="text-base font-bold text-gray-900">
                     Madrasah Aliyah Negeri Asahan
                   </h3>
                   <span
-                    class="text-sm bg-blue-50 text-primary px-2 py-0.5 rounded"
-                    >2018 - 2021</span
+                    class="text-xs bg-cyan-50 text-cyan-600 px-2.5 py-0.5 rounded-full font-semibold border border-cyan-100"
+                    >2018 – 2021</span
                   >
                 </div>
-                <p class="text-gray-500 mb-2">Ilmu Pengetahuan Sosial (IPS)</p>
-                <p class="text-gray-600">
+                <p class="text-sm text-gray-500 font-medium mb-2">
+                  Ilmu Pengetahuan Sosial (IPS)
+                </p>
+                <p class="text-sm text-gray-600 leading-relaxed">
                   Mempelajari dasar-dasar ilmu sosial, ekonomi, administrasi,
                   dan pengolahan informasi. Memperoleh keterampilan dalam
                   analisis data, komunikasi, serta pemahaman tata kelola
-                  organisasi yang mendukung kemampuan saya dalam dunia kerja
-                  maupun pengembangan sistem informasi.
+                  organisasi.
                 </p>
               </div>
             </div>
@@ -362,170 +829,157 @@
         </div>
       </section>
 
-      <!-- Bagian Pengalaman Kerja & Magang -->
-      <section id="pengalaman" class="mb-12 md:mb-16">
-        <div class="bg-white rounded-xl shadow-md p-6 md:p-8 card-hover">
+      <!-- ════════════════════════════
+           PENGALAMAN
+      ════════════════════════════ -->
+      <section id="pengalaman" class="fade-in">
+        <div
+          class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-10 card-hover"
+        >
           <h2
-            class="text-[clamp(1.4rem,3vw,1.8rem)] font-bold text-gray-800 border-l-4 border-primary pl-4 mb-6"
+            class="section-title text-[clamp(1.3rem,3vw,1.8rem)] text-gray-900 border-l-4 border-primary pl-4 mb-7"
           >
             Pengalaman Kerja & Magang
           </h2>
-
           <div class="space-y-8">
-            <!-- Pengalaman 1: Staff Administrasi -->
+            <!-- Exp 1 -->
             <div class="flex gap-5">
-              <div class="flex flex-col items-center">
+              <div class="flex flex-col items-center min-w-[40px]">
                 <div
-                  class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                  class="w-10 h-10 rounded-xl bg-violet-500 text-white flex items-center justify-center shadow-md shadow-violet-500/30"
                 >
-                  <i class="fa fa-briefcase"></i>
+                  <i class="fa fa-briefcase text-sm"></i>
                 </div>
-                <div class="h-full w-0.5 bg-gray-200 mt-3"></div>
+                <div class="timeline-line"></div>
               </div>
-              <div class="pb-2">
-                <div class="flex flex-wrap items-center gap-2 mb-1">
-                  <h3 class="text-lg font-semibold text-gray-800">
+              <div class="pb-4 w-full">
+                <div class="flex flex-wrap items-center gap-2 mb-0.5">
+                  <h3 class="text-base font-bold text-gray-900">
                     Staf Administrasi
                   </h3>
                   <span
-                    class="text-sm bg-blue-50 text-primary px-2 py-0.5 rounded"
+                    class="text-xs bg-violet-50 text-violet-600 px-2.5 py-0.5 rounded-full font-semibold border border-violet-100"
                     >2025</span
                   >
                 </div>
-                <p class="text-gray-500 mb-2">Fotokopi Panca, Kisaran</p>
-                <p class="text-gray-600 mb-3">
-                  Bertanggung jawab dalam mendukung kelancaran operasional
-                  harian usaha, khususnya yang berkaitan dengan pengelolaan
-                  dokumen dan data.
+                <p class="text-sm text-gray-500 font-medium mb-3">
+                  Fotokopi Panca, Kisaran
                 </p>
-                <ul class="list-disc pl-5 text-gray-600 space-y-1">
-                  <li>
-                    Menginput berbagai jenis data administrasi serta mengelola
-                    sistem pengarsipan agar tertata rapi dan terstruktur
+                <ul class="space-y-1.5 text-sm text-gray-600">
+                  <li class="flex gap-2">
+                    <span class="text-violet-400 mt-0.5">▸</span> Menginput data
+                    administrasi dan mengelola sistem pengarsipan agar tertata
+                    rapi
                   </li>
-                  <li>
-                    Menyusun dan mencetak laporan kegiatan harian sebagai bahan
-                    evaluasi operasional
+                  <li class="flex gap-2">
+                    <span class="text-violet-400 mt-0.5">▸</span> Menyusun dan
+                    mencetak laporan kegiatan harian sebagai bahan evaluasi
+                    operasional
                   </li>
-                  <li>
-                    Membantu kebutuhan pelanggan, mulai dari pemrosesan hingga
-                    pengecekan kelengkapan dokumen
+                  <li class="flex gap-2">
+                    <span class="text-violet-400 mt-0.5">▸</span> Membantu
+                    kebutuhan pelanggan, mulai pemrosesan hingga pengecekan
+                    dokumen
                   </li>
-                  <li>
-                    Memastikan seluruh data dan berkas tersimpan dengan rapi
-                    sehingga mudah ditemukan kembali saat diperlukan
-                  </li>
-                  <li>
-                    Terbiasa bekerja secara disiplin untuk menyelesaikan tugas
-                    sesuai target dan batas waktu yang ditentukan
-                  </li>
-                  <li>
-                    Memberikan pelayanan yang ramah, sopan, dan profesional
-                    kepada setiap pelanggan yang datang
+                  <li class="flex gap-2">
+                    <span class="text-violet-400 mt-0.5">▸</span> Memberikan
+                    pelayanan yang ramah, sopan, dan profesional kepada setiap
+                    pelanggan
                   </li>
                 </ul>
               </div>
             </div>
 
-            <!-- Pengalaman 2: KKL BPS -->
+            <!-- Exp 2 -->
             <div class="flex gap-5">
-              <div class="flex flex-col items-center">
+              <div class="flex flex-col items-center min-w-[40px]">
                 <div
-                  class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                  class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center shadow-md shadow-amber-500/30"
                 >
-                  <i class="fa fa-building"></i>
+                  <i class="fa fa-building text-sm"></i>
                 </div>
-                <div class="h-full w-0.5 bg-gray-200 mt-3"></div>
+                <div class="timeline-line"></div>
               </div>
-              <div class="pb-2">
-                <div class="flex flex-wrap items-center gap-2 mb-1">
-                  <h3 class="text-lg font-semibold text-gray-800">
+              <div class="pb-4 w-full">
+                <div class="flex flex-wrap items-center gap-2 mb-0.5">
+                  <h3 class="text-base font-bold text-gray-900">
                     Kuliah Kerja Lapangan (KKL)
                   </h3>
                   <span
-                    class="text-sm bg-blue-50 text-primary px-2 py-0.5 rounded"
+                    class="text-xs bg-amber-50 text-amber-600 px-2.5 py-0.5 rounded-full font-semibold border border-amber-100"
                     >2024</span
                   >
                 </div>
-                <p class="text-gray-500 mb-2">
+                <p class="text-sm text-gray-500 font-medium mb-3">
                   Badan Pusat Statistik (BPS) Kabupaten Asahan
                 </p>
-                <p class="text-gray-600 mb-3">
-                  Melaksanakan kegiatan praktik lapangan di instansi
-                  pemerintahan, di mana saya belajar dan terlibat langsung dalam
-                  proses pengolahan data berskala besar.
-                </p>
-                <ul class="list-disc pl-5 text-gray-600 space-y-1">
-                  <li>
-                    Membantu proses pengumpulan, pengolahan, serta pemeriksaan
-                    keabsahan data statistik wilayah
+                <ul class="space-y-1.5 text-sm text-gray-600">
+                  <li class="flex gap-2">
+                    <span class="text-amber-400 mt-0.5">▸</span> Membantu
+                    pengumpulan, pengolahan, dan pemeriksaan keabsahan data
+                    statistik wilayah
                   </li>
-                  <li>
-                    Menyusun ringkasan informasi dan laporan berkala harian
-                    maupun mingguan berdasarkan data yang telah diolah
+                  <li class="flex gap-2">
+                    <span class="text-amber-400 mt-0.5">▸</span> Menyusun
+                    ringkasan informasi dan laporan berkala harian maupun
+                    mingguan
                   </li>
-                  <li>
-                    Mendukung kelancaran kegiatan administrasi serta
-                    mendokumentasikan arsip instansi dengan baik
+                  <li class="flex gap-2">
+                    <span class="text-amber-400 mt-0.5">▸</span> Mendukung
+                    kelancaran kegiatan administrasi dan mendokumentasikan arsip
+                    instansi
                   </li>
-                  <li>
-                    Bekerja sama dengan anggota tim untuk menjamin tingkat
-                    ketelitian dan keakuratan data yang dihasilkan
+                  <li class="flex gap-2">
+                    <span class="text-amber-400 mt-0.5">▸</span> Bekerja sama
+                    dalam tim untuk menjamin ketelitian dan keakuratan data
                   </li>
                 </ul>
               </div>
             </div>
 
-            <!-- Pengalaman 3: MSIB Nurul Fikri -->
+            <!-- Exp 3 -->
             <div class="flex gap-5">
-              <div class="flex flex-col items-center">
+              <div class="flex flex-col items-center min-w-[40px]">
                 <div
-                  class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                  class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center shadow-md shadow-primary/30"
                 >
-                  <i class="fa fa-code"></i>
+                  <i class="fa fa-code text-sm"></i>
                 </div>
-                <div class="h-full w-0.5 bg-gray-200 mt-3"></div>
               </div>
-              <div class="pb-2">
-                <div class="flex flex-wrap items-center gap-2 mb-1">
-                  <h3 class="text-lg font-semibold text-gray-800">
+              <div class="pb-4 w-full">
+                <div class="flex flex-wrap items-center gap-2 mb-0.5">
+                  <h3 class="text-base font-bold text-gray-900">
                     Program MSIB – Akademi Fullstack Web Developer
                   </h3>
                   <span
-                    class="text-sm bg-blue-50 text-primary px-2 py-0.5 rounded"
+                    class="text-xs bg-blue-50 text-primary px-2.5 py-0.5 rounded-full font-semibold border border-blue-100"
                     >2024</span
                   >
                 </div>
-                <p class="text-gray-500 mb-2">PT. Nurul Fikri Cipta Inovasi</p>
-                <p class="text-gray-600 mb-3">
-                  Mengikuti program pelatihan dan magang bersertifikat tingkat
-                  nasional, di mana saya mendalami keterampilan pengembangan
-                  perangkat lunak dari tahap perancangan hingga penerapan.
+                <p class="text-sm text-gray-500 font-medium mb-3">
+                  PT. Nurul Fikri Cipta Inovasi
                 </p>
-                <ul class="list-disc pl-5 text-gray-600 space-y-1">
-                  <li>
-                    Membangun dan mengembangkan berbagai jenis aplikasi berbasis
-                    web menggunakan bahasa pemrograman PHP dan kerangka kerja
-                    Laravel
+                <ul class="space-y-1.5 text-sm text-gray-600">
+                  <li class="flex gap-2">
+                    <span class="text-primary mt-0.5">▸</span> Membangun
+                    aplikasi web menggunakan PHP dan kerangka kerja Laravel
                   </li>
-                  <li>
-                    Merancang serta membuat tampilan antarmuka situs web yang
-                    menarik dan mudah digunakan dengan bantuan HTML, CSS, dan
+                  <li class="flex gap-2">
+                    <span class="text-primary mt-0.5">▸</span> Merancang
+                    antarmuka situs web yang menarik dengan HTML, CSS, dan
                     JavaScript
                   </li>
-                  <li>
-                    Mengelola dan merancang struktur basis data menggunakan
-                    sistem manajemen MySQL agar data tersimpan dengan aman dan
-                    terorganisir
+                  <li class="flex gap-2">
+                    <span class="text-primary mt-0.5">▸</span> Mengelola dan
+                    merancang struktur basis data menggunakan MySQL
                   </li>
-                  <li>
-                    Terbiasa menggunakan sistem pengendalian versi Git untuk
-                    memudahkan kerja sama tim dalam pengembangan proyek
-                    perangkat lunak
+                  <li class="flex gap-2">
+                    <span class="text-primary mt-0.5">▸</span> Menggunakan
+                    sistem pengendalian versi Git untuk kolaborasi tim
                   </li>
-                  <li>
-                    Memahami dan menerapkan tahapan serta alur kerja standar
-                    dalam pembangunan sebuah sistem informasi berbasis web
+                  <li class="flex gap-2">
+                    <span class="text-primary mt-0.5">▸</span> Memahami alur
+                    kerja standar pembangunan sistem informasi berbasis web
                   </li>
                 </ul>
               </div>
@@ -534,569 +988,599 @@
         </div>
       </section>
 
-      <!-- Bagian Sertifikat & Pelatihan -->
-      <section id="sertifikat" class="mb-12 md:mb-16">
-        <div class="bg-white rounded-xl shadow-md p-6 md:p-8 card-hover">
+      <!-- ════════════════════════════
+           SERTIFIKAT (ACCORDION)
+      ════════════════════════════ -->
+      <section id="sertifikat" class="fade-in">
+        <div
+          class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-10"
+        >
           <h2
-            class="text-[clamp(1.4rem,3vw,1.8rem)] font-bold text-gray-800 border-l-4 border-primary pl-4 mb-6"
+            class="section-title text-[clamp(1.3rem,3vw,1.8rem)] text-gray-900 border-l-4 border-primary pl-4 mb-7"
           >
             Sertifikat & Pelatihan
           </h2>
+          <p class="text-sm text-gray-500 mb-6">
+            Klik kategori untuk melihat sertifikat terkait.
+          </p>
 
-          <!-- SERTIFIKAT MSIB -->
-          <div class="mb-10">
-            <h3
-              class="text-lg font-semibold text-gray-800 mb-6 flex items-center gap-2"
+          <!-- ACCORDION 1: MSIB -->
+          <div
+            class="accordion-item mb-3 border border-gray-200 rounded-xl overflow-hidden"
+          >
+            <button
+              class="accordion-btn w-full flex justify-between items-center p-5 bg-blue-50 hover:bg-blue-100 transition-colors text-left"
             >
-              <i class="fa fa-certificate text-primary"></i> Sertifikat Program
-              MSIB
-            </h3>
-
-            <div
-              class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
-            >
-              <!-- Sertifikat 1 -->
-              <div
-                class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
-              >
-                <img
-                  src="Sertifikat_page-0001.jpg"
-                  alt="Sertifikat Program MSIB"
-                  class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="msib1"
-                />
-
-                <h5 class="font-medium text-gray-800 text-center text-sm">
-                  Sertifikat Kelulusan Program MSIB
-                </h5>
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center text-sm"
+                >
+                  <i class="fa fa-certificate"></i>
+                </div>
+                <div>
+                  <div class="font-bold text-gray-900 text-sm">
+                    Sertifikat Program MSIB
+                  </div>
+                  <div class="text-xs text-gray-500">
+                    5 Sertifikat · PT. Nurul Fikri Cipta Inovasi
+                  </div>
+                </div>
               </div>
-
-              <!-- Sertifikat 2 -->
-              <div
-                class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
-              >
-                <img
-                  src="Sertifikat_page-0002.jpg"
-                  alt="Sertifikat Program MSIB"
-                  class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="msib2"
-                />
-
-                <h5 class="font-medium text-gray-800 text-center text-sm">
-                  Sertifikat Kelulusan Program MSIB
-                </h5>
-              </div>
-
-              <!-- Sertifikat 3 -->
-              <div
-                class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
-              >
-                <img
-                  src="Sertifikat_page-0003.jpg"
-                  alt="Sertifikat Program MSIB"
-                  class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="msib3"
-                />
-
-                <h5 class="font-medium text-gray-800 text-center text-sm">
-                  Sertifikat Kelulusan Program MSIB
-                </h5>
-              </div>
-
-              <!-- Sertifikat 4 -->
-              <div
-                class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
-              >
-                <img
-                  src="Sertifikat_page-0004.jpg"
-                  alt="Sertifikat Program MSIB"
-                  class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="msib4"
-                />
-
-                <h5 class="font-medium text-gray-800 text-center text-sm">
-                  Sertifikat Kelulusan Program MSIB
-                </h5>
-              </div>
-
-              <!-- Sertifikat 5 -->
-              <div
-                class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
-              >
-                <img
-                  src="Sertifikat_page-0005.jpg"
-                  alt="Sertifikat Program MSIB"
-                  class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="msib5"
-                />
-
-                <h5 class="font-medium text-gray-800 text-center text-sm">
-                  Sertifikat Kelulusan Program MSIB
-                </h5>
+              <i class="fa fa-chevron-down accordion-icon text-primary"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="p-5 bg-gray-50">
+                <div class="cert-grid">
+                  <div
+                    class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                  >
+                    <img
+                      src="Sertifikat_page-0001.jpg"
+                      alt="Sertifikat MSIB 1"
+                      class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                      data-gallery="msib1"
+                      onerror="this.parentElement.style.display = 'none'"
+                    />
+                    <p class="text-xs font-medium text-gray-700 text-center">
+                      Kelulusan MSIB #1
+                    </p>
+                  </div>
+                  <div
+                    class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                  >
+                    <img
+                      src="Sertifikat_page-0002.jpg"
+                      alt="Sertifikat MSIB 2"
+                      class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                      data-gallery="msib2"
+                      onerror="this.parentElement.style.display = 'none'"
+                    />
+                    <p class="text-xs font-medium text-gray-700 text-center">
+                      Kelulusan MSIB #2
+                    </p>
+                  </div>
+                  <div
+                    class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                  >
+                    <img
+                      src="Sertifikat_page-0003.jpg"
+                      alt="Sertifikat MSIB 3"
+                      class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                      data-gallery="msib3"
+                      onerror="this.parentElement.style.display = 'none'"
+                    />
+                    <p class="text-xs font-medium text-gray-700 text-center">
+                      Kelulusan MSIB #3
+                    </p>
+                  </div>
+                  <div
+                    class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                  >
+                    <img
+                      src="Sertifikat_page-0004.jpg"
+                      alt="Sertifikat MSIB 4"
+                      class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                      data-gallery="msib4"
+                      onerror="this.parentElement.style.display = 'none'"
+                    />
+                    <p class="text-xs font-medium text-gray-700 text-center">
+                      Kelulusan MSIB #4
+                    </p>
+                  </div>
+                  <div
+                    class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                  >
+                    <img
+                      src="Sertifikat_page-0005.jpg"
+                      alt="Sertifikat MSIB 5"
+                      class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                      data-gallery="msib5"
+                      onerror="this.parentElement.style.display = 'none'"
+                    />
+                    <p class="text-xs font-medium text-gray-700 text-center">
+                      Kelulusan MSIB #5
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- SERTIFIKAT BNSP -->
-          <div class="mb-10">
-            <h3
-              class="text-lg font-semibold text-gray-800 mb-6 flex items-center gap-2"
+          <!-- ACCORDION 2: BNSP -->
+          <div
+            class="accordion-item mb-3 border border-gray-200 rounded-xl overflow-hidden"
+          >
+            <button
+              class="accordion-btn w-full flex justify-between items-center p-5 bg-amber-50 hover:bg-amber-100 transition-colors text-left"
             >
-              <i class="fa fa-award text-yellow-600"></i> Sertifikat Kompetensi
-              BNSP
-            </h3>
-
-            <div
-              class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
-            >
-              <!-- Sertifikat 1 -->
-              <div
-                class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
-              >
-                <img
-                  src="Sertifikat_page-0006.jpg"
-                  alt="Sertifikat Kompetensi BNSP"
-                  class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="bnsp1"
-                />
-
-                <h5 class="font-medium text-gray-800 text-center text-sm">
-                  Sertifikat Kompetensi BNSP
-                </h5>
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-9 h-9 rounded-lg bg-amber-500 text-white flex items-center justify-center text-sm"
+                >
+                  <i class="fa fa-award"></i>
+                </div>
+                <div>
+                  <div class="font-bold text-gray-900 text-sm">
+                    Sertifikat Kompetensi BNSP
+                  </div>
+                  <div class="text-xs text-gray-500">
+                    2 Sertifikat · Badan Nasional Sertifikasi Profesi
+                  </div>
+                </div>
               </div>
-
-              <!-- Sertifikat 2 -->
-              <div
-                class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
-              >
-                <img
-                  src="Sertifikat_page-0007.jpg"
-                  alt="Sertifikat Kompetensi BNSP"
-                  class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="bnsp2"
-                />
-
-                <h5 class="font-medium text-gray-800 text-center text-sm">
-                  Sertifikat Kompetensi BNSP
-                </h5>
+              <i class="fa fa-chevron-down accordion-icon text-amber-500"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="p-5 bg-gray-50">
+                <div class="cert-grid">
+                  <div
+                    class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                  >
+                    <img
+                      src="Sertifikat_page-0006.jpg"
+                      alt="Sertifikat BNSP 1"
+                      class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                      data-gallery="bnsp1"
+                      onerror="this.parentElement.style.display = 'none'"
+                    />
+                    <p class="text-xs font-medium text-gray-700 text-center">
+                      Kompetensi BNSP #1
+                    </p>
+                  </div>
+                  <div
+                    class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                  >
+                    <img
+                      src="Sertifikat_page-0007.jpg"
+                      alt="Sertifikat BNSP 2"
+                      class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                      data-gallery="bnsp2"
+                      onerror="this.parentElement.style.display = 'none'"
+                    />
+                    <p class="text-xs font-medium text-gray-700 text-center">
+                      Kompetensi BNSP #2
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- SERTIFIKAT CODEPOLITAN -->
-          <div class="mt-12 pt-8 border-t border-gray-100">
-            <h3
-              class="text-lg font-semibold text-gray-800 mb-6 flex items-center gap-2"
+          <!-- ACCORDION 3: Codepolitan Sep 2024 -->
+          <div
+            class="accordion-item mb-3 border border-gray-200 rounded-xl overflow-hidden"
+          >
+            <button
+              class="accordion-btn w-full flex justify-between items-center p-5 bg-green-50 hover:bg-green-100 transition-colors text-left"
             >
-              <i class="fa fa-graduation-cap text-primary"></i> Sertifikat
-              Pelatihan & Kelas Online
-            </h3>
-
-            <div class="mb-8">
-              <h4
-                class="font-semibold text-gray-700 mb-4 flex items-center gap-2"
-              >
-                <i class="fa fa-book text-green-600"></i> Codepolitan
-                <span class="text-sm font-normal text-gray-500"
-                  >(September 2024)</span
-                >
-              </h4>
-              <div
-                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
-              >
-                <!-- Sertifikat 1 -->
+              <div class="flex items-center gap-3">
                 <div
-                  class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+                  class="w-9 h-9 rounded-lg bg-green-500 text-white flex items-center justify-center text-sm"
                 >
-                  <img
-                    src="5.jpg"
-                    alt="Sertifikat Kelas Fitur Baru Laravel 7"
-                    class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                    data-gallery="codepolitan1"
-                  />
-                  <h5 class="font-medium text-gray-800 text-center text-sm">
-                    Kelas Fitur Baru Laravel 7
-                  </h5>
+                  <i class="fa fa-book"></i>
                 </div>
-                <!-- Sertifikat 2 -->
-                <div
-                  class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
-                >
-                  <img
-                    src="1.jpg"
-                    alt="Sertifikat Kelas Mengenal Pemrograman Komputer"
-                    class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                    data-gallery="codepolitan2"
-                  />
-                  <h5 class="font-medium text-gray-800 text-center text-sm">
-                    Kelas Mengenal Pemrograman Komputer
-                  </h5>
+                <div>
+                  <div class="font-bold text-gray-900 text-sm">Codepolitan</div>
+                  <div class="text-xs text-gray-500">
+                    5 Sertifikat · September 2024
+                  </div>
                 </div>
-                <!-- Sertifikat 3 -->
-                <div
-                  class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
-                >
-                  <img
-                    src="2.jpg"
-                    alt="Sertifikat Kelas Belajar JQuery Dasar"
-                    class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                    data-gallery="codepolitan3"
-                  />
-                  <h5 class="font-medium text-gray-800 text-center text-sm">
-                    Kelas Belajar JQuery Dasar
-                  </h5>
-                </div>
-                <!-- Sertifikat 4 -->
-                <div
-                  class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
-                >
-                  <img
-                    src="3.jpg"
-                    alt="Sertifikat Kelas Belajar GIT untuk Pemula"
-                    class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                    data-gallery="codepolitan4"
-                  />
-                  <h5 class="font-medium text-gray-800 text-center text-sm">
-                    Kelas Belajar GIT untuk Pemula
-                  </h5>
-                </div>
-                <!-- Sertifikat 5 -->
-                <div
-                  class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
-                >
-                  <img
-                    src="4.jpg"
-                    alt="Sertifikat Kelas Belajar Dasar-dasar HTML dan CSS"
-                    class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                    data-gallery="codepolitan5"
-                  />
-                  <h5 class="font-medium text-gray-800 text-center text-sm">
-                    Kelas Belajar Dasar-dasar HTML dan CSS
-                  </h5>
+              </div>
+              <i class="fa fa-chevron-down accordion-icon text-green-500"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="p-5 bg-gray-50">
+                <div class="cert-grid">
+                  <div
+                    class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                  >
+                    <img
+                      src="5.jpg"
+                      alt="Laravel 7"
+                      class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                      data-gallery="codepolitan1"
+                      onerror="this.parentElement.style.display = 'none'"
+                    />
+                    <p class="text-xs font-medium text-gray-700 text-center">
+                      Fitur Baru Laravel 7
+                    </p>
+                  </div>
+                  <div
+                    class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                  >
+                    <img
+                      src="1.jpg"
+                      alt="Pemrograman Komputer"
+                      class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                      data-gallery="codepolitan2"
+                      onerror="this.parentElement.style.display = 'none'"
+                    />
+                    <p class="text-xs font-medium text-gray-700 text-center">
+                      Mengenal Pemrograman
+                    </p>
+                  </div>
+                  <div
+                    class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                  >
+                    <img
+                      src="2.jpg"
+                      alt="JQuery Dasar"
+                      class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                      data-gallery="codepolitan3"
+                      onerror="this.parentElement.style.display = 'none'"
+                    />
+                    <p class="text-xs font-medium text-gray-700 text-center">
+                      Belajar JQuery Dasar
+                    </p>
+                  </div>
+                  <div
+                    class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                  >
+                    <img
+                      src="3.jpg"
+                      alt="GIT Pemula"
+                      class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                      data-gallery="codepolitan4"
+                      onerror="this.parentElement.style.display = 'none'"
+                    />
+                    <p class="text-xs font-medium text-gray-700 text-center">
+                      Belajar GIT Pemula
+                    </p>
+                  </div>
+                  <div
+                    class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                  >
+                    <img
+                      src="4.jpg"
+                      alt="HTML & CSS"
+                      class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                      data-gallery="codepolitan5"
+                      onerror="this.parentElement.style.display = 'none'"
+                    />
+                    <p class="text-xs font-medium text-gray-700 text-center">
+                      Dasar HTML & CSS
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- Bagian Baru: Codepolitan Mei 2026 -->
-            <div class="mb-8">
-              <h4
-                class="font-semibold text-gray-700 mb-4 flex items-center gap-2"
-              >
-                <i class="fa fa-book text-green-600"></i> Codepolitan
-                <span class="text-sm font-normal text-gray-500"
-                  >(Mei 2026)</span
-                >
-              </h4>
-              <div
-                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
-              >
-                <!-- Sertifikat 1 -->
+          <!-- ACCORDION 4: Codepolitan Mei 2026 -->
+          <div
+            class="accordion-item mb-3 border border-gray-200 rounded-xl overflow-hidden"
+          >
+            <button
+              class="accordion-btn w-full flex justify-between items-center p-5 bg-green-50 hover:bg-green-100 transition-colors text-left"
+            >
+              <div class="flex items-center gap-3">
                 <div
-                  class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+                  class="w-9 h-9 rounded-lg bg-green-600 text-white flex items-center justify-center text-sm"
                 >
-                  <img
-                    src="baru3.jpg"
-                    alt="Sertifikat Belajar Python Dasar"
-                    class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                    data-gallery="codepolitan6"
-                  />
-                  <h5 class="font-medium text-gray-800 text-center text-sm">
-                    Belajar Python Dasar
-                  </h5>
+                  <i class="fa fa-book"></i>
                 </div>
-                <!-- Sertifikat 2 -->
-                <div
-                  class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
-                >
-                  <img
-                    src="baru1.jpg"
-                    alt="Sertifikat Belajar C++ Dasar"
-                    class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                    data-gallery="codepolitan7"
-                  />
-                  <h5 class="font-medium text-gray-800 text-center text-sm">
-                    Belajar C++ Dasar
-                  </h5>
+                <div>
+                  <div class="font-bold text-gray-900 text-sm">Codepolitan</div>
+                  <div class="text-xs text-gray-500">
+                    4 Sertifikat · Mei 2026
+                  </div>
                 </div>
-                <!-- Sertifikat 3 -->
-                <div
-                  class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
-                >
-                  <img
-                    src="baru2.jpg"
-                    alt="Sertifikat Belajar Java Dasar"
-                    class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                    data-gallery="codepolitan8"
-                  />
-                  <h5 class="font-medium text-gray-800 text-center text-sm">
-                    Belajar Java Dasar
-                  </h5>
-                </div>
-                <!-- Sertifikat 4 -->
-                <div
-                  class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
-                >
-                  <img
-                    src="baru4.jpg"
-                    alt="Sertifikat Belajar Git dari 0 sampai Bisa"
-                    class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                    data-gallery="codepolitan9"
-                  />
-                  <h5 class="font-medium text-gray-800 text-center text-sm">
-                    Belajar Git dari 0 sampai Bisa
-                  </h5>
+              </div>
+              <i class="fa fa-chevron-down accordion-icon text-green-600"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="p-5 bg-gray-50">
+                <div class="cert-grid">
+                  <div
+                    class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                  >
+                    <img
+                      src="baru3.jpg"
+                      alt="Python Dasar"
+                      class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                      data-gallery="codepolitan6"
+                      onerror="this.parentElement.style.display = 'none'"
+                    />
+                    <p class="text-xs font-medium text-gray-700 text-center">
+                      Belajar Python Dasar
+                    </p>
+                  </div>
+                  <div
+                    class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                  >
+                    <img
+                      src="baru1.jpg"
+                      alt="C++ Dasar"
+                      class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                      data-gallery="codepolitan7"
+                      onerror="this.parentElement.style.display = 'none'"
+                    />
+                    <p class="text-xs font-medium text-gray-700 text-center">
+                      Belajar C++ Dasar
+                    </p>
+                  </div>
+                  <div
+                    class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                  >
+                    <img
+                      src="baru2.jpg"
+                      alt="Java Dasar"
+                      class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                      data-gallery="codepolitan8"
+                      onerror="this.parentElement.style.display = 'none'"
+                    />
+                    <p class="text-xs font-medium text-gray-700 text-center">
+                      Belajar Java Dasar
+                    </p>
+                  </div>
+                  <div
+                    class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                  >
+                    <img
+                      src="baru4.jpg"
+                      alt="Git 0 sampai Bisa"
+                      class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                      data-gallery="codepolitan9"
+                      onerror="this.parentElement.style.display = 'none'"
+                    />
+                    <p class="text-xs font-medium text-gray-700 text-center">
+                      Git dari 0 sampai Bisa
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- SERTIFIKAT DICODING -->
-            <div class="mb-8">
-              <h4
-                class="font-semibold text-gray-700 mb-4 flex items-center gap-2"
-              >
-                <i class="fa fa-code text-blue-600"></i> Dicoding
-              </h4>
-
-              <!-- Bagian Juni 2024 -->
-              <div class="mb-6">
-                <h5 class="text-sm font-normal text-gray-500 mb-3 pl-4">
-                  Juni 2024
-                </h5>
-
+          <!-- ACCORDION 5: Dicoding -->
+          <div
+            class="accordion-item mb-3 border border-gray-200 rounded-xl overflow-hidden"
+          >
+            <button
+              class="accordion-btn w-full flex justify-between items-center p-5 bg-blue-50 hover:bg-blue-100 transition-colors text-left"
+            >
+              <div class="flex items-center gap-3">
                 <div
-                  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4"
+                  class="w-9 h-9 rounded-lg bg-blue-500 text-white flex items-center justify-center text-sm"
                 >
-                  <!-- Sertifikat SOLID -->
-                  <div
-                    class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
-                  >
-                    <img
-                      src="0001.jpg"
-                      alt="Sertifikat Belajar Prinsip Pemrograman SOLID"
-                      class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                      data-gallery="solid"
-                    />
-
-                    <!-- Tambahan halaman -->
-                    <img
-                      src="0002.jpg"
-                      class="hidden gallery-img"
-                      data-gallery="solid"
-                    />
-
-                    <h5 class="font-medium text-gray-800 text-center text-sm">
-                      Belajar Prinsip Pemrograman SOLID
-                    </h5>
-                  </div>
-
-                  <!-- Sertifikat Java -->
-                  <div
-                    class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
-                  >
-                    <img
-                      src="00011.jpg"
-                      alt="Sertifikat Memulai Pemrograman Dengan Java"
-                      class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                      data-gallery="java"
-                    />
-
-                    <!-- Tambahan halaman -->
-                    <img
-                      src="00022.jpg"
-                      class="hidden gallery-img"
-                      data-gallery="java"
-                    />
-                    <img
-                      src="00033.jpg"
-                      class="hidden gallery-img"
-                      data-gallery="java"
-                    />
-
-                    <h5 class="font-medium text-gray-800 text-center text-sm">
-                      Memulai Pemrograman Dengan Java
-                    </h5>
+                  <i class="fa fa-code"></i>
+                </div>
+                <div>
+                  <div class="font-bold text-gray-900 text-sm">Dicoding</div>
+                  <div class="text-xs text-gray-500">
+                    7 Sertifikat · 2023 – 2024
                   </div>
                 </div>
               </div>
-
-              <!-- Bagian Juli 2023 -->
-              <div class="mb-6">
-                <h5 class="text-sm font-normal text-gray-500 mb-3 pl-4">
-                  Juli 2023
-                </h5>
-
-                <div
-                  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4"
-                >
-                  <!-- Sertifikat Manajemen Proyek -->
-                  <div
-                    class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+              <i class="fa fa-chevron-down accordion-icon text-blue-500"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="p-5 bg-gray-50 space-y-6">
+                <div>
+                  <h5
+                    class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3"
                   >
-                    <img
-                      src="1111.jpg"
-                      alt="Sertifikat Belajar Dasar Manajemen Proyek"
-                      class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                      data-gallery="manajemen"
-                    />
-
-                    <!-- Tambahan halaman -->
-                    <img
-                      src="1112.jpg"
-                      class="hidden gallery-img"
-                      data-gallery="manajemen"
-                    />
-
-                    <img
-                      src="1113.jpg"
-                      class="hidden gallery-img"
-                      data-gallery="manajemen"
-                    />
-
-                    <h5 class="font-medium text-gray-800 text-center text-sm">
-                      Belajar Dasar Manajemen Proyek
-                    </h5>
+                    Juni 2024
+                  </h5>
+                  <div class="cert-grid">
+                    <div
+                      class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                    >
+                      <img
+                        src="0001.jpg"
+                        alt="SOLID"
+                        class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                        data-gallery="solid"
+                        onerror="this.parentElement.style.display = 'none'"
+                      />
+                      <img
+                        src="0002.jpg"
+                        class="hidden gallery-img"
+                        data-gallery="solid"
+                      />
+                      <p class="text-xs font-medium text-gray-700 text-center">
+                        Prinsip SOLID
+                      </p>
+                    </div>
+                    <div
+                      class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                    >
+                      <img
+                        src="00011.jpg"
+                        alt="Java"
+                        class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                        data-gallery="java"
+                        onerror="this.parentElement.style.display = 'none'"
+                      />
+                      <img
+                        src="00022.jpg"
+                        class="hidden gallery-img"
+                        data-gallery="java"
+                      />
+                      <img
+                        src="00033.jpg"
+                        class="hidden gallery-img"
+                        data-gallery="java"
+                      />
+                      <p class="text-xs font-medium text-gray-700 text-center">
+                        Pemrograman Java
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <!-- Bagian September 2023 -->
-              <div class="mb-6">
-                <h5 class="text-sm font-normal text-gray-500 mb-3 pl-4">
-                  September 2023
-                </h5>
-
-                <div
-                  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4"
-                >
-                  <!-- Sertifikat SQL -->
-                  <div
-                    class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+                <div>
+                  <h5
+                    class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3"
                   >
-                    <img
-                      src="11111.jpg"
-                      alt="Sertifikat SQL"
-                      class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                      data-gallery="sql"
-                    />
-
-                    <!-- Tambahan halaman -->
-                    <img
-                      src="11112.jpg"
-                      class="hidden gallery-img"
-                      data-gallery="sql"
-                    />
-                    <img
-                      src="11113.jpg"
-                      class="hidden gallery-img"
-                      data-gallery="sql"
-                    />
-
-                    <h5 class="font-medium text-gray-800 text-center text-sm">
-                      Belajar Dasar Structured Query Language (SQL)
-                    </h5>
-                  </div>
-
-                  <!-- Sertifikat Software -->
-                  <div
-                    class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
-                  >
-                    <img
-                      src="1111111.jpg"
-                      alt="Sertifikat Software"
-                      class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                      data-gallery="software"
-                    />
-
-                    <!-- Tambahan halaman -->
-                    <img
-                      src="1111112.jpg"
-                      class="hidden gallery-img"
-                      data-gallery="software"
-                    />
-                    <img
-                      src="1111113.jpg"
-                      class="hidden gallery-img"
-                      data-gallery="software"
-                    />
-
-                    <img
-                      src="1111114.jpg"
-                      class="hidden gallery-img"
-                      data-gallery="software"
-                    />
-
-                    <h5 class="font-medium text-gray-800 text-center text-sm">
-                      Memulai Dasar Pemrograman untuk Menjadi Pengembang
-                      Software
-                    </h5>
+                    Juli 2023
+                  </h5>
+                  <div class="cert-grid">
+                    <div
+                      class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                    >
+                      <img
+                        src="1111.jpg"
+                        alt="Manajemen Proyek"
+                        class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                        data-gallery="manajemen"
+                        onerror="this.parentElement.style.display = 'none'"
+                      />
+                      <img
+                        src="1112.jpg"
+                        class="hidden gallery-img"
+                        data-gallery="manajemen"
+                      />
+                      <img
+                        src="1113.jpg"
+                        class="hidden gallery-img"
+                        data-gallery="manajemen"
+                      />
+                      <p class="text-xs font-medium text-gray-700 text-center">
+                        Manajemen Proyek
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <!-- Bagian Oktober 2023 -->
-              <div>
-                <h5 class="text-sm font-normal text-gray-500 mb-3 pl-4">
-                  Oktober 2023
-                </h5>
-
-                <div
-                  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4"
-                >
-                  <!-- Sertifikat C -->
-                  <div
-                    class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+                <div>
+                  <h5
+                    class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3"
                   >
-                    <img
-                      src="111.jpg"
-                      alt="Sertifikat C"
-                      class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                      data-gallery="c"
-                    />
-
-                    <!-- Tambahan halaman -->
-                    <img
-                      src="222.jpg"
-                      class="hidden gallery-img"
-                      data-gallery="c"
-                    />
-
-                    <img
-                      src="333.jpg"
-                      class="hidden gallery-img"
-                      data-gallery="c"
-                    />
-
-                    <h5 class="font-medium text-gray-800 text-center text-sm">
-                      Memulai Pemrograman Dengan C
-                    </h5>
+                    September 2023
+                  </h5>
+                  <div class="cert-grid">
+                    <div
+                      class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                    >
+                      <img
+                        src="11111.jpg"
+                        alt="SQL"
+                        class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                        data-gallery="sql"
+                        onerror="this.parentElement.style.display = 'none'"
+                      />
+                      <img
+                        src="11112.jpg"
+                        class="hidden gallery-img"
+                        data-gallery="sql"
+                      />
+                      <img
+                        src="11113.jpg"
+                        class="hidden gallery-img"
+                        data-gallery="sql"
+                      />
+                      <p class="text-xs font-medium text-gray-700 text-center">
+                        Dasar SQL
+                      </p>
+                    </div>
+                    <div
+                      class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                    >
+                      <img
+                        src="1111111.jpg"
+                        alt="Software Dev"
+                        class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                        data-gallery="software"
+                        onerror="this.parentElement.style.display = 'none'"
+                      />
+                      <img
+                        src="1111112.jpg"
+                        class="hidden gallery-img"
+                        data-gallery="software"
+                      />
+                      <img
+                        src="1111113.jpg"
+                        class="hidden gallery-img"
+                        data-gallery="software"
+                      />
+                      <img
+                        src="1111114.jpg"
+                        class="hidden gallery-img"
+                        data-gallery="software"
+                      />
+                      <p class="text-xs font-medium text-gray-700 text-center">
+                        Pengembang Software
+                      </p>
+                    </div>
                   </div>
+                </div>
 
-                  <!-- Sertifikat JavaScript -->
-                  <div
-                    class="bg-gray-50 p-3 rounded-lg border border-gray-100 card-hover"
+                <div>
+                  <h5
+                    class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3"
                   >
-                    <img
-                      src="111111.jpg"
-                      alt="Sertifikat JavaScript"
-                      class="gallery-img w-full h-auto rounded mb-3 shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                      data-gallery="js"
-                    />
-
-                    <!-- Tambahan halaman -->
-                    <img
-                      src="111112.jpg"
-                      class="hidden gallery-img"
-                      data-gallery="js"
-                    />
-                    <img
-                      src="111113.jpg"
-                      class="hidden gallery-img"
-                      data-gallery="js"
-                    />
-
-                    <h5 class="font-medium text-gray-800 text-center text-sm">
-                      Belajar Dasar Pemrograman JavaScript
-                    </h5>
+                    Oktober 2023
+                  </h5>
+                  <div class="cert-grid">
+                    <div
+                      class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                    >
+                      <img
+                        src="111.jpg"
+                        alt="C"
+                        class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                        data-gallery="c"
+                        onerror="this.parentElement.style.display = 'none'"
+                      />
+                      <img
+                        src="222.jpg"
+                        class="hidden gallery-img"
+                        data-gallery="c"
+                      />
+                      <img
+                        src="333.jpg"
+                        class="hidden gallery-img"
+                        data-gallery="c"
+                      />
+                      <p class="text-xs font-medium text-gray-700 text-center">
+                        Pemrograman C
+                      </p>
+                    </div>
+                    <div
+                      class="bg-white rounded-xl border border-gray-100 p-3 card-hover"
+                    >
+                      <img
+                        src="111111.jpg"
+                        alt="JavaScript"
+                        class="gallery-img w-full h-auto rounded-lg mb-2 cursor-pointer"
+                        data-gallery="js"
+                        onerror="this.parentElement.style.display = 'none'"
+                      />
+                      <img
+                        src="111112.jpg"
+                        class="hidden gallery-img"
+                        data-gallery="js"
+                      />
+                      <img
+                        src="111113.jpg"
+                        class="hidden gallery-img"
+                        data-gallery="js"
+                      />
+                      <p class="text-xs font-medium text-gray-700 text-center">
+                        Dasar JavaScript
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1105,617 +1589,753 @@
         </div>
       </section>
 
-      <!-- Bagian Proyek -->
-      <section id="proyek" class="mb-12 md:mb-16">
-        <div class="bg-white rounded-xl shadow-md p-6 md:p-8 card-hover">
+      <!-- ════════════════════════════
+           PROYEK
+      ════════════════════════════ -->
+      <section id="proyek" class="fade-in">
+        <div
+          class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-10"
+        >
           <h2
-            class="text-[clamp(1.4rem,3vw,1.8rem)] font-bold text-gray-800 border-l-4 border-primary pl-4 mb-6"
+            class="section-title text-[clamp(1.3rem,3vw,1.8rem)] text-gray-900 border-l-4 border-primary pl-4 mb-7"
           >
             Proyek Unggulan
           </h2>
-
-          <!-- Proyek 1 -->
-          <div
-            class="mb-12 pb-8 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0"
-          >
-            <h3 class="text-xl font-semibold text-gray-800 mb-2">
-              Sistem E-CRM Berbasis Web Menggunakan Laravel 11
-            </h3>
-            <p class="text-gray-500 italic mb-4">
-              Studi Kasus: Usaha Mikro Wiwit Hijab
-            </p>
-
-            <div class="grid md:grid-cols-3 gap-6">
-              <div class="md:col-span-2">
-                <h4 class="font-medium text-gray-700 mb-2">
-                  Deskripsi Proyek:
-                </h4>
-                <ul class="space-y-2 pl-5 list-disc text-gray-600 mb-4">
-                  <li>
-                    Membangun sistem manajemen hubungan pelanggan yang lengkap
-                    untuk membantu pengusaha mengelola data dan interaksi dengan
-                    pelanggan secara efektif.
-                  </li>
-                  <li>
-                    Meliputi fitur manajemen data pelanggan, pencatatan
-                    transaksi, riwayat pembelian, dan program loyalitas berbasis
-                    poin serta kupon diskon.
-                  </li>
-                  <li>
-                    Terintegrasi dengan sistem notifikasi otomatis untuk
-                    meningkatkan kualitas layanan dan keterlibatan pelanggan.
-                  </li>
-                  <li>
-                    Menggunakan basis data MySQL yang terstruktur untuk menjamin
-                    keamanan dan aksesibilitas data.
-                  </li>
-                </ul>
-                <div class="flex flex-wrap gap-2 mt-3">
-                  <span
-                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-                    >Laravel 11</span
-                  >
-                  <span
-                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-                    >PHP</span
-                  >
-                  <span
-                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-                    >MySQL</span
-                  >
-                  <span
-                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-                    >JavaScript</span
-                  >
+          <div class="space-y-10">
+            <!-- ── Proyek 1 ── -->
+            <div
+              class="border border-gray-100 rounded-2xl p-6 hover:border-primary/30 transition-colors hover:shadow-md"
+            >
+              <div
+                class="flex flex-wrap items-start justify-between gap-3 mb-4"
+              >
+                <div>
+                  <h3 class="text-lg font-bold text-gray-900">
+                    Sistem E-CRM Berbasis Web
+                  </h3>
+                  <p class="text-sm text-gray-500 italic">
+                    Studi Kasus: Usaha Mikro Wiwit Hijab · Laravel 11
+                  </p>
+                </div>
+                <a
+                  href="https://github.com/amandasari2"
+                  target="_blank"
+                  class="inline-flex items-center gap-1.5 text-xs bg-gray-900 text-white px-3 py-1.5 rounded-lg hover:bg-gray-700 transition-colors font-medium"
+                >
+                  <i class="fa-brands fa-github"></i> GitHub
+                </a>
+              </div>
+              <div class="grid md:grid-cols-3 gap-6">
+                <div class="md:col-span-2">
+                  <ul class="space-y-2 text-sm text-gray-600 mb-4">
+                    <li class="flex gap-2">
+                      <span class="text-primary mt-0.5">▸</span> Sistem
+                      manajemen hubungan pelanggan lengkap untuk pengelolaan
+                      data dan interaksi pelanggan secara efektif
+                    </li>
+                    <li class="flex gap-2">
+                      <span class="text-primary mt-0.5">▸</span> Fitur manajemen
+                      data pelanggan, pencatatan transaksi, riwayat pembelian,
+                      program loyalitas poin & kupon diskon
+                    </li>
+                    <li class="flex gap-2">
+                      <span class="text-primary mt-0.5">▸</span> Terintegrasi
+                      dengan sistem notifikasi otomatis untuk meningkatkan
+                      kualitas layanan pelanggan
+                    </li>
+                    <li class="flex gap-2">
+                      <span class="text-primary mt-0.5">▸</span> Basis data
+                      MySQL terstruktur untuk menjamin keamanan dan
+                      aksesibilitas data
+                    </li>
+                  </ul>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="tag-tech">Laravel 11</span>
+                    <span class="tag-tech">PHP</span>
+                    <span class="tag-tech">MySQL</span>
+                    <span class="tag-tech">JavaScript</span>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                  <img
+                    src="home.png"
+                    alt="E-CRM Home"
+                    class="gallery-img rounded-xl cursor-pointer border border-gray-100 hover:border-primary/40 transition-colors w-full h-auto"
+                    data-gallery="ecrm"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <img
+                    src="dashboard.png"
+                    alt="E-CRM Dashboard"
+                    class="gallery-img rounded-xl cursor-pointer border border-gray-100 hover:border-primary/40 transition-colors w-full h-auto"
+                    data-gallery="ecrm"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <img
+                    src="chat.png"
+                    alt="E-CRM Chat"
+                    class="gallery-img rounded-xl cursor-pointer border border-gray-100 hover:border-primary/40 transition-colors w-full h-auto"
+                    data-gallery="ecrm"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <img
+                    src="resi.png"
+                    alt="E-CRM Resi"
+                    class="gallery-img rounded-xl cursor-pointer border border-gray-100 hover:border-primary/40 transition-colors w-full h-auto"
+                    data-gallery="ecrm"
+                    onerror="this.style.display = 'none'"
+                  />
                 </div>
               </div>
+            </div>
 
-              <div class="grid grid-cols-2 gap-3">
-                <img
-                  src="home.png"
-                  alt="Halaman Utama Sistem"
-                  class="gallery-img w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="ecrm"
-                />
-                <img
-                  src="dashboard.png"
-                  alt="Panel Kendali Sistem"
-                  class="gallery-img w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="ecrm"
-                />
-                <img
-                  src="chat.png"
-                  alt="Fitur Komunikasi"
-                  class="gallery-img w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="ecrm"
-                />
-                <img
-                  src="resi.png"
-                  alt="Cetak Bukti Pengiriman"
-                  class="gallery-img w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="ecrm"
-                />
+            <!-- ── Proyek 2 ── -->
+            <div
+              class="border border-gray-100 rounded-2xl p-6 hover:border-primary/30 transition-colors hover:shadow-md"
+            >
+              <div
+                class="flex flex-wrap items-start justify-between gap-3 mb-4"
+              >
+                <div>
+                  <h3 class="text-lg font-bold text-gray-900">
+                    Sistem Buku Tamu Digital
+                  </h3>
+                  <p class="text-sm text-gray-500 italic">
+                    Kantor Kementerian Agama · PHP & CodeIgniter
+                  </p>
+                </div>
+                <a
+                  href="https://github.com/amandasari2"
+                  target="_blank"
+                  class="inline-flex items-center gap-1.5 text-xs bg-gray-900 text-white px-3 py-1.5 rounded-lg hover:bg-gray-700 transition-colors font-medium"
+                >
+                  <i class="fa-brands fa-github"></i> GitHub
+                </a>
+              </div>
+              <div class="grid md:grid-cols-3 gap-6">
+                <div class="md:col-span-2">
+                  <ul class="space-y-2 text-sm text-gray-600 mb-4">
+                    <li class="flex gap-2">
+                      <span class="text-primary mt-0.5">▸</span> Sistem
+                      pencatatan kunjungan berbasis web menggantikan buku tamu
+                      konvensional
+                    </li>
+                    <li class="flex gap-2">
+                      <span class="text-primary mt-0.5">▸</span> Menyimpan
+                      seluruh data tamu secara terstruktur dalam basis data
+                      digital
+                    </li>
+                    <li class="flex gap-2">
+                      <span class="text-primary mt-0.5">▸</span> Fitur
+                      rekapitulasi dan pembuatan laporan kunjungan otomatis
+                      untuk administrasi instansi
+                    </li>
+                  </ul>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="tag-tech">PHP</span>
+                    <span class="tag-tech">CodeIgniter</span>
+                    <span class="tag-tech">MySQL</span>
+                    <span class="tag-tech">HTML5</span>
+                    <span class="tag-tech">CSS3</span>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                  <img
+                    src="bukutamu.png"
+                    alt="Buku Tamu"
+                    class="gallery-img rounded-xl cursor-pointer border border-gray-100 hover:border-primary/40 transition-colors w-full h-auto"
+                    data-gallery="bukutamu"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <img
+                    src="tamu2.png"
+                    alt="Daftar Tamu"
+                    class="gallery-img rounded-xl cursor-pointer border border-gray-100 hover:border-primary/40 transition-colors w-full h-auto"
+                    data-gallery="bukutamu"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <img
+                    src="dashboardb.png"
+                    alt="Dashboard"
+                    class="gallery-img rounded-xl cursor-pointer border border-gray-100 hover:border-primary/40 transition-colors w-full h-auto"
+                    data-gallery="bukutamu"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <img
+                    src="lapor.png"
+                    alt="Laporan"
+                    class="gallery-img rounded-xl cursor-pointer border border-gray-100 hover:border-primary/40 transition-colors w-full h-auto"
+                    data-gallery="bukutamu"
+                    onerror="this.style.display = 'none'"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- ── Proyek 3 ── -->
+            <div
+              class="border border-gray-100 rounded-2xl p-6 hover:border-primary/30 transition-colors hover:shadow-md"
+            >
+              <div
+                class="flex flex-wrap items-start justify-between gap-3 mb-4"
+              >
+                <div>
+                  <h3 class="text-lg font-bold text-gray-900">
+                    Sistem Survei Kepegawaian
+                  </h3>
+                  <p class="text-sm text-gray-500 italic">
+                    Kantor Kementerian Agama · PHP & CodeIgniter
+                  </p>
+                </div>
+                <a
+                  href="https://github.com/amandasari2"
+                  target="_blank"
+                  class="inline-flex items-center gap-1.5 text-xs bg-gray-900 text-white px-3 py-1.5 rounded-lg hover:bg-gray-700 transition-colors font-medium"
+                >
+                  <i class="fa-brands fa-github"></i> GitHub
+                </a>
+              </div>
+              <div class="grid md:grid-cols-3 gap-6">
+                <div class="md:col-span-2">
+                  <ul class="space-y-2 text-sm text-gray-600 mb-4">
+                    <li class="flex gap-2">
+                      <span class="text-primary mt-0.5">▸</span> Sistem
+                      pengumpulan data berbasis web untuk survei kepuasan dan
+                      evaluasi kinerja pegawai pemerintah
+                    </li>
+                    <li class="flex gap-2">
+                      <span class="text-primary mt-0.5">▸</span> Formulir isian
+                      mudah diakses dan diisi oleh responden secara mandiri
+                      maupun dibantu petugas
+                    </li>
+                    <li class="flex gap-2">
+                      <span class="text-primary mt-0.5">▸</span> Menampilkan
+                      hasil analisis dalam bentuk tabel dan grafik untuk
+                      pengambilan keputusan pimpinan
+                    </li>
+                  </ul>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="tag-tech">PHP</span>
+                    <span class="tag-tech">CodeIgniter</span>
+                    <span class="tag-tech">MySQL</span>
+                    <span class="tag-tech">JavaScript</span>
+                    <span class="tag-tech">HTML & CSS</span>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                  <img
+                    src="survei.png"
+                    alt="Survei"
+                    class="gallery-img rounded-xl cursor-pointer border border-gray-100 hover:border-primary/40 transition-colors w-full h-auto"
+                    data-gallery="survei"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <img
+                    src="layanan.png"
+                    alt="Layanan"
+                    class="gallery-img rounded-xl cursor-pointer border border-gray-100 hover:border-primary/40 transition-colors w-full h-auto"
+                    data-gallery="survei"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <img
+                    src="form.png"
+                    alt="Form"
+                    class="gallery-img rounded-xl cursor-pointer border border-gray-100 hover:border-primary/40 transition-colors w-full h-auto"
+                    data-gallery="survei"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <img
+                    src="dashboardk.png"
+                    alt="Dashboard"
+                    class="gallery-img rounded-xl cursor-pointer border border-gray-100 hover:border-primary/40 transition-colors w-full h-auto"
+                    data-gallery="survei"
+                    onerror="this.style.display = 'none'"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- ── Proyek 4 ── -->
+            <div
+              class="border border-gray-100 rounded-2xl p-6 hover:border-primary/30 transition-colors hover:shadow-md"
+            >
+              <div
+                class="flex flex-wrap items-start justify-between gap-3 mb-4"
+              >
+                <div>
+                  <h3 class="text-lg font-bold text-gray-900">
+                    Implementasi Desa Cantik Berbasis Web
+                  </h3>
+                  <p class="text-sm text-gray-500 italic">
+                    KKL – BPS Desa Teluk Dalam · Laravel 11
+                  </p>
+                </div>
+                <a
+                  href="https://github.com/amandasari2"
+                  target="_blank"
+                  class="inline-flex items-center gap-1.5 text-xs bg-gray-900 text-white px-3 py-1.5 rounded-lg hover:bg-gray-700 transition-colors font-medium"
+                >
+                  <i class="fa-brands fa-github"></i> GitHub
+                </a>
+              </div>
+              <div class="grid md:grid-cols-3 gap-6">
+                <div class="md:col-span-2">
+                  <ul class="space-y-2 text-sm text-gray-600 mb-4">
+                    <li class="flex gap-2">
+                      <span class="text-primary mt-0.5">▸</span> Sistem
+                      informasi desa berbasis web untuk program Desa Cantik
+                      (Desa Cinta Statistik)
+                    </li>
+                    <li class="flex gap-2">
+                      <span class="text-primary mt-0.5">▸</span> Meningkatkan
+                      efektivitas pelayanan publik melalui pengelolaan data yang
+                      terstruktur dan mudah diakses
+                    </li>
+                    <li class="flex gap-2">
+                      <span class="text-primary mt-0.5">▸</span> Mendukung BPS
+                      dalam pengumpulan dan penyajian data desa yang akurat
+                      untuk pengambilan keputusan
+                    </li>
+                    <li class="flex gap-2">
+                      <span class="text-primary mt-0.5">▸</span> Pusat informasi
+                      desa yang transparan bagi masyarakat maupun pemerintahan
+                      desa
+                    </li>
+                  </ul>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="tag-tech">Laravel 11</span>
+                    <span class="tag-tech">PHP</span>
+                    <span class="tag-tech">MySQL</span>
+                    <span class="tag-tech">HTML5</span>
+                    <span class="tag-tech">CSS3</span>
+                    <span class="tag-tech">JavaScript</span>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                  <img
+                    src="desa1.png"
+                    alt="Desa 1"
+                    class="gallery-img rounded-xl cursor-pointer border border-gray-100 hover:border-primary/40 transition-colors w-full h-auto"
+                    data-gallery="desacantik"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <img
+                    src="desa2.png"
+                    alt="Desa 2"
+                    class="gallery-img rounded-xl cursor-pointer border border-gray-100 hover:border-primary/40 transition-colors w-full h-auto"
+                    data-gallery="desacantik"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <img
+                    src="desa3.png"
+                    alt="Desa 3"
+                    class="gallery-img rounded-xl cursor-pointer border border-gray-100 hover:border-primary/40 transition-colors w-full h-auto"
+                    data-gallery="desacantik"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <img
+                    src="desa.png"
+                    alt="Desa Admin"
+                    class="gallery-img rounded-xl cursor-pointer border border-gray-100 hover:border-primary/40 transition-colors w-full h-auto"
+                    data-gallery="desacantik"
+                    onerror="this.style.display = 'none'"
+                  />
+                </div>
               </div>
             </div>
           </div>
-
-          <!-- Proyek 2 -->
-          <div
-            class="mb-12 pb-8 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0"
-          >
-            <h3 class="text-xl font-semibold text-gray-800 mb-2">
-              Sistem Buku Tamu Digital
-            </h3>
-            <p class="text-gray-500 italic mb-4">
-              Penggunaan: Kantor Kementerian Agama
-            </p>
-
-            <div class="grid md:grid-cols-3 gap-6">
-              <div class="md:col-span-2">
-                <h4 class="font-medium text-gray-700 mb-2">
-                  Deskripsi Proyek:
-                </h4>
-                <ul class="space-y-2 pl-5 list-disc text-gray-600 mb-4">
-                  <li>
-                    Mengembangkan sistem pencatatan kunjungan berbasis web untuk
-                    menggantikan buku tamu konvensional, sehingga proses
-                    pendaftaran menjadi lebih cepat dan efisien.
-                  </li>
-                  <li>
-                    Menyimpan seluruh data tamu secara terstruktur dalam basis
-                    data digital, memudahkan pencarian informasi kapan saja.
-                  </li>
-                  <li>
-                    Memiliki fitur rekapitulasi dan pembuatan laporan kunjungan
-                    secara otomatis untuk keperluan administrasi instansi.
-                  </li>
-                  <li>
-                    Dibangun menggunakan bahasa pemrograman PHP dan basis data
-                    MySQL dengan antarmuka yang sederhana namun fungsional.
-                  </li>
-                </ul>
-                <div class="flex flex-wrap gap-2 mt-3">
-                  <span
-                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-                    >PHP</span
-                  >
-                  <span
-                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-                    >MySQL</span
-                  >
-                  <span
-                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-                    >HTML5</span
-                  >
-                  <span
-                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-                    >CSS3</span
-                  >
-                  <span
-                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-                    >CodeIgniter</span
-                  >
-                </div>
-              </div>
-
-              <div class="grid grid-cols-2 gap-3">
-                <img
-                  src="bukutamu.png"
-                  alt="Formulir Pendaftaran Tamu"
-                  class="gallery-img w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="bukutamu"
-                />
-                <img
-                  src="tamu2.png"
-                  alt="Daftar Data Tamu"
-                  class="gallery-img w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="bukutamu"
-                />
-                <img
-                  src="dashboardb.png"
-                  alt="Panel Kendali Admin"
-                  class="gallery-img w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="bukutamu"
-                />
-                <img
-                  src="lapor.png"
-                  alt="Laporan Data Kunjungan"
-                  class="gallery-img w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="bukutamu"
-                />
-              </div>
-            </div>
-          </div>
-
-          <!-- Proyek 3 -->
-          <div
-            class="mb-12 pb-8 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0"
-          >
-            <h3 class="text-xl font-semibold text-gray-800 mb-2">
-              Sistem Survei Kepegawaian
-            </h3>
-            <p class="text-gray-500 italic mb-4">
-              Penggunaan: Kantor Kementerian Agama
-            </p>
-
-            <div class="grid md:grid-cols-3 gap-6">
-              <div class="md:col-span-2">
-                <h4 class="font-medium text-gray-700 mb-2">
-                  Deskripsi Proyek:
-                </h4>
-                <ul class="space-y-2 pl-5 list-disc text-gray-600 mb-4">
-                  <li>
-                    Membuat sistem pengumpulan data berbasis web untuk mendukung
-                    kegiatan survei kepuasan dan evaluasi kinerja pegawai di
-                    lingkungan instansi pemerintah.
-                  </li>
-                  <li>
-                    Menyediakan formulir isian yang mudah diakses dan diisi oleh
-                    responden secara mandiri maupun dibantu oleh petugas
-                    administrasi.
-                  </li>
-                  <li>
-                    Memproses dan menyimpan seluruh hasil survei secara otomatis
-                    ke dalam basis data yang aman dan terorganisir.
-                  </li>
-                  <li>
-                    Menampilkan hasil analisis dalam bentuk tabel dan grafik
-                    sederhana guna mempermudah pengambilan keputusan pimpinan.
-                  </li>
-                  <li>
-                    Dikembangkan menggunakan teknologi PHP dan MySQL dengan
-                    fokus pada kemudahan penggunaan dan keandalan sistem.
-                  </li>
-                </ul>
-                <div class="flex flex-wrap gap-2 mt-3">
-                  <span
-                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-                    >PHP</span
-                  >
-                  <span
-                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-                    >CodeIgniter</span
-                  >
-                  <span
-                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-                    >MySQL</span
-                  >
-                  <span
-                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-                    >JavaScript</span
-                  >
-                  <span
-                    class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-                    >HTML & CSS</span
-                  >
-                </div>
-              </div>
-
-              <div class="grid grid-cols-2 gap-3">
-                <img
-                  src="survei.png"
-                  alt="Halaman Utama Survei"
-                  class="gallery-img w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="survei"
-                />
-                <img
-                  src="layanan.png"
-                  alt="Hasil dan Analisis Data"
-                  class="gallery-img w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="survei"
-                />
-                <img
-                  src="form.png"
-                  alt="Contoh Formulir Survei"
-                  class="gallery-img w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="survei"
-                />
-                <img
-                  src="dashboardk.png"
-                  alt="Panel Kendali Sistem"
-                  class="gallery-img w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-                  data-gallery="survei"
-                />
-              </div>
-            </div>
-          </div>
-
-          <!-- Proyek 4 -->
-<div
-  class="mb-12 pb-8 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0"
->
-  <h3 class="text-xl font-semibold text-gray-800 mb-2">
-    Implementasi Program Desa Cantik Berbasis Web
-  </h3>
-  <p class="text-gray-500 italic mb-4">
-    Kerja Kuliah Lapangan (KKL) – Badan Pusat Statistik (BPS) Desa Teluk Dalam
-  </p>
-
-  <div class="grid md:grid-cols-3 gap-6">
-    <div class="md:col-span-2">
-      <h4 class="font-medium text-gray-700 mb-2">
-        Deskripsi Proyek:
-      </h4>
-
-      <ul class="space-y-2 pl-5 list-disc text-gray-600 mb-4">
-        <li>
-          Mengembangkan sistem informasi desa berbasis web sebagai bagian dari
-          program Desa Cantik (Desa Cinta Statistik) untuk membantu pengelolaan
-          dan penyebaran data desa secara digital.
-        </li>
-
-        <li>
-          Sistem dirancang untuk meningkatkan efektivitas dan efisiensi
-          pelayanan publik melalui pengelolaan data yang lebih terstruktur,
-          cepat, dan mudah diakses oleh perangkat desa maupun masyarakat.
-        </li>
-
-        <li>
-          Mendukung Badan Pusat Statistik (BPS) dalam proses pengumpulan,
-          pengolahan, dan penyajian data desa yang lebih akurat serta
-          up-to-date guna menunjang pengambilan keputusan berbasis data.
-        </li>
-
-        <li>
-          Menyediakan pusat informasi desa yang transparan dan informatif,
-          sehingga masyarakat dapat memperoleh informasi penting desa dengan
-          lebih mudah dan cepat.
-        </li>
-
-        <li>
-          Proyek ini juga menjadi sarana penerapan kemampuan mahasiswa dalam
-          pengembangan sistem informasi berbasis web yang memberikan manfaat
-          langsung bagi masyarakat dan pemerintahan desa.
-        </li>
-      </ul>
-
-      <div class="flex flex-wrap gap-2 mt-3">
-        <span
-          class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-          >PHP</span
-        >
-        <span
-          class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-          >Laravel 11</span
-        >
-        <span
-          class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-          >MySQL</span
-        >
-        <span
-          class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-          >HTML5</span
-        >
-        <span
-          class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-          >CSS3</span
-        >
-        <span
-          class="bg-blue-50 text-primary px-3 py-1 rounded-full text-sm font-medium"
-          >JavaScript</span
-        >
-      </div>
-    </div>
-
-    <div class="grid grid-cols-2 gap-3">
-      <img
-        src="desa1.png"
-        alt="Halaman Utama Desa Cantik"
-        class="gallery-img w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-        data-gallery="desacantik"
-      />
-
-      <img
-        src="desa2.png"
-        alt="Halaman Gallery dan Struktur Organisasi Desa"
-        class="gallery-img w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-        data-gallery="desacantik"
-      />
-
-      <img
-        src="desa3.png"
-        alt="Halaman Dashboard Staff Badan Pusat Statistik (BPS)"
-        class="gallery-img w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-        data-gallery="desacantik"
-      />
-
-      <img
-        src="desa.png"
-        alt="Halaman Admin Desa Teluk Dalam"
-        class="gallery-img w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 cursor-pointer"
-        data-gallery="desacantik"
-      />
-    </div>
-  </div>
-</div>
         </div>
       </section>
 
-      <!-- Bagian Keahlian -->
-      <section id="keahlian" class="mb-12 md:mb-16">
-        <div class="bg-white rounded-xl shadow-md p-6 md:p-8 card-hover">
+      <!-- ════════════════════════════
+           KEAHLIAN
+      ════════════════════════════ -->
+      <section id="keahlian" class="fade-in">
+        <div
+          class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-10 card-hover"
+        >
           <h2
-            class="text-[clamp(1.4rem,3vw,1.8rem)] font-bold text-gray-800 border-l-4 border-primary pl-4 mb-6"
+            class="section-title text-[clamp(1.3rem,3vw,1.8rem)] text-gray-900 border-l-4 border-primary pl-4 mb-7"
           >
             Keahlian & Kemampuan
           </h2>
 
-          <div class="grid md:grid-cols-2 gap-8">
-            <!-- Keahlian Teknis -->
+          <div class="grid md:grid-cols-2 gap-10">
+            <!-- Teknis -->
             <div>
               <h3
-                class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2"
+                class="font-bold text-gray-800 mb-5 flex items-center gap-2 text-base"
               >
-                <i class="fa fa-code text-primary"></i> Keahlian Teknis
+                <span
+                  class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-sm"
+                  ><i class="fa fa-code"></i
+                ></span>
+                Keahlian Teknis
               </h3>
-              <div class="flex flex-wrap gap-3">
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+              <div class="flex flex-wrap gap-2.5">
+                <span class="skill-badge"
+                  ><i class="fa-brands fa-php"></i> PHP</span
                 >
-                  <i class="fa-brands fa-php"></i> PHP
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-brands fa-laravel"></i> Laravel</span
                 >
-                  <i class="fa-brands fa-laravel"></i> Laravel
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-solid fa-code-branch"></i> CodeIgniter</span
                 >
-                  <i class="fa-solid fa-code-branch"></i> CodeIgniter
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-brands fa-html5"></i> HTML5</span
                 >
-                  <i class="fa-brands fa-html5"></i> HTML5
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-brands fa-css3-alt"></i> CSS3</span
                 >
-                  <i class="fa-brands fa-css3-alt"></i> CSS3
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-brands fa-js"></i> JavaScript</span
                 >
-                  <i class="fa-brands fa-js"></i> JavaScript
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-solid fa-database"></i> MySQL</span
                 >
-                  <i class="fa-solid fa-database"></i> MySQL
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-brands fa-python"></i> Python</span
                 >
-                  <i class="fa-solid fa-paper-plane"></i> Postman
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-brands fa-java"></i> Java</span
                 >
-                  <i class="fa-solid fa-database"></i> MySQL Workbench
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-solid fa-c"></i> C / C++</span
                 >
-                  <i class="fa-brands fa-java"></i> Java
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-brands fa-git-alt"></i> Git</span
                 >
-                  <i class="fa-solid fa-c"></i> C
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-brands fa-jsfiddle"></i> jQuery</span
                 >
-                  <i class="fa-brands fa-jsfiddle"></i> JQuery
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-solid fa-paper-plane"></i> Postman</span
                 >
-                  <i class="fa-brands fa-git-alt"></i> GIT
-                </span>
-                <!-- Keahlian Baru Ditambahkan -->
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-solid fa-database"></i> MySQL Workbench</span
                 >
-                  <i class="fa-brands fa-python"></i> Python
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
-                >
-                  <i class="fa-solid fa-c-plus-plus"></i> C++
-                </span>
+              </div>
+
+              <!-- Progress bars -->
+              <div class="mt-6 space-y-3">
+                <div>
+                  <div
+                    class="flex justify-between text-xs font-medium text-gray-600 mb-1.5"
+                  >
+                    <span>PHP & Laravel</span
+                    ><span class="text-primary">85%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress-fill" data-width="85"></div>
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class="flex justify-between text-xs font-medium text-gray-600 mb-1.5"
+                  >
+                    <span>HTML, CSS, JavaScript</span
+                    ><span class="text-primary">80%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress-fill" data-width="80"></div>
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class="flex justify-between text-xs font-medium text-gray-600 mb-1.5"
+                  >
+                    <span>MySQL & Database</span
+                    ><span class="text-primary">78%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress-fill" data-width="78"></div>
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class="flex justify-between text-xs font-medium text-gray-600 mb-1.5"
+                  >
+                    <span>Python / Java / C++</span
+                    ><span class="text-primary">60%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress-fill" data-width="60"></div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <!-- Keahlian Administrasi & Umum -->
+            <!-- Administrasi -->
             <div>
               <h3
-                class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2"
+                class="font-bold text-gray-800 mb-5 flex items-center gap-2 text-base"
               >
-                <i class="fa fa-briefcase text-primary"></i> Keahlian
-                Administrasi & Umum
+                <span
+                  class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-sm"
+                  ><i class="fa fa-briefcase"></i
+                ></span>
+                Keahlian Administrasi & Umum
               </h3>
-              <div class="flex flex-wrap gap-3">
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+              <div class="flex flex-wrap gap-2.5">
+                <span class="skill-badge"
+                  ><i class="fa-solid fa-file-excel"></i> Microsoft Excel</span
                 >
-                  <i class="fa-solid fa-file-excel"></i> Microsoft Excel
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-solid fa-file-word"></i> Microsoft Word</span
                 >
-                  <i class="fa-solid fa-file-word"></i> Microsoft Word
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-solid fa-file-powerpoint"></i> PowerPoint</span
                 >
-                  <i class="fa-solid fa-file-powerpoint"></i> Microsoft
-                  PowerPoint
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-solid fa-table"></i> Pengolahan Data</span
                 >
-                  <i class="fa-solid fa-table"></i> Pengolahan Data
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-solid fa-archive"></i> Manajemen Arsip</span
                 >
-                  <i class="fa-solid fa-archive"></i> Manajemen Arsip
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-solid fa-file-alt"></i> Pelaporan</span
                 >
-                  <i class="fa-solid fa-file-alt"></i> Pelaporan
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-solid fa-comments"></i> Komunikasi Efektif</span
                 >
-                  <i class="fa-solid fa-comments"></i> Komunikasi Efektif
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-solid fa-users"></i> Kerja Sama Tim</span
                 >
-                  <i class="fa-solid fa-users"></i> Kerja Sama Tim
-                </span>
-                <span
-                  class="bg-blue-50 text-primary px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow flex items-center gap-2"
+                <span class="skill-badge"
+                  ><i class="fa-solid fa-clock"></i> Manajemen Waktu</span
                 >
-                  <i class="fa-solid fa-clock"></i> Manajemen Waktu
-                </span>
+              </div>
+
+              <div class="mt-6 space-y-3">
+                <div>
+                  <div
+                    class="flex justify-between text-xs font-medium text-gray-600 mb-1.5"
+                  >
+                    <span>Microsoft Office</span
+                    ><span class="text-primary">90%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress-fill" data-width="90"></div>
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class="flex justify-between text-xs font-medium text-gray-600 mb-1.5"
+                  >
+                    <span>Pengelolaan Data & Arsip</span
+                    ><span class="text-primary">85%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress-fill" data-width="85"></div>
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class="flex justify-between text-xs font-medium text-gray-600 mb-1.5"
+                  >
+                    <span>Komunikasi & Tim</span
+                    ><span class="text-primary">88%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress-fill" data-width="88"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Bagian Kontak -->
-      <section id="kontak" class="mb-12 md:mb-16">
-        <div class="bg-white rounded-xl shadow-md p-6 md:p-8 card-hover">
+      <!-- ════════════════════════════
+           KONTAK (+ FORM)
+      ════════════════════════════ -->
+      <section id="kontak" class="fade-in">
+        <div
+          class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-10 card-hover"
+        >
           <h2
-            class="text-[clamp(1.4rem,3vw,1.8rem)] font-bold text-gray-800 border-l-4 border-primary pl-4 mb-6"
+            class="section-title text-[clamp(1.3rem,3vw,1.8rem)] text-gray-900 border-l-4 border-primary pl-4 mb-7"
           >
-            Informasi Kontak
+            Hubungi Saya
           </h2>
 
-          <div class="grid md:grid-cols-2 gap-8">
+          <div class="grid md:grid-cols-2 gap-10">
+            <!-- Info kontak -->
             <div>
-              <p class="text-gray-600 mb-6">
-                Jika Anda tertarik untuk bekerja sama atau membutuhkan informasi
-                lebih lanjut, silakan hubungi saya melalui kontak di bawah ini.
-                Saya terbuka untuk peluang kerja, proyek, maupun diskusi seputar
-                bidang keahlian saya.
+              <p
+                class="text-gray-600 mb-7 leading-relaxed text-sm md:text-base"
+              >
+                Jika Anda tertarik bekerja sama atau membutuhkan informasi lebih
+                lanjut, silakan hubungi saya. Saya terbuka untuk peluang kerja,
+                proyek, maupun diskusi seputar bidang keahlian saya.
               </p>
-              <div class="space-y-4">
-                <div class="flex items-center gap-3 text-gray-700">
+
+              <div class="space-y-4 mb-7">
+                <div
+                  class="flex items-center gap-4 p-4 bg-blue-50 rounded-xl border border-blue-100"
+                >
                   <div
-                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                    class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-primary/20"
                   >
-                    <i class="fa fa-phone"></i>
+                    <i class="fa fa-phone text-sm"></i>
                   </div>
-                  <span>0813-7505-2211</span>
+                  <div>
+                    <div class="text-xs text-gray-500 font-medium">
+                      Telepon / WhatsApp
+                    </div>
+                    <a
+                      href="https://wa.me/6281375052211"
+                      target="_blank"
+                      class="font-semibold text-gray-900 hover:text-primary transition-colors text-sm"
+                      >0813-7505-2211</a
+                    >
+                  </div>
                 </div>
-                <div class="flex items-center gap-3 text-gray-700">
+                <div
+                  class="flex items-center gap-4 p-4 bg-blue-50 rounded-xl border border-blue-100"
+                >
                   <div
-                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                    class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-primary/20"
                   >
-                    <i class="fa fa-envelope"></i>
+                    <i class="fa fa-envelope text-sm"></i>
                   </div>
-                  <span>amandasari968@gmail.com</span>
+                  <div>
+                    <div class="text-xs text-gray-500 font-medium">Email</div>
+                    <a
+                      href="mailto:amandasari968@gmail.com"
+                      class="font-semibold text-gray-900 hover:text-primary transition-colors text-sm"
+                      >amandasari968@gmail.com</a
+                    >
+                  </div>
                 </div>
-                <div class="flex items-center gap-3 text-gray-700">
+                <div
+                  class="flex items-center gap-4 p-4 bg-blue-50 rounded-xl border border-blue-100"
+                >
                   <div
-                    class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                    class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-primary/20"
                   >
-                    <i class="fa fa-map-marker"></i>
+                    <i class="fa fa-map-marker text-sm"></i>
                   </div>
-                  <span>Kisaran, Sumatera Utara, Indonesia</span>
+                  <div>
+                    <div class="text-xs text-gray-500 font-medium">Lokasi</div>
+                    <div class="font-semibold text-gray-900 text-sm">
+                      Kisaran, Sumatera Utara, Indonesia
+                    </div>
+                  </div>
                 </div>
+              </div>
+
+              <!-- Jam kerja -->
+              <div class="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                <h4 class="font-bold text-gray-800 mb-3 text-sm">
+                  🕐 Jam Kerja
+                </h4>
+                <div class="space-y-1.5 text-sm text-gray-600">
+                  <div class="flex justify-between">
+                    <span>Senin – Jumat</span
+                    ><span class="font-medium text-gray-800"
+                      >08.00 – 17.00 WIB</span
+                    >
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Sabtu</span
+                    ><span class="font-medium text-gray-800"
+                      >08.00 – 12.00 WIB</span
+                    >
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Minggu & Libur</span
+                    ><span class="text-gray-400">Tutup</span>
+                  </div>
+                </div>
+                <p class="text-xs text-gray-400 mt-3">
+                  Merespons pesan dalam 1×24 jam pada hari kerja.
+                </p>
               </div>
             </div>
 
-            <div class="bg-gray-50 p-6 rounded-lg border border-gray-100">
-              <h3 class="text-lg font-semibold text-gray-800 mb-4">
-                Jam Kerja
+            <!-- Form Kontak -->
+            <div>
+              <h3 class="font-bold text-gray-900 mb-5 text-base">
+                Kirim Pesan Langsung
               </h3>
-              <ul class="space-y-2 text-gray-600">
-                <li class="flex justify-between">
-                  <span>Senin - Jumat:</span>
-                  <span>08.00 - 17.00 WIB</span>
-                </li>
-                <li class="flex justify-between">
-                  <span>Sabtu:</span>
-                  <span>08.00 - 12.00 WIB</span>
-                </li>
-                <li class="flex justify-between">
-                  <span>Minggu & Hari Libur:</span>
-                  <span>Tutup</span>
-                </li>
-              </ul>
-              <div class="mt-6 pt-4 border-t border-gray-200">
-                <p class="text-gray-600 text-sm">
-                  Saya berusaha merespons setiap pesan dalam waktu kurang dari
-                  1x24 jam pada hari kerja.
+              <div id="contactForm" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      class="block text-xs font-semibold text-gray-600 mb-1.5"
+                      >Nama <span class="text-red-400">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="nama"
+                      class="form-input"
+                      placeholder="Nama Anda"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-semibold text-gray-600 mb-1.5"
+                      >Email <span class="text-red-400">*</span></label
+                    >
+                    <input
+                      type="email"
+                      id="email"
+                      class="form-input"
+                      placeholder="email@contoh.com"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-semibold text-gray-600 mb-1.5"
+                    >Subjek <span class="text-red-400">*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="subjek"
+                    class="form-input"
+                    placeholder="Keperluan Anda"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-semibold text-gray-600 mb-1.5"
+                    >Pesan <span class="text-red-400">*</span></label
+                  >
+                  <textarea
+                    id="pesan"
+                    class="form-input resize-none"
+                    rows="5"
+                    placeholder="Tulis pesan Anda di sini..."
+                  ></textarea>
+                </div>
+                <button
+                  id="sendBtn"
+                  style="
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    background: #1a56db;
+                    color: #ffffff;
+                    padding: 14px 28px;
+                    border-radius: 10px;
+                    font-weight: 700;
+                    font-size: 0.95rem;
+                    border: none;
+                    cursor: pointer;
+                    width: 100%;
+                    box-shadow: 0 4px 14px rgba(26, 86, 219, 0.35);
+                  "
+                  onmouseover="this.style.background = '#1240A8'"
+                  onmouseout="this.style.background = '#1A56DB'"
+                >
+                  <i class="fa fa-paper-plane"></i> Kirim via WhatsApp
+                </button>
+                <p class="text-xs text-gray-400 text-center">
+                  Pesan akan dikirim melalui WhatsApp ke nomor saya.
                 </p>
               </div>
             </div>
@@ -1724,267 +2344,347 @@
       </section>
     </main>
 
-    <!-- Bagian Kaki -->
-    <footer class="bg-dark text-white py-8">
-      <div class="container mx-auto px-4 md:px-8 text-center">
-        <div class="flex justify-center space-x-4 mb-4">
-          <a
-            href="https://github.com/amandasari2"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
-          >
-            <!-- Perbaiki kelas ikon -->
-            <i class="fa-brands fa-github"></i>
-          </a>
-          <a
-            href="https://linkedin.com/in/amandasari"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
-          >
-            <i class="fa-brands fa-linkedin"></i>
-          </a>
-          <a
-            href="mailto:amandasari968@gmail.com"
-            class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
-          >
-            <i class="fa-solid fa-envelope"></i>
-          </a>
-          <a
-            href="https://wa.me/6281375052211"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
-          >
-            <i class="fa-brands fa-whatsapp"></i>
-          </a>
+    <!-- ════════════════════════════
+         FOOTER
+    ════════════════════════════ -->
+    <footer class="bg-dark text-white py-10 mt-6">
+      <div class="container mx-auto px-4 md:px-8">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center gap-6"
+        >
+          <div class="flex items-center gap-3">
+            <span
+              class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center font-bold text-sm shadow-md"
+              >AS</span
+            >
+            <div>
+              <div class="font-bold text-white">Amanda Sari</div>
+              <div class="text-xs text-gray-400">
+                Web Developer · Sistem Informasi
+              </div>
+            </div>
+          </div>
+          <div class="flex space-x-3">
+            <a
+              href="https://github.com/amandasari2"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center hover:bg-primary transition-colors text-sm"
+              title="GitHub"
+            >
+              <i class="fa-brands fa-github"></i>
+            </a>
+            <a
+              href="https://linkedin.com/in/amandasari"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center hover:bg-primary transition-colors text-sm"
+              title="LinkedIn"
+            >
+              <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <a
+              href="mailto:amandasari968@gmail.com"
+              class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center hover:bg-primary transition-colors text-sm"
+              title="Email"
+            >
+              <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a
+              href="https://wa.me/6281375052211"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center hover:bg-primary transition-colors text-sm"
+              title="WhatsApp"
+            >
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
         </div>
-        <p class="text-gray-400 text-sm md:text-base">
-          © 2026 Amanda Sari. All rights reserved.
-        </p>
+        <div
+          class="border-t border-white/10 mt-6 pt-6 text-center text-sm text-gray-500"
+        >
+          © <span id="year"></span> Amanda Sari. Dibuat dengan
+          <span class="text-red-400">♥</span> menggunakan HTML, Tailwind CSS &
+          JavaScript.
+        </div>
       </div>
     </footer>
 
-    <!-- MODAL PREVIEW SERTIFIKAT -->
+    <!-- ════════════════════════════
+         IMAGE MODAL
+    ════════════════════════════ -->
     <div
       id="imageModal"
-      class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50 p-4"
+      class="fixed inset-0 bg-black/85 hidden items-center justify-center z-[100] p-4"
     >
-      <!-- Tombol Close -->
       <span
         id="closeModal"
-        class="absolute top-5 right-6 text-white text-4xl cursor-pointer z-50"
+        class="absolute top-5 right-6 text-white text-4xl cursor-pointer z-50 hover:text-gray-300 transition-colors"
+        >&times;</span
       >
-        &times;
-      </span>
-
-      <!-- Tombol Prev -->
       <button
         id="prevBtn"
-        class="absolute left-4 text-white text-5xl z-50 hidden"
+        class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-5xl z-50 hidden hover:text-gray-300 transition-colors px-2"
       >
         &#10094;
       </button>
-
-      <!-- Gambar -->
       <img
         id="modalImage"
-        class="max-w-full max-h-[90vh] rounded-lg border-4 border-white shadow-2xl"
+        class="max-w-full max-h-[88vh] rounded-xl border-2 border-white/20 shadow-2xl object-contain"
         src=""
         alt=""
       />
-
-      <!-- Tombol Next -->
       <button
         id="nextBtn"
-        class="absolute right-4 text-white text-5xl z-50 hidden"
+        class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-5xl z-50 hidden hover:text-gray-300 transition-colors px-2"
       >
         &#10095;
       </button>
+      <div
+        id="modalCounter"
+        class="absolute bottom-5 left-1/2 -translate-x-1/2 text-white text-sm bg-black/50 px-4 py-1.5 rounded-full hidden"
+      ></div>
     </div>
 
-    <!-- Skrip untuk Menu Mobile & Efek Gulir -->
+    <!-- Scroll to Top -->
+    <button id="scrollTop" title="Kembali ke atas">
+      <i class="fa fa-arrow-up text-sm"></i>
+    </button>
+
+    <!-- Toast Notification -->
+    <div id="toast">
+      <i class="fa fa-check-circle"></i> <span id="toastMsg"></span>
+    </div>
+
+    <!-- ════════════════════════════
+         SCRIPTS
+    ════════════════════════════ -->
     <script>
-      // Ambil elemen yang dibutuhkan
+      // ── MOBILE MENU ──
       const menuToggle = document.getElementById("menuToggle");
       const closeMenu = document.getElementById("closeMenu");
       const mobileMenu = document.getElementById("mobileMenu");
       const overlay = document.getElementById("overlay");
-      const mobileLinks = mobileMenu.querySelectorAll("a");
 
-      // Fungsi buka menu
-      menuToggle.addEventListener("click", () => {
+      function openMenu() {
         mobileMenu.classList.remove("-translate-x-full");
         overlay.classList.remove("hidden");
-        document.body.style.overflow = "hidden"; // Mencegah latar bergulir
-      });
-
-      // Fungsi tutup menu
-      function tutupMenu() {
+        document.body.style.overflow = "hidden";
+      }
+      function closeMenuFn() {
         mobileMenu.classList.add("-translate-x-full");
         overlay.classList.add("hidden");
-        document.body.style.overflow = ""; // Kembalikan gulir
+        document.body.style.overflow = "";
       }
+      menuToggle.addEventListener("click", openMenu);
+      closeMenu.addEventListener("click", closeMenuFn);
+      overlay.addEventListener("click", closeMenuFn);
+      document
+        .querySelectorAll(".mobile-link")
+        .forEach((l) => l.addEventListener("click", closeMenuFn));
 
-      closeMenu.addEventListener("click", tutupMenu);
-      overlay.addEventListener("click", tutupMenu);
-
-      // Tutup menu kalau salah satu tautan diklik
-      mobileLinks.forEach((link) => {
-        link.addEventListener("click", tutupMenu);
-      });
-
-      // Efek aktif pada tautan navigasi saat menggulir halaman
+      // ── NAV ACTIVE ON SCROLL ──
       const sections = document.querySelectorAll("section[id]");
-      const navLinks = document.querySelectorAll('nav a[href^="#"]');
-
+      const navLinks = document.querySelectorAll("nav a[href^='#']");
       window.addEventListener("scroll", () => {
         const scrollY = window.pageYOffset;
-
-        sections.forEach((section) => {
-          const sectionHeight = section.offsetHeight;
-          const sectionTop = section.offsetTop - 100;
-          const sectionId = section.getAttribute("id");
-
-          if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            navLinks.forEach((link) => {
-              link.classList.remove("text-primary", "font-semibold");
-              if (link.getAttribute("href") === `#${sectionId}`) {
-                link.classList.add("text-primary", "font-semibold");
-              }
+        sections.forEach((sec) => {
+          if (
+            scrollY >= sec.offsetTop - 120 &&
+            scrollY < sec.offsetTop - 120 + sec.offsetHeight
+          ) {
+            navLinks.forEach((l) => {
+              l.classList.remove("text-primary", "font-bold");
+              if (l.getAttribute("href") === "#" + sec.id)
+                l.classList.add("text-primary", "font-bold");
             });
           }
         });
       });
 
-      // Pengaturan teks dan kecepatan
+      // ── TYPING EFFECT ──
       const teks = "Amanda Sari";
-      const kecepatanKetik = 150; // Kecepatan saat mengetik
-      const kecepatanHapus = 100; // Kecepatan saat menghapus
-      const jeda = 1000; // Jeda sebentar setelah selesai ngetik sebelum dihapus
-
-      let indeks = 0;
-      let sedangMenghapus = false;
-      const elemen = document.getElementById("teks-diketik");
-
-      // Fungsi efek ketik dan hapus berulang
-      function ketikTerus() {
-        // Kalau sedang TIDAK menghapus
-        if (!sedangMenghapus) {
-          // Ngetik huruf satu per satu
-          if (indeks < teks.length) {
-            elemen.textContent = teks.substring(0, indeks + 1);
-            indeks++;
-            setTimeout(ketikTerus, kecepatanKetik);
-          } else {
-            // Kalau sudah selesai ngetik, tunggu sebentar baru mulai hapus
-            sedangMenghapus = true;
-            setTimeout(ketikTerus, jeda);
+      let idx = 0,
+        deleting = false;
+      const el = document.getElementById("teks-diketik");
+      function type() {
+        if (!deleting) {
+          el.textContent = teks.substring(0, idx + 1);
+          idx++;
+          if (idx === teks.length) {
+            deleting = true;
+            setTimeout(type, 1800);
+            return;
+          }
+        } else {
+          el.textContent = teks.substring(0, idx - 1);
+          idx--;
+          if (idx === 0) {
+            deleting = false;
+            setTimeout(type, 400);
+            return;
           }
         }
-        // Kalau SEDANG menghapus
-        else {
-          // Hapus huruf satu per satu
-          if (indeks > 0) {
-            elemen.textContent = teks.substring(0, indeks - 1);
-            indeks--;
-            setTimeout(ketikTerus, kecepatanHapus);
-          } else {
-            // Kalau sudah habis dihapus, mulai ngetik lagi dari awal
-            sedangMenghapus = false;
-            setTimeout(ketikTerus, kecepatanKetik);
-          }
-        }
+        setTimeout(type, deleting ? 80 : 140);
       }
+      window.addEventListener("load", type);
 
-      // Jalankan saat halaman dimuat
-      window.onload = ketikTerus;
-
-      const modal = document.getElementById("imageModal");
-      const modalImg = document.getElementById("modalImage");
-
-      const closeModal = document.getElementById("closeModal");
-      const nextBtn = document.getElementById("nextBtn");
-      const prevBtn = document.getElementById("prevBtn");
-
-      // Ambil semua gambar yang punya class gallery-img
-      const images = document.querySelectorAll(".gallery-img");
-
-      let currentGallery = [];
-      let currentIndex = 0;
-
-      // Klik gambar
-      images.forEach((img) => {
-        img.addEventListener("click", () => {
-          const galleryName = img.dataset.gallery;
-
-          // Ambil semua gambar dengan gallery yang sama
-          currentGallery = Array.from(
-            document.querySelectorAll(
-              `.gallery-img[data-gallery="${galleryName}"]`,
-            ),
-          );
-
-          currentIndex = currentGallery.indexOf(img);
-
-          showImage();
-
-          modal.classList.remove("hidden");
-          modal.classList.add("flex");
+      // ── ACCORDION ──
+      document.querySelectorAll(".accordion-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const content = btn.nextElementSibling;
+          const icon = btn.querySelector(".accordion-icon");
+          content.classList.toggle("open");
+          icon.classList.toggle("rotated");
         });
       });
 
-      // Tampilkan gambar
-      function showImage() {
-        modalImg.src = currentGallery[currentIndex].src;
+      // ── SCROLL TO TOP ──
+      const scrollTopBtn = document.getElementById("scrollTop");
+      window.addEventListener("scroll", () => {
+        scrollTopBtn.classList.toggle("show", window.scrollY > 400);
+      });
+      scrollTopBtn.addEventListener("click", () =>
+        window.scrollTo({ top: 0, behavior: "smooth" }),
+      );
 
-        // Jika cuma 1 gambar → sembunyikan tombol
-        if (currentGallery.length <= 1) {
-          nextBtn.classList.add("hidden");
-          prevBtn.classList.add("hidden");
-        } else {
-          nextBtn.classList.remove("hidden");
-          prevBtn.classList.remove("hidden");
-        }
-      }
+      // ── PROGRESS BARS ──
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.querySelectorAll(".progress-fill").forEach((bar) => {
+                bar.style.width = bar.dataset.width + "%";
+              });
+              observer.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.3 },
+      );
+      document
+        .querySelectorAll("#keahlian .bg-white")
+        .forEach((el) => observer.observe(el));
 
-      // Next
-      nextBtn.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % currentGallery.length;
+      // ── FADE IN ──
+      const fadeObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document
+        .querySelectorAll(".fade-in")
+        .forEach((el) => fadeObserver.observe(el));
 
-        showImage();
+      // ── IMAGE MODAL ──
+      const modal = document.getElementById("imageModal");
+      const modalImg = document.getElementById("modalImage");
+      const closeModal = document.getElementById("closeModal");
+      const nextBtn = document.getElementById("nextBtn");
+      const prevBtn = document.getElementById("prevBtn");
+      const modalCounter = document.getElementById("modalCounter");
+      let currentGallery = [],
+        currentIndex = 0;
+
+      document.querySelectorAll(".gallery-img:not(.hidden)").forEach((img) => {
+        img.addEventListener("click", () => {
+          const g = img.dataset.gallery;
+          currentGallery = Array.from(
+            document.querySelectorAll(`.gallery-img[data-gallery="${g}"]`),
+          );
+          currentIndex = currentGallery.indexOf(img);
+          showModal();
+        });
       });
 
-      // Prev
+      function showModal() {
+        modalImg.src = currentGallery[currentIndex].src;
+        const multi = currentGallery.length > 1;
+        nextBtn.classList.toggle("hidden", !multi);
+        prevBtn.classList.toggle("hidden", !multi);
+        modalCounter.classList.toggle("hidden", !multi);
+        if (multi)
+          modalCounter.textContent =
+            currentIndex + 1 + " / " + currentGallery.length;
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      }
+
+      function closeModalFn() {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+      closeModal.addEventListener("click", closeModalFn);
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModalFn();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeModalFn();
+        if (e.key === "ArrowRight" && !nextBtn.classList.contains("hidden")) {
+          currentIndex = (currentIndex + 1) % currentGallery.length;
+          showModal();
+        }
+        if (e.key === "ArrowLeft" && !prevBtn.classList.contains("hidden")) {
+          currentIndex =
+            (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+          showModal();
+        }
+      });
+      nextBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % currentGallery.length;
+        showModal();
+      });
       prevBtn.addEventListener("click", () => {
         currentIndex =
           (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-
-        showImage();
+        showModal();
       });
 
-      // Close modal
-      closeModal.addEventListener("click", () => {
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
-      });
+      // ── TOAST ──
+      function showToast(msg) {
+        const t = document.getElementById("toast");
+        document.getElementById("toastMsg").textContent = msg;
+        t.style.display = "flex";
+        setTimeout(() => {
+          t.style.display = "none";
+        }, 3500);
+      }
 
-      // Klik background untuk close
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) {
-          modal.classList.add("hidden");
-          modal.classList.remove("flex");
+      // ── CONTACT FORM → WHATSAPP ──
+      document.getElementById("sendBtn").addEventListener("click", () => {
+        const nama = document.getElementById("nama").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const subjek = document.getElementById("subjek").value.trim();
+        const pesan = document.getElementById("pesan").value.trim();
+
+        if (!nama || !email || !subjek || !pesan) {
+          showToast("⚠️ Mohon lengkapi semua kolom!");
+          return;
         }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          showToast("⚠️ Format email tidak valid!");
+          return;
+        }
+
+        const msg = `Halo Amanda! 👋\n\n*Nama:* ${nama}\n*Email:* ${email}\n*Subjek:* ${subjek}\n\n*Pesan:*\n${pesan}`;
+        window.open(
+          "https://wa.me/6281375052211?text=" + encodeURIComponent(msg),
+          "_blank",
+        );
+
+        // Clear form
+        ["nama", "email", "subjek", "pesan"].forEach(
+          (id) => (document.getElementById(id).value = ""),
+        );
+        showToast("✓ Membuka WhatsApp...");
       });
 
-      // ESC keyboard untuk close
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          modal.classList.add("hidden");
-          modal.classList.remove("flex");
-        }
-      });
+      // ── SET CURRENT YEAR IN FOOTER ──
+      document.getElementById("year").textContent = new Date().getFullYear();
     </script>
   </body>
 </html>
