@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="AS.png" />
     <title>Amanda Sari — Web Developer Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -49,7 +50,7 @@
         cursor: default;
       }
 
-      /* ── CUSTOM CURSOR ── */
+      /* ── CUSTOM CURSOR — hidden on touch devices ── */
       .cursor-dot {
         width: 8px;
         height: 8px;
@@ -74,6 +75,13 @@
         pointer-events: none;
         z-index: 9998;
         transition: transform 0.15s ease;
+      }
+      /* Hide cursor on touch devices */
+      @media (hover: none) and (pointer: coarse) {
+        .cursor-dot,
+        .cursor-ring {
+          display: none !important;
+        }
       }
 
       /* ── STARFIELD CANVAS ── */
@@ -140,6 +148,36 @@
         }
       }
 
+      /* ── PERFORMANCE TOGGLE BUTTON ── */
+      #perfToggle {
+        position: fixed;
+        bottom: 80px;
+        right: 28px;
+        z-index: 99;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(10, 20, 60, 0.85);
+        color: var(--text-dim);
+        border: 1px solid var(--card-border);
+        cursor: pointer;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.25s;
+        backdrop-filter: blur(10px);
+        title: "Toggle animasi";
+      }
+      #perfToggle:hover {
+        border-color: rgba(56, 189, 248, 0.4);
+        color: var(--accent-glow);
+      }
+      #perfToggle.paused {
+        color: #f87171;
+        border-color: rgba(248, 113, 113, 0.4);
+      }
+
       /* ── LAYOUT ── */
       .container {
         max-width: 1200px;
@@ -158,7 +196,6 @@
         background: var(--space-nav);
         backdrop-filter: blur(20px);
         border-bottom: 1px solid rgba(56, 189, 248, 0.15);
-        padding: 0;
       }
       .nav-inner {
         display: flex;
@@ -1050,8 +1087,6 @@
         flex-direction: column;
         gap: 14px;
       }
-      .progress-item {
-      }
       .progress-label {
         display: flex;
         justify-content: space-between;
@@ -1443,61 +1478,7 @@
         transform: translateY(0);
       }
 
-      /* ── RESPONSIVE ── */
-      @media (max-width: 900px) {
-        .hero-grid {
-          grid-template-columns: 1fr;
-          text-align: center;
-        }
-        .hero-photo {
-          order: -1;
-        }
-        .hero-btns {
-          justify-content: center;
-        }
-        .hero-badge {
-          margin: 0 auto 24px;
-        }
-        .hero-desc {
-          margin: 0 auto 32px;
-        }
-        .about-grid {
-          grid-template-columns: 1fr;
-        }
-        .skills-grid {
-          grid-template-columns: 1fr;
-        }
-        .contact-grid {
-          grid-template-columns: 1fr;
-        }
-        .project-grid {
-          grid-template-columns: 1fr;
-        }
-        .nav-links,
-        .nav-cv {
-          display: none;
-        }
-        .hamburger {
-          display: flex;
-        }
-        .nav-inner {
-          padding: 14px 20px;
-        }
-      }
-      @media (max-width: 600px) {
-        .photo-orbit {
-          width: 240px;
-          height: 240px;
-        }
-        .form-row {
-          grid-template-columns: 1fr;
-        }
-        .cert-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      /* ——— ANIMASI BORDER ALIR ——— */
+      /* ── FLOW BORDER ── */
       .flow-border {
         position: relative;
         overflow: hidden;
@@ -1544,7 +1525,8 @@
           right: 100%;
         }
       }
-      /* ——— ANIMASI TEKS BERCAHAYA ——— */
+
+      /* ── SHIMMER ── */
       .shimmer {
         position: relative;
         overflow: hidden;
@@ -1570,15 +1552,10 @@
           left: 150%;
         }
       }
-      /* ——— ANIMASI MENGAMBANG ——— */
+
+      /* ── FLOAT ── */
       .float {
         animation: float 4s ease-in-out infinite;
-      }
-      .float-slow {
-        animation: float 6s ease-in-out infinite reverse;
-      }
-      .float-fast {
-        animation: float 3s ease-in-out infinite;
       }
       @keyframes float {
         0% {
@@ -1591,20 +1568,73 @@
           transform: translateY(0px) rotate(0deg);
         }
       }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 900px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+        .hero-photo {
+          order: -1;
+        }
+        .hero-btns {
+          justify-content: center;
+        }
+        .hero-badge {
+          margin: 0 auto 24px;
+        }
+        .hero-desc {
+          margin: 0 auto 32px;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+        .project-grid {
+          grid-template-columns: 1fr;
+        }
+        .nav-links,
+        .nav-cv {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .nav-inner {
+          padding: 14px 20px;
+        }
+        /* Hide perf toggle on mobile to avoid clutter */
+        #perfToggle {
+          display: none;
+        }
+      }
+      @media (max-width: 600px) {
+        .photo-orbit {
+          width: 240px;
+          height: 240px;
+        }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+        .cert-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
     </style>
   </head>
   <body>
-    <!-- Custom cursor -->
+    <!-- Custom cursor — JS will hide these on touch devices -->
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-ring" id="cursorRing"></div>
 
-    <!-- Nebula -->
     <div class="nebula-bg"></div>
-
-    <!-- Starfield Canvas -->
     <canvas id="starfield"></canvas>
-
-    <!-- Space Objects Canvas (sun, moon, earth, rocket, cat) -->
     <canvas id="spaceCanvas"></canvas>
 
     <!-- NAVIGATION -->
@@ -1663,7 +1693,7 @@
       </div>
     </div>
 
-    <!-- ═══════════════ HERO ═══════════════ -->
+    <!-- HERO -->
     <header class="hero">
       <div class="container">
         <div class="hero-grid">
@@ -1721,9 +1751,7 @@
           </div>
           <div class="hero-photo fade-up">
             <div class="photo-orbit float">
-              <div class="photo-ring-outer">
-                <div class="orbit-dot"></div>
-              </div>
+              <div class="photo-ring-outer"><div class="orbit-dot"></div></div>
               <div class="photo-ring-middle"></div>
               <div class="photo-container">
                 <img
@@ -1751,7 +1779,7 @@
     <div class="cosmic-divider"></div>
 
     <main>
-      <!-- ═══════════════ TENTANG ═══════════════ -->
+      <!-- TENTANG -->
       <section id="tentang">
         <div class="container">
           <div class="fade-up">
@@ -1773,7 +1801,7 @@
                   penguasaan perangkat lunak perkantoran seperti
                   <strong>Microsoft Office</strong> hingga berbagai teknologi
                   pengembangan web seperti
-                  <strong>PHP, Laravel, HTML, CSS,</strong> dan
+                  <strong>PHP, CodeIgniter, Laravel, HTML, CSS,</strong> dan
                   <strong>JavaScript</strong>. Kombinasi ini membuat saya mampu
                   menjembatani kebutuhan administrasi dengan solusi teknologi
                   yang tepat.
@@ -1814,7 +1842,7 @@
 
       <div class="cosmic-divider"></div>
 
-      <!-- ═══════════════ PENDIDIKAN ═══════════════ -->
+      <!-- PENDIDIKAN -->
       <section id="pendidikan">
         <div class="container">
           <div class="fade-up">
@@ -1915,7 +1943,7 @@
 
       <div class="cosmic-divider"></div>
 
-      <!-- ═══════════════ PENGALAMAN ═══════════════ -->
+      <!-- PENGALAMAN -->
       <section id="pengalaman">
         <div class="container">
           <div class="fade-up">
@@ -1971,7 +1999,6 @@
                   </ul>
                 </div>
               </div>
-
               <div class="timeline-item">
                 <div class="timeline-left">
                   <div
@@ -2023,7 +2050,6 @@
                   </ul>
                 </div>
               </div>
-
               <div class="timeline-item">
                 <div class="timeline-left">
                   <div
@@ -2083,7 +2109,7 @@
 
       <div class="cosmic-divider"></div>
 
-      <!-- ═══════════════ SERTIFIKAT ═══════════════ -->
+      <!-- SERTIFIKAT -->
       <section id="sertifikat">
         <div class="container">
           <div class="fade-up">
@@ -2102,7 +2128,6 @@
             </p>
           </div>
 
-          <!-- MSIB -->
           <div class="accordion flow-border fade-up">
             <button class="accordion-btn" onclick="toggleAccordion(this)">
               <div class="acc-left">
@@ -2185,7 +2210,6 @@
             </div>
           </div>
 
-          <!-- BNSP -->
           <div class="accordion flow-border fade-up">
             <button class="accordion-btn" onclick="toggleAccordion(this)">
               <div class="acc-left">
@@ -2235,7 +2259,6 @@
             </div>
           </div>
 
-          <!-- Codepolitan Sep 2024 -->
           <div class="accordion flow-border fade-up">
             <button class="accordion-btn" onclick="toggleAccordion(this)">
               <div class="acc-left">
@@ -2301,7 +2324,6 @@
             </div>
           </div>
 
-          <!-- Codepolitan Mei 2026 -->
           <div class="accordion flow-border fade-up">
             <button class="accordion-btn" onclick="toggleAccordion(this)">
               <div class="acc-left">
@@ -2371,7 +2393,6 @@
             </div>
           </div>
 
-          <!-- Dicoding -->
           <div class="accordion flow-border fade-up">
             <button class="accordion-btn" onclick="toggleAccordion(this)">
               <div class="acc-left">
@@ -2504,7 +2525,7 @@
 
       <div class="cosmic-divider"></div>
 
-      <!-- ═══════════════ PROYEK ═══════════════ -->
+      <!-- PROYEK -->
       <section id="proyek">
         <div class="container">
           <div class="fade-up">
@@ -2512,7 +2533,6 @@
             <h2 class="section-title shimmer">Proyek <span>Unggulan</span></h2>
           </div>
 
-          <!-- Proyek 1 -->
           <div class="project-card flow-border fade-up">
             <div class="project-header">
               <div>
@@ -2525,9 +2545,8 @@
                 href="https://github.com/amandasari2"
                 target="_blank"
                 class="github-btn"
+                ><i class="fa-brands fa-github"></i> GitHub</a
               >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
             </div>
             <div class="project-grid">
               <div>
@@ -2550,10 +2569,10 @@
                   </li>
                 </ul>
                 <div class="tech-tags">
-                  <span class="tech-tag">Laravel 11</span>
-                  <span class="tech-tag">PHP</span>
-                  <span class="tech-tag">MySQL</span>
-                  <span class="tech-tag">JavaScript</span>
+                  <span class="tech-tag">Laravel 11</span
+                  ><span class="tech-tag">PHP</span
+                  ><span class="tech-tag">MySQL</span
+                  ><span class="tech-tag">JavaScript</span>
                 </div>
               </div>
               <div class="project-imgs">
@@ -2585,7 +2604,6 @@
             </div>
           </div>
 
-          <!-- Proyek 2 -->
           <div class="project-card flow-border fade-up">
             <div class="project-header">
               <div>
@@ -2598,9 +2616,8 @@
                 href="https://github.com/amandasari2"
                 target="_blank"
                 class="github-btn"
+                ><i class="fa-brands fa-github"></i> GitHub</a
               >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
             </div>
             <div class="project-grid">
               <div>
@@ -2619,11 +2636,11 @@
                   </li>
                 </ul>
                 <div class="tech-tags">
-                  <span class="tech-tag">PHP</span>
-                  <span class="tech-tag">CodeIgniter</span>
-                  <span class="tech-tag">MySQL</span>
-                  <span class="tech-tag">HTML5</span>
-                  <span class="tech-tag">CSS3</span>
+                  <span class="tech-tag">PHP</span
+                  ><span class="tech-tag">CodeIgniter</span
+                  ><span class="tech-tag">MySQL</span
+                  ><span class="tech-tag">HTML5</span
+                  ><span class="tech-tag">CSS3</span>
                 </div>
               </div>
               <div class="project-imgs">
@@ -2655,7 +2672,6 @@
             </div>
           </div>
 
-          <!-- Proyek 3 -->
           <div class="project-card flow-border fade-up">
             <div class="project-header">
               <div>
@@ -2668,9 +2684,8 @@
                 href="https://github.com/amandasari2"
                 target="_blank"
                 class="github-btn"
+                ><i class="fa-brands fa-github"></i> GitHub</a
               >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
             </div>
             <div class="project-grid">
               <div>
@@ -2689,11 +2704,11 @@
                   </li>
                 </ul>
                 <div class="tech-tags">
-                  <span class="tech-tag">PHP</span>
-                  <span class="tech-tag">CodeIgniter</span>
-                  <span class="tech-tag">MySQL</span>
-                  <span class="tech-tag">JavaScript</span>
-                  <span class="tech-tag">HTML & CSS</span>
+                  <span class="tech-tag">PHP</span
+                  ><span class="tech-tag">CodeIgniter</span
+                  ><span class="tech-tag">MySQL</span
+                  ><span class="tech-tag">JavaScript</span
+                  ><span class="tech-tag">HTML & CSS</span>
                 </div>
               </div>
               <div class="project-imgs">
@@ -2725,7 +2740,6 @@
             </div>
           </div>
 
-          <!-- Proyek 4 -->
           <div class="project-card flow-border fade-up">
             <div class="project-header">
               <div>
@@ -2740,9 +2754,8 @@
                 href="https://github.com/amandasari2"
                 target="_blank"
                 class="github-btn"
+                ><i class="fa-brands fa-github"></i> GitHub</a
               >
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
             </div>
             <div class="project-grid">
               <div>
@@ -2765,12 +2778,12 @@
                   </li>
                 </ul>
                 <div class="tech-tags">
-                  <span class="tech-tag">Laravel 11</span>
-                  <span class="tech-tag">PHP</span>
-                  <span class="tech-tag">MySQL</span>
-                  <span class="tech-tag">HTML5</span>
-                  <span class="tech-tag">CSS3</span>
-                  <span class="tech-tag">JavaScript</span>
+                  <span class="tech-tag">Laravel 11</span
+                  ><span class="tech-tag">PHP</span
+                  ><span class="tech-tag">MySQL</span
+                  ><span class="tech-tag">HTML5</span
+                  ><span class="tech-tag">CSS3</span
+                  ><span class="tech-tag">JavaScript</span>
                 </div>
               </div>
               <div class="project-imgs">
@@ -2806,7 +2819,7 @@
 
       <div class="cosmic-divider"></div>
 
-      <!-- ═══════════════ KEAHLIAN ═══════════════ -->
+      <!-- KEAHLIAN -->
       <section id="keahlian">
         <div class="container">
           <div class="fade-up">
@@ -2817,7 +2830,6 @@
           </div>
           <div class="glass-card flow-border fade-up">
             <div class="skills-grid">
-              <!-- Teknis -->
               <div>
                 <div class="skills-section-title">
                   <div class="skill-icon-wrap"><i class="fa fa-code"></i></div>
@@ -2902,7 +2914,6 @@
                   </div>
                 </div>
               </div>
-              <!-- Administrasi -->
               <div>
                 <div class="skills-section-title">
                   <div class="skill-icon-wrap">
@@ -2976,7 +2987,7 @@
 
       <div class="cosmic-divider"></div>
 
-      <!-- ═══════════════ KONTAK ═══════════════ -->
+      <!-- KONTAK -->
       <section id="kontak">
         <div class="container">
           <div class="fade-up">
@@ -3050,8 +3061,7 @@
                   <div>
                     <label class="form-label"
                       >Nama <span style="color: #f87171">*</span></label
-                    >
-                    <input
+                    ><input
                       type="text"
                       id="fNama"
                       class="form-input"
@@ -3061,8 +3071,7 @@
                   <div>
                     <label class="form-label"
                       >Email <span style="color: #f87171">*</span></label
-                    >
-                    <input
+                    ><input
                       type="email"
                       id="fEmail"
                       class="form-input"
@@ -3073,8 +3082,7 @@
                 <div class="form-group">
                   <label class="form-label"
                     >Subjek <span style="color: #f87171">*</span></label
-                  >
-                  <input
+                  ><input
                     type="text"
                     id="fSubjek"
                     class="form-input"
@@ -3084,8 +3092,7 @@
                 <div class="form-group">
                   <label class="form-label"
                     >Pesan <span style="color: #f87171">*</span></label
-                  >
-                  <textarea
+                  ><textarea
                     id="fPesan"
                     class="form-input"
                     rows="5"
@@ -3169,40 +3176,75 @@
     <!-- Scroll Top -->
     <button id="scrollTop"><i class="fa fa-arrow-up"></i></button>
 
+    <!-- Perf Toggle -->
+    <button id="perfToggle" title="Pause/resume animasi">
+      <i class="fa fa-pause"></i>
+    </button>
+
     <!-- Toast -->
     <div id="toast">
       <i class="fa fa-check-circle"></i> <span id="toastMsg"></span>
     </div>
 
     <script>
-      // ═══════════════════════════════════════════════
-      //   CURSOR
-      // ═══════════════════════════════════════════════
-      const dot = document.getElementById("cursorDot");
-      const ring = document.getElementById("cursorRing");
-      let mx = 0,
-        my = 0,
-        rx = 0,
-        ry = 0;
-      document.addEventListener("mousemove", (e) => {
-        mx = e.clientX;
-        my = e.clientY;
-        dot.style.transform = `translate(${mx - 4}px,${my - 4}px)`;
-      });
-      function animCursor() {
-        rx += (mx - rx) * 0.12;
-        ry += (my - ry) * 0.12;
-        ring.style.transform = `translate(${rx - 16}px,${ry - 16}px)`;
-        requestAnimationFrame(animCursor);
-      }
-      animCursor();
+      // ══════════════════════════════════════════════
+      //  PERFORMANCE DETECTION
+      //  Low-end = < 4 logical CPUs OR mobile with bad GPU hints
+      // ══════════════════════════════════════════════
+      const isLowEnd =
+        (navigator.hardwareConcurrency || 4) < 4 ||
+        /Android|iPhone|iPad/i.test(navigator.userAgent);
+      const isTouchDevice = window.matchMedia(
+        "(hover: none) and (pointer: coarse)",
+      ).matches;
 
-      // ═══════════════════════════════════════════════
-      //   STARFIELD
-      // ═══════════════════════════════════════════════
+      // Reduced object counts for low-end devices
+      const CFG = {
+        starDensity: isLowEnd ? 5000 : 2000, // px² per star (higher = fewer stars)
+        showRocket: !isLowEnd,
+        showCat: !isLowEnd,
+        showAirplane: !isLowEnd,
+        showHeli: !isLowEnd,
+        showJet: false, // removed — too heavy even on desktop
+        showBirds: !isLowEnd,
+        showPlanets: true,
+        showShoots: !isLowEnd,
+        birdCount: isLowEnd ? 0 : 3, // was 4
+      };
+
+      let animPaused = false;
+      let rafId = null;
+
+      // ══════════════════════════════════════════════
+      //  CURSOR — skip entirely on touch
+      // ══════════════════════════════════════════════
+      if (!isTouchDevice) {
+        const dot = document.getElementById("cursorDot");
+        const ring = document.getElementById("cursorRing");
+        let mx = 0,
+          my = 0,
+          rx = 0,
+          ry = 0;
+        document.addEventListener("mousemove", (e) => {
+          mx = e.clientX;
+          my = e.clientY;
+          dot.style.transform = `translate(${mx - 4}px,${my - 4}px)`;
+        });
+        (function animCursor() {
+          rx += (mx - rx) * 0.12;
+          ry += (my - ry) * 0.12;
+          ring.style.transform = `translate(${rx - 16}px,${ry - 16}px)`;
+          requestAnimationFrame(animCursor);
+        })();
+      }
+
+      // ══════════════════════════════════════════════
+      //  STARFIELD
+      // ══════════════════════════════════════════════
       const sc = document.getElementById("starfield");
       const ctx = sc.getContext("2d");
       let stars = [];
+
       function resizeSc() {
         sc.width = window.innerWidth;
         sc.height = window.innerHeight;
@@ -3215,20 +3257,20 @@
 
       function initStars() {
         stars = [];
-        const n = Math.floor((sc.width * sc.height) / 2000);
+        const n = Math.floor((sc.width * sc.height) / CFG.starDensity);
         for (let i = 0; i < n; i++) {
           stars.push({
             x: Math.random() * sc.width,
             y: Math.random() * sc.height,
             r: Math.random() * 1.5 + 0.3,
-            alpha: Math.random(),
-            speed: Math.random() * 0.4 + 0.05,
             twinkle: Math.random() * Math.PI * 2,
+            speed: Math.random() * 0.15 + 0.03,
           });
         }
       }
       initStars();
-      function drawStars(t) {
+
+      function drawStars() {
         ctx.clearRect(0, 0, sc.width, sc.height);
         stars.forEach((s) => {
           s.twinkle += 0.02;
@@ -3237,15 +3279,14 @@
           ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(220,230,255,${a})`;
           ctx.fill();
-          // Shooting star rarely
-          s.y += s.speed * 0.15;
+          s.y += s.speed;
           if (s.y > sc.height) s.y = 0;
         });
       }
 
-      // ═══════════════════════════════════════════════
-      //   SPACE OBJECTS
-      // ═══════════════════════════════════════════════
+      // ══════════════════════════════════════════════
+      //  SPACE CANVAS
+      // ══════════════════════════════════════════════
       const sc2 = document.getElementById("spaceCanvas");
       const ctx2 = sc2.getContext("2d");
       function resizeSc2() {
@@ -3256,47 +3297,41 @@
       window.addEventListener("resize", resizeSc2);
 
       // — SUN —
-      const sun = {
-        x: sc2.width * 0.88,
-        y: sc2.height * 0.14,
-        r: 55,
-        angle: 0,
-        pulseT: 0,
-      };
+      const sun = { x: 0, y: 0, r: 55, pulseT: 0 };
+      function updateSunPos() {
+        sun.x = sc2.width * 0.88;
+        sun.y = sc2.height * 0.14;
+      }
+      updateSunPos();
+      window.addEventListener("resize", updateSunPos);
+
       function drawSun(t) {
-        const x = sun.x,
-          y = sun.y,
-          r = sun.r;
+        const { x, y, r } = sun;
         sun.pulseT += 0.018;
-        // Corona rays
-        const numRays = 16;
+        const numRays = isLowEnd ? 8 : 16;
         for (let i = 0; i < numRays; i++) {
           const ang = (i / numRays) * Math.PI * 2 + t * 0.003;
           const len = r + 18 + Math.sin(t * 0.04 + i * 1.2) * 10;
-          const x1 = x + Math.cos(ang) * (r + 6);
-          const y1 = y + Math.sin(ang) * (r + 6);
-          const x2 = x + Math.cos(ang) * len;
-          const y2 = y + Math.sin(ang) * len;
           ctx2.beginPath();
-          ctx2.strokeStyle = `rgba(251,191,36,${0.25 + 0.12 * Math.sin(t * 0.03 + i)})`;
+          ctx2.strokeStyle = `rgba(251,191,36,${0.2 + 0.1 * Math.sin(t * 0.03 + i)})`;
           ctx2.lineWidth = 2;
-          ctx2.moveTo(x1, y1);
-          ctx2.lineTo(x2, y2);
+          ctx2.moveTo(x + Math.cos(ang) * (r + 6), y + Math.sin(ang) * (r + 6));
+          ctx2.lineTo(x + Math.cos(ang) * len, y + Math.sin(ang) * len);
           ctx2.stroke();
         }
-        // Outer glow corona
-        for (let layer = 5; layer > 0; layer--) {
-          const gR = r + layer * 14 + Math.sin(sun.pulseT) * 6;
-          const grd = ctx2.createRadialGradient(x, y, r * 0.7, x, y, gR);
-          grd.addColorStop(0, `rgba(253,224,71,${0.06 / layer})`);
-          grd.addColorStop(1, "rgba(253,224,71,0)");
-          ctx2.beginPath();
-          ctx2.arc(x, y, gR, 0, Math.PI * 2);
-          ctx2.fillStyle = grd;
-          ctx2.fill();
+        if (!isLowEnd) {
+          for (let layer = 3; layer > 0; layer--) {
+            const gR = r + layer * 14 + Math.sin(sun.pulseT) * 6;
+            const grd = ctx2.createRadialGradient(x, y, r * 0.7, x, y, gR);
+            grd.addColorStop(0, `rgba(253,224,71,${0.05 / layer})`);
+            grd.addColorStop(1, "rgba(253,224,71,0)");
+            ctx2.beginPath();
+            ctx2.arc(x, y, gR, 0, Math.PI * 2);
+            ctx2.fillStyle = grd;
+            ctx2.fill();
+          }
         }
-        // Sun body
-        const bodyGrd = ctx2.createRadialGradient(
+        const bg = ctx2.createRadialGradient(
           x - r * 0.3,
           y - r * 0.3,
           r * 0.1,
@@ -3304,65 +3339,31 @@
           y,
           r,
         );
-        bodyGrd.addColorStop(0, "#fde68a");
-        bodyGrd.addColorStop(0.4, "#fbbf24");
-        bodyGrd.addColorStop(0.85, "#f59e0b");
-        bodyGrd.addColorStop(1, "#d97706");
+        bg.addColorStop(0, "#fde68a");
+        bg.addColorStop(0.4, "#fbbf24");
+        bg.addColorStop(0.85, "#f59e0b");
+        bg.addColorStop(1, "#d97706");
         ctx2.beginPath();
         ctx2.arc(x, y, r, 0, Math.PI * 2);
-        ctx2.fillStyle = bodyGrd;
-        ctx2.fill();
-        // Sunspot details
-        ctx2.beginPath();
-        ctx2.arc(x - 12, y - 8, 5, 0, Math.PI * 2);
-        ctx2.fillStyle = "rgba(180,100,0,.25)";
-        ctx2.fill();
-        ctx2.beginPath();
-        ctx2.arc(x + 10, y + 12, 4, 0, Math.PI * 2);
-        ctx2.fillStyle = "rgba(180,100,0,.2)";
+        ctx2.fillStyle = bg;
         ctx2.fill();
       }
 
       // — MOON —
-      const moon = {
-        orbitR: 0,
-        angle: 0,
-        speed: 0.00025,
-        baseX: 0,
-        baseY: 0,
-        r: 22,
-      };
-      function initMoon() {
-        moon.baseX = sc2.width * 0.88;
-        moon.baseY = sc2.height * 0.14;
-        moon.orbitR = 100;
-      }
-      initMoon();
-      window.addEventListener("resize", () => {
-        initMoon();
-        sun.x = sc2.width * 0.88;
-        sun.y = sc2.height * 0.14;
-      });
-      function drawMoon(t) {
+      const moon = { angle: 0, speed: 0.00025, r: 22 };
+      function drawMoon() {
         moon.angle += moon.speed;
-        const mx2 = moon.baseX + Math.cos(moon.angle) * moon.orbitR;
-        const my2 = moon.baseY + Math.sin(moon.angle) * moon.orbitR * 0.4;
+        const bx = sun.x,
+          by = sun.y,
+          orb = 100;
+        const mx2 = bx + Math.cos(moon.angle) * orb;
+        const my2 = by + Math.sin(moon.angle) * orb * 0.4;
         const r = moon.r;
-        // orbit path
         ctx2.beginPath();
-        ctx2.ellipse(
-          moon.baseX,
-          moon.baseY,
-          moon.orbitR,
-          moon.orbitR * 0.4,
-          0,
-          0,
-          Math.PI * 2,
-        );
+        ctx2.ellipse(bx, by, orb, orb * 0.4, 0, 0, Math.PI * 2);
         ctx2.strokeStyle = "rgba(148,163,184,.08)";
         ctx2.lineWidth = 1;
         ctx2.stroke();
-        // glow
         const mg = ctx2.createRadialGradient(
           mx2,
           my2,
@@ -3371,13 +3372,12 @@
           my2,
           r * 2.5,
         );
-        mg.addColorStop(0, "rgba(226,232,240,.1)");
+        mg.addColorStop(0, "rgba(226,232,240,.08)");
         mg.addColorStop(1, "transparent");
         ctx2.beginPath();
         ctx2.arc(mx2, my2, r * 2.5, 0, Math.PI * 2);
         ctx2.fillStyle = mg;
         ctx2.fill();
-        // body
         const mbg = ctx2.createRadialGradient(
           mx2 - r * 0.3,
           my2 - r * 0.3,
@@ -3393,7 +3393,6 @@
         ctx2.arc(mx2, my2, r, 0, Math.PI * 2);
         ctx2.fillStyle = mbg;
         ctx2.fill();
-        // craters
         [
           [-0.3, -0.2, 4],
           [0.3, 0.1, 3],
@@ -3404,54 +3403,34 @@
           ctx2.fillStyle = "rgba(100,116,139,.3)";
           ctx2.fill();
         });
-        // shadow
-        ctx2.beginPath();
-        ctx2.arc(mx2, my2, r, 0, Math.PI * 2);
-        const sh = ctx2.createRadialGradient(
-          mx2 + r * 0.4,
-          my2,
-          0,
-          mx2 + r * 0.2,
-          my2,
-          r,
-        );
-        sh.addColorStop(0, "transparent");
-        sh.addColorStop(0.6, "transparent");
-        sh.addColorStop(1, "rgba(30,41,59,.5)");
-        ctx2.fillStyle = sh;
-        ctx2.fill();
       }
 
       // — EARTH —
-      const earth = {
-        x: 0,
-        y: 0,
-        r: 38,
-        angle: 0,
-      };
-      function initEarth() {
-        earth.x = sc2.width * 0.08;
-        earth.y = sc2.height * 0.75;
+      const earth = { angle: 0, r: 38 };
+      let earthX = 0,
+        earthY = 0;
+      function updateEarthPos() {
+        earthX = sc2.width * 0.08;
+        earthY = sc2.height * 0.75;
       }
-      initEarth();
-      window.addEventListener("resize", initEarth);
-      function drawEarth(t) {
+      updateEarthPos();
+      window.addEventListener("resize", updateEarthPos);
+
+      function drawEarth() {
         earth.angle += 0.003;
-        const { x, y, r, angle } = earth;
-        // orbit ring
-        // glow
+        const { angle, r } = earth;
+        const x = earthX,
+          y = earthY;
         const eg = ctx2.createRadialGradient(x, y, r * 0.5, x, y, r * 2.5);
-        eg.addColorStop(0, "rgba(56,189,248,.08)");
+        eg.addColorStop(0, "rgba(56,189,248,.06)");
         eg.addColorStop(1, "transparent");
         ctx2.beginPath();
         ctx2.arc(x, y, r * 2.5, 0, Math.PI * 2);
         ctx2.fillStyle = eg;
         ctx2.fill();
-        // Save for rotation
         ctx2.save();
         ctx2.translate(x, y);
         ctx2.rotate(angle);
-        // Ocean
         const ebg = ctx2.createRadialGradient(
           -r * 0.2,
           -r * 0.2,
@@ -3467,300 +3446,45 @@
         ctx2.arc(0, 0, r, 0, Math.PI * 2);
         ctx2.fillStyle = ebg;
         ctx2.fill();
-        // Continents (simplified blobs)
         ctx2.fillStyle = "rgba(34,197,94,.75)";
-        ctx2.beginPath();
-        ctx2.ellipse(-8, -10, 14, 10, -0.5, 0, Math.PI * 2);
-        ctx2.fill();
-        ctx2.beginPath();
-        ctx2.ellipse(10, 6, 10, 14, 0.3, 0, Math.PI * 2);
-        ctx2.fill();
-        ctx2.beginPath();
-        ctx2.ellipse(-12, 16, 9, 7, 0.2, 0, Math.PI * 2);
-        ctx2.fill();
-        ctx2.beginPath();
-        ctx2.ellipse(8, -16, 7, 5, 0, 0, Math.PI * 2);
-        ctx2.fill();
-        // Clouds
-        ctx2.fillStyle = "rgba(255,255,255,.35)";
-        ctx2.beginPath();
-        ctx2.ellipse(-5, 2, 16, 5, 0.1, 0, Math.PI * 2);
-        ctx2.fill();
-        ctx2.beginPath();
-        ctx2.ellipse(12, -5, 12, 4, -0.2, 0, Math.PI * 2);
-        ctx2.fill();
+        [
+          [
+            { x: -8, y: -10, rx: 14, ry: 10, rot: -0.5 },
+            { x: 10, y: 6, rx: 10, ry: 14, rot: 0.3 },
+            { x: -12, y: 16, rx: 9, ry: 7, rot: 0.2 },
+            { x: 8, y: -16, rx: 7, ry: 5, rot: 0 },
+          ],
+        ]
+          .flat()
+          .forEach((e) => {
+            ctx2.beginPath();
+            ctx2.ellipse(e.x, e.y, e.rx, e.ry, e.rot, 0, Math.PI * 2);
+            ctx2.fill();
+          });
+        if (!isLowEnd) {
+          ctx2.fillStyle = "rgba(255,255,255,.3)";
+          ctx2.beginPath();
+          ctx2.ellipse(-5, 2, 16, 5, 0.1, 0, Math.PI * 2);
+          ctx2.fill();
+          ctx2.beginPath();
+          ctx2.ellipse(12, -5, 12, 4, -0.2, 0, Math.PI * 2);
+          ctx2.fill();
+        }
         ctx2.restore();
-        // Atmosphere rim
         const atm = ctx2.createRadialGradient(x, y, r, x, y, r * 1.18);
-        atm.addColorStop(0, "rgba(56,189,248,.2)");
+        atm.addColorStop(0, "rgba(56,189,248,.15)");
         atm.addColorStop(1, "transparent");
         ctx2.beginPath();
         ctx2.arc(x, y, r * 1.18, 0, Math.PI * 2);
         ctx2.fillStyle = atm;
         ctx2.fill();
-        // Earth orbit path tiny ring
-        ctx2.beginPath();
-        ctx2.ellipse(x, y, r * 1.5, r * 0.5, 0, 0, Math.PI * 2);
-        ctx2.strokeStyle = "rgba(56,189,248,.1)";
-        ctx2.lineWidth = 1;
-        ctx2.stroke();
       }
 
-      // — ROCKET —
-      const rocket = {
-        t: 0,
-        speed: 0.003,
-        path: [
-          { x: 0.15, y: 0.9 },
-          { x: 0.3, y: 0.6 },
-          { x: 0.5, y: 0.35 },
-          { x: 0.7, y: 0.55 },
-          { x: 0.85, y: 0.4 },
-          { x: 1.05, y: 0.2 },
-        ],
-      };
-      function getBezier(pts, t) {
-        // Catmull-Rom approximation through segments
-        const total = pts.length - 1;
-        const seg = Math.min(Math.floor(t * total), total - 1);
-        const lt = t * total - seg;
-        const p0 = pts[Math.max(seg - 1, 0)];
-        const p1 = pts[seg];
-        const p2 = pts[Math.min(seg + 1, total)];
-        const p3 = pts[Math.min(seg + 2, total)];
-        const cx =
-          0.5 *
-          (p2.x -
-            p0.x +
-            2 * (p1.x - p2.x) * lt +
-            (p0.x - p1.x + 3 * (p2.x - p1.x) + 2 * (p1.x - p2.x)) * lt * lt);
-        const rx2 = p1.x + lt * cx;
-        const cy =
-          0.5 *
-          (p2.y -
-            p0.y +
-            2 * (p1.y - p2.y) * lt +
-            (p0.y - p1.y + 3 * (p2.y - p1.y) + 2 * (p1.y - p2.y)) * lt * lt);
-        const ry2 = p1.y + lt * cy;
-        return { x: rx2 * sc2.width, y: ry2 * sc2.height };
-      }
-      function drawRocket(t) {
-        rocket.t = (rocket.t + rocket.speed) % 1;
-        const pos = getBezier(rocket.path, rocket.t);
-        const posPrev = getBezier(rocket.path, Math.max(rocket.t - 0.01, 0));
-        const dx = pos.x - posPrev.x,
-          dy = pos.y - posPrev.y;
-        const angle2 = Math.atan2(dy, dx);
-
-        // Trail
-        for (let i = 1; i <= 12; i++) {
-          const tp = getBezier(rocket.path, Math.max(rocket.t - i * 0.008, 0));
-          ctx2.beginPath();
-          ctx2.arc(tp.x, tp.y, 2 - i * 0.13, 0, Math.PI * 2);
-          ctx2.fillStyle = `rgba(251,146,60,${0.5 - i * 0.04})`;
-          ctx2.fill();
-        }
-
-        ctx2.save();
-        ctx2.translate(pos.x, pos.y);
-        ctx2.rotate(angle2);
-        // Body
-        ctx2.fillStyle = "#e2e8f0";
-        ctx2.beginPath();
-        ctx2.moveTo(18, 0);
-        ctx2.lineTo(-10, -7);
-        ctx2.lineTo(-14, 0);
-        ctx2.lineTo(-10, 7);
-        ctx2.closePath();
-        ctx2.fill();
-        // Nose
-        ctx2.fillStyle = "#38bdf8";
-        ctx2.beginPath();
-        ctx2.moveTo(18, 0);
-        ctx2.lineTo(8, -4);
-        ctx2.lineTo(8, 4);
-        ctx2.closePath();
-        ctx2.fill();
-        // Wings
-        ctx2.fillStyle = "#60a5fa";
-        ctx2.beginPath();
-        ctx2.moveTo(-8, -7);
-        ctx2.lineTo(-14, -14);
-        ctx2.lineTo(-14, -7);
-        ctx2.closePath();
-        ctx2.fill();
-        ctx2.beginPath();
-        ctx2.moveTo(-8, 7);
-        ctx2.lineTo(-14, 14);
-        ctx2.lineTo(-14, 7);
-        ctx2.closePath();
-        ctx2.fill();
-        // Engine glow
-        const engGrd = ctx2.createRadialGradient(-14, 0, 0, -14, 0, 10);
-        engGrd.addColorStop(0, "rgba(251,146,60,.9)");
-        engGrd.addColorStop(0.4, "rgba(239,68,68,.6)");
-        engGrd.addColorStop(1, "transparent");
-        ctx2.beginPath();
-        ctx2.arc(-14, 0, 10, 0, Math.PI * 2);
-        ctx2.fillStyle = engGrd;
-        ctx2.fill();
-        ctx2.restore();
-      }
-
-      // — SPACE CAT —
-      const spcat = {
-        x: 0,
-        y: 0,
-        bobT: 0,
-        dirX: 1,
-        speed: 0.4,
-      };
-      function initCat() {
-        spcat.x = sc2.width * 0.5;
-        spcat.y = sc2.height * 0.2;
-      }
-      initCat();
-      window.addEventListener("resize", initCat);
-      function drawCat(t) {
-        spcat.bobT += 0.025;
-        spcat.x += spcat.dirX * spcat.speed;
-        if (spcat.x > sc2.width * 0.9 || spcat.x < sc2.width * 0.1)
-          spcat.dirX *= -1;
-        const x = spcat.x,
-          y = spcat.y + Math.sin(spcat.bobT) * 6;
-        const flip = spcat.dirX < 0;
-        ctx2.save();
-        if (flip) {
-          ctx2.translate(x, 0);
-          ctx2.scale(-1, 1);
-          ctx2.translate(-x, 0);
-        }
-        // Helmet glass
-        const helg = ctx2.createRadialGradient(x, y - 6, 2, x, y - 6, 18);
-        helg.addColorStop(0, "rgba(186,230,253,.3)");
-        helg.addColorStop(0.7, "rgba(56,189,248,.15)");
-        helg.addColorStop(1, "rgba(56,189,248,.4)");
-        ctx2.beginPath();
-        ctx2.arc(x, y - 6, 18, 0, Math.PI * 2);
-        ctx2.fillStyle = helg;
-        ctx2.fill();
-        ctx2.beginPath();
-        ctx2.arc(x, y - 6, 18, 0, Math.PI * 2);
-        ctx2.strokeStyle = "rgba(56,189,248,.5)";
-        ctx2.lineWidth = 1.5;
-        ctx2.stroke();
-        // Helmet shine
-        ctx2.beginPath();
-        ctx2.ellipse(x - 5, y - 12, 5, 3, 0.4, 0, Math.PI * 2);
-        ctx2.fillStyle = "rgba(255,255,255,.3)";
-        ctx2.fill();
-        // Body (spacesuit)
-        ctx2.fillStyle = "#e2e8f0";
-        ctx2.beginPath();
-        ctx2.roundRect(x - 9, y + 10, 18, 18, 4);
-        ctx2.fill();
-        // Suit badge
-        ctx2.fillStyle = "#38bdf8";
-        ctx2.beginPath();
-        ctx2.roundRect(x - 4, y + 13, 8, 5, 2);
-        ctx2.fill();
-        // Legs
-        ctx2.fillStyle = "#cbd5e1";
-        ctx2.beginPath();
-        ctx2.roundRect(x - 8, y + 26, 6, 8, 3);
-        ctx2.fill();
-        ctx2.beginPath();
-        ctx2.roundRect(x + 2, y + 26, 6, 8, 3);
-        ctx2.fill();
-        // Boots
-        ctx2.fillStyle = "#60a5fa";
-        ctx2.beginPath();
-        ctx2.roundRect(x - 9, y + 31, 7, 5, 2);
-        ctx2.fill();
-        ctx2.beginPath();
-        ctx2.roundRect(x + 2, y + 31, 7, 5, 2);
-        ctx2.fill();
-        // Arms
-        ctx2.strokeStyle = "#cbd5e1";
-        ctx2.lineWidth = 5;
-        ctx2.lineCap = "round";
-        ctx2.beginPath();
-        ctx2.moveTo(x - 9, y + 15);
-        ctx2.lineTo(x - 16, y + 22);
-        ctx2.stroke();
-        ctx2.beginPath();
-        ctx2.moveTo(x + 9, y + 15);
-        ctx2.lineTo(x + 16, y + 22);
-        ctx2.stroke();
-        // Face (inside helmet)
-        // Cat ears
-        ctx2.fillStyle = "#f9a8d4";
-        ctx2.beginPath();
-        ctx2.moveTo(x - 10, y - 16);
-        ctx2.lineTo(x - 14, y - 24);
-        ctx2.lineTo(x - 5, y - 18);
-        ctx2.closePath();
-        ctx2.fill();
-        ctx2.beginPath();
-        ctx2.moveTo(x + 10, y - 16);
-        ctx2.lineTo(x + 14, y - 24);
-        ctx2.lineTo(x + 5, y - 18);
-        ctx2.closePath();
-        ctx2.fill();
-        // Eyes
-        ctx2.fillStyle = "#1e293b";
-        ctx2.beginPath();
-        ctx2.ellipse(x - 5, y - 5, 2.5, 3, 0, 0, Math.PI * 2);
-        ctx2.fill();
-        ctx2.beginPath();
-        ctx2.ellipse(x + 5, y - 5, 2.5, 3, 0, 0, Math.PI * 2);
-        ctx2.fill();
-        // Eye shine
-        ctx2.fillStyle = "#fff";
-        ctx2.beginPath();
-        ctx2.arc(x - 4, y - 6.5, 1, 0, Math.PI * 2);
-        ctx2.fill();
-        ctx2.beginPath();
-        ctx2.arc(x + 6, y - 6.5, 1, 0, Math.PI * 2);
-        ctx2.fill();
-        // Nose
-        ctx2.fillStyle = "#fda4af";
-        ctx2.beginPath();
-        ctx2.arc(x, y - 2, 2, 0, Math.PI * 2);
-        ctx2.fill();
-        // Mouth & whiskers
-        ctx2.strokeStyle = "#475569";
-        ctx2.lineWidth = 1;
-        ctx2.beginPath();
-        ctx2.moveTo(x - 10, y - 4);
-        ctx2.lineTo(x - 4, y - 3);
-        ctx2.stroke();
-        ctx2.beginPath();
-        ctx2.moveTo(x + 10, y - 4);
-        ctx2.lineTo(x + 4, y - 3);
-        ctx2.stroke();
-        ctx2.beginPath();
-        ctx2.moveTo(x - 2, y - 2);
-        ctx2.lineTo(x - 2, y + 2);
-        ctx2.moveTo(x + 2, y - 2);
-        ctx2.lineTo(x + 2, y + 2);
-        ctx2.stroke();
-        // Tail
-        ctx2.strokeStyle = "#e2e8f0";
-        ctx2.lineWidth = 4;
-        ctx2.lineCap = "round";
-        ctx2.beginPath();
-        ctx2.moveTo(x + 9, y + 24);
-        ctx2.bezierCurveTo(x + 18, y + 30, x + 22, y + 18, x + 16, y + 14);
-        ctx2.stroke();
-        ctx2.restore();
-      }
-
-      // — SMALL PLANETS —
+      // — PLANETS —
       const planets = [
         {
-          x: 0.92,
-          y: 0.65,
+          xr: 0.92,
+          yr: 0.65,
           r: 16,
           c1: "#a78bfa",
           c2: "#7c3aed",
@@ -3769,8 +3493,8 @@
           speed: 0.0008,
         },
         {
-          x: 0.05,
-          y: 0.32,
+          xr: 0.05,
+          yr: 0.32,
           r: 12,
           c1: "#fb923c",
           c2: "#c2410c",
@@ -3779,11 +3503,11 @@
           speed: 0.0015,
         },
       ];
-      function drawPlanets(t) {
+      function drawPlanets() {
         planets.forEach((p) => {
           p.angle += p.speed;
-          const x = p.x * sc2.width,
-            y = p.y * sc2.height,
+          const x = p.xr * sc2.width,
+            y = p.yr * sc2.height,
             r = p.r;
           if (p.ring) {
             ctx2.save();
@@ -3799,7 +3523,7 @@
               0,
               Math.PI * 2,
             );
-            ctx2.strokeStyle = "rgba(167,139,250,.4)";
+            ctx2.strokeStyle = "rgba(167,139,250,.35)";
             ctx2.lineWidth = 3;
             ctx2.stroke();
             ctx2.restore();
@@ -3818,52 +3542,229 @@
           ctx2.arc(x, y, r, 0, Math.PI * 2);
           ctx2.fillStyle = grd;
           ctx2.fill();
-          // texture stripes
-          ctx2.save();
-          ctx2.translate(x, y);
-          ctx2.rotate(p.angle);
-          for (let i = 0; i < 3; i++) {
-            const sy = -r * 0.4 + i * r * 0.4;
-            ctx2.fillStyle = `rgba(255,255,255,.07)`;
-            ctx2.beginPath();
-            ctx2.ellipse(0, sy, r * 0.9, r * 0.08, 0, 0, Math.PI * 2);
-            ctx2.fill();
-          }
-          ctx2.restore();
         });
       }
 
-      // — ✈️ PESAWAT TERBANG (GERAK BEBAS KELILING) —
+      // — ROCKET —
+      const rocket = { t: 0, speed: 0.003 };
+      const rPath = [
+        { x: 0.15, y: 0.9 },
+        { x: 0.3, y: 0.6 },
+        { x: 0.5, y: 0.35 },
+        { x: 0.7, y: 0.55 },
+        { x: 0.85, y: 0.4 },
+        { x: 1.05, y: 0.2 },
+      ];
+      function getBezier(pts, t) {
+        const total = pts.length - 1,
+          seg = Math.min(Math.floor(t * total), total - 1);
+        const lt = t * total - seg;
+        const p0 = pts[Math.max(seg - 1, 0)],
+          p1 = pts[seg],
+          p2 = pts[Math.min(seg + 1, total)],
+          p3 = pts[Math.min(seg + 2, total)];
+        const cx =
+          0.5 *
+          (p2.x -
+            p0.x +
+            2 * (p1.x - p2.x) * lt +
+            (p0.x - p1.x + 3 * (p2.x - p1.x) + 2 * (p1.x - p2.x)) * lt * lt);
+        const cy =
+          0.5 *
+          (p2.y -
+            p0.y +
+            2 * (p1.y - p2.y) * lt +
+            (p0.y - p1.y + 3 * (p2.y - p1.y) + 2 * (p1.y - p2.y)) * lt * lt);
+        return {
+          x: (p1.x + lt * cx) * sc2.width,
+          y: (p1.y + lt * cy) * sc2.height,
+        };
+      }
+      function drawRocket() {
+        rocket.t = (rocket.t + rocket.speed) % 1;
+        const pos = getBezier(rPath, rocket.t);
+        const prev = getBezier(rPath, Math.max(rocket.t - 0.01, 0));
+        const angle = Math.atan2(pos.y - prev.y, pos.x - prev.x);
+        for (let i = 1; i <= 8; i++) {
+          const tp = getBezier(rPath, Math.max(rocket.t - i * 0.008, 0));
+          ctx2.beginPath();
+          ctx2.arc(tp.x, tp.y, 2 - i * 0.18, 0, Math.PI * 2);
+          ctx2.fillStyle = `rgba(251,146,60,${0.5 - i * 0.05})`;
+          ctx2.fill();
+        }
+        ctx2.save();
+        ctx2.translate(pos.x, pos.y);
+        ctx2.rotate(angle);
+        ctx2.fillStyle = "#e2e8f0";
+        ctx2.beginPath();
+        ctx2.moveTo(18, 0);
+        ctx2.lineTo(-10, -7);
+        ctx2.lineTo(-14, 0);
+        ctx2.lineTo(-10, 7);
+        ctx2.closePath();
+        ctx2.fill();
+        ctx2.fillStyle = "#38bdf8";
+        ctx2.beginPath();
+        ctx2.moveTo(18, 0);
+        ctx2.lineTo(8, -4);
+        ctx2.lineTo(8, 4);
+        ctx2.closePath();
+        ctx2.fill();
+        ctx2.fillStyle = "#60a5fa";
+        ctx2.beginPath();
+        ctx2.moveTo(-8, -7);
+        ctx2.lineTo(-14, -14);
+        ctx2.lineTo(-14, -7);
+        ctx2.closePath();
+        ctx2.fill();
+        ctx2.beginPath();
+        ctx2.moveTo(-8, 7);
+        ctx2.lineTo(-14, 14);
+        ctx2.lineTo(-14, 7);
+        ctx2.closePath();
+        ctx2.fill();
+        ctx2.restore();
+      }
+
+      // — SPACE CAT —
+      const spcat = { bobT: 0, dirX: 1, speed: 0.4 };
+      let catX = 0,
+        catBaseY = 0;
+      function initCat() {
+        catX = sc2.width * 0.5;
+        catBaseY = sc2.height * 0.2;
+      }
+      initCat();
+      window.addEventListener("resize", initCat);
+      function drawCat() {
+        spcat.bobT += 0.025;
+        catX += spcat.dirX * spcat.speed;
+        if (catX > sc2.width * 0.9 || catX < sc2.width * 0.1) spcat.dirX *= -1;
+        const x = catX,
+          y = catBaseY + Math.sin(spcat.bobT) * 6;
+        ctx2.save();
+        if (spcat.dirX < 0) {
+          ctx2.translate(x, 0);
+          ctx2.scale(-1, 1);
+          ctx2.translate(-x, 0);
+        }
+        const helg = ctx2.createRadialGradient(x, y - 6, 2, x, y - 6, 18);
+        helg.addColorStop(0, "rgba(186,230,253,.25)");
+        helg.addColorStop(1, "rgba(56,189,248,.35)");
+        ctx2.beginPath();
+        ctx2.arc(x, y - 6, 18, 0, Math.PI * 2);
+        ctx2.fillStyle = helg;
+        ctx2.fill();
+        ctx2.beginPath();
+        ctx2.arc(x, y - 6, 18, 0, Math.PI * 2);
+        ctx2.strokeStyle = "rgba(56,189,248,.45)";
+        ctx2.lineWidth = 1.5;
+        ctx2.stroke();
+        ctx2.fillStyle = "#e2e8f0";
+        ctx2.beginPath();
+        ctx2.roundRect(x - 9, y + 10, 18, 18, 4);
+        ctx2.fill();
+        ctx2.fillStyle = "#38bdf8";
+        ctx2.beginPath();
+        ctx2.roundRect(x - 4, y + 13, 8, 5, 2);
+        ctx2.fill();
+        ctx2.fillStyle = "#cbd5e1";
+        ctx2.beginPath();
+        ctx2.roundRect(x - 8, y + 26, 6, 8, 3);
+        ctx2.fill();
+        ctx2.beginPath();
+        ctx2.roundRect(x + 2, y + 26, 6, 8, 3);
+        ctx2.fill();
+        ctx2.fillStyle = "#60a5fa";
+        ctx2.beginPath();
+        ctx2.roundRect(x - 9, y + 31, 7, 5, 2);
+        ctx2.fill();
+        ctx2.beginPath();
+        ctx2.roundRect(x + 2, y + 31, 7, 5, 2);
+        ctx2.fill();
+        ctx2.strokeStyle = "#cbd5e1";
+        ctx2.lineWidth = 5;
+        ctx2.lineCap = "round";
+        ctx2.beginPath();
+        ctx2.moveTo(x - 9, y + 15);
+        ctx2.lineTo(x - 16, y + 22);
+        ctx2.stroke();
+        ctx2.beginPath();
+        ctx2.moveTo(x + 9, y + 15);
+        ctx2.lineTo(x + 16, y + 22);
+        ctx2.stroke();
+        ctx2.fillStyle = "#f9a8d4";
+        ctx2.beginPath();
+        ctx2.moveTo(x - 10, y - 16);
+        ctx2.lineTo(x - 14, y - 24);
+        ctx2.lineTo(x - 5, y - 18);
+        ctx2.closePath();
+        ctx2.fill();
+        ctx2.beginPath();
+        ctx2.moveTo(x + 10, y - 16);
+        ctx2.lineTo(x + 14, y - 24);
+        ctx2.lineTo(x + 5, y - 18);
+        ctx2.closePath();
+        ctx2.fill();
+        ctx2.fillStyle = "#1e293b";
+        ctx2.beginPath();
+        ctx2.ellipse(x - 5, y - 5, 2.5, 3, 0, 0, Math.PI * 2);
+        ctx2.fill();
+        ctx2.beginPath();
+        ctx2.ellipse(x + 5, y - 5, 2.5, 3, 0, 0, Math.PI * 2);
+        ctx2.fill();
+        ctx2.fillStyle = "#fff";
+        ctx2.beginPath();
+        ctx2.arc(x - 4, y - 6.5, 1, 0, Math.PI * 2);
+        ctx2.fill();
+        ctx2.beginPath();
+        ctx2.arc(x + 6, y - 6.5, 1, 0, Math.PI * 2);
+        ctx2.fill();
+        ctx2.fillStyle = "#fda4af";
+        ctx2.beginPath();
+        ctx2.arc(x, y - 2, 2, 0, Math.PI * 2);
+        ctx2.fill();
+        ctx2.strokeStyle = "#475569";
+        ctx2.lineWidth = 1;
+        ctx2.beginPath();
+        ctx2.moveTo(x - 10, y - 4);
+        ctx2.lineTo(x - 4, y - 3);
+        ctx2.stroke();
+        ctx2.beginPath();
+        ctx2.moveTo(x + 10, y - 4);
+        ctx2.lineTo(x + 4, y - 3);
+        ctx2.stroke();
+        ctx2.strokeStyle = "#e2e8f0";
+        ctx2.lineWidth = 4;
+        ctx2.lineCap = "round";
+        ctx2.beginPath();
+        ctx2.moveTo(x + 9, y + 24);
+        ctx2.bezierCurveTo(x + 18, y + 30, x + 22, y + 18, x + 16, y + 14);
+        ctx2.stroke();
+        ctx2.restore();
+      }
+
+      // — AIRPLANE —
       const airplane = {
-        x: Math.random() * 800,
-        y: Math.random() * 600,
-        speedX: 1.2 + Math.random() * 1.5,
-        speedY: 0.8 + Math.random() * 1.2,
+        x: 200,
+        y: 300,
+        speedX: 1.4,
+        speedY: 0.9,
         size: 22,
         angle: 0,
       };
       function drawAirplane(t) {
-        // Gerak bebas ke segala arah + sedikit bergelombang
-        airplane.x += airplane.speedX + Math.sin(t * 0.002) * 0.4;
-        airplane.y += airplane.speedY + Math.cos(t * 0.003) * 0.4;
-
-        // Pantul kalau kena pinggir layar
+        airplane.x += airplane.speedX + Math.sin(t * 0.002) * 0.3;
+        airplane.y += airplane.speedY + Math.cos(t * 0.003) * 0.3;
         if (airplane.x < -100 || airplane.x > sc2.width + 100)
           airplane.speedX *= -1;
         if (airplane.y < 50 || airplane.y > sc2.height - 50)
           airplane.speedY *= -1;
-
-        // Arah pesawat mengikuti arah gerakan
         airplane.angle = Math.atan2(airplane.speedY, airplane.speedX);
-
-        const x = airplane.x,
-          y = airplane.y,
-          s = airplane.size;
+        const { x, y, size: s } = airplane;
         ctx2.save();
         ctx2.translate(x, y);
         ctx2.rotate(airplane.angle);
-
-        // Badan pesawat
         ctx2.fillStyle = "#e2e8f0";
         ctx2.beginPath();
         ctx2.moveTo(s * 1.2, 0);
@@ -3872,8 +3773,6 @@
         ctx2.lineTo(-s * 0.8, -s * 0.35);
         ctx2.closePath();
         ctx2.fill();
-
-        // Sayap
         ctx2.fillStyle = "#cbd5e1";
         ctx2.beginPath();
         ctx2.moveTo(0, s * 0.35);
@@ -3887,78 +3786,52 @@
         ctx2.lineTo(s * 0.2, -s * 0.7);
         ctx2.closePath();
         ctx2.fill();
-
-        // Ekor
-        ctx2.fillStyle = "#94a3b8";
-        ctx2.beginPath();
-        ctx2.moveTo(-s * 0.7, 0);
-        ctx2.lineTo(-s * 1.1, s * 0.45);
-        ctx2.lineTo(-s * 0.9, 0);
-        ctx2.lineTo(-s * 1.1, -s * 0.45);
-        ctx2.closePath();
-        ctx2.fill();
-
-        // Jalur asap
-        ctx2.strokeStyle = "rgba(226, 232, 240, 0.3)";
-        ctx2.lineWidth = 1.8;
+        ctx2.strokeStyle = "rgba(226,232,240,0.25)";
+        ctx2.lineWidth = 1.5;
         ctx2.setLineDash([8, 12]);
         ctx2.beginPath();
         ctx2.moveTo(-s * 0.8, 0);
-        ctx2.lineTo(-s * 6, 0);
+        ctx2.lineTo(-s * 5, 0);
         ctx2.stroke();
         ctx2.setLineDash([]);
-
         ctx2.restore();
       }
 
-      // — 🚁 HELIKOPTER (GERAK BEBAS KELILING) —
+      // — HELICOPTER —
       const helicopter = {
-        x: Math.random() * 800,
-        y: Math.random() * 600,
-        speedX: 0.7 + Math.random() * 0.8,
-        speedY: 0.5 + Math.random() * 0.7,
+        x: 400,
+        y: 200,
+        speedX: 0.8,
+        speedY: 0.6,
         size: 20,
         rotor: 0,
       };
       function drawHelicopter(t) {
-        helicopter.x += helicopter.speedX + Math.sin(t * 0.004) * 0.6;
-        helicopter.y += helicopter.speedY + Math.cos(t * 0.0035) * 0.6;
-        helicopter.rotor += 0.35; // putar baling-baling
-
-        // Pantul pinggir layar
+        helicopter.x += helicopter.speedX + Math.sin(t * 0.004) * 0.5;
+        helicopter.y += helicopter.speedY + Math.cos(t * 0.0035) * 0.5;
+        helicopter.rotor += 0.35;
         if (helicopter.x < -80 || helicopter.x > sc2.width + 80)
           helicopter.speedX *= -1;
         if (helicopter.y < 100 || helicopter.y > sc2.height - 100)
           helicopter.speedY *= -1;
-
-        const x = helicopter.x,
-          y = helicopter.y,
-          s = helicopter.size;
+        const { x, y, size: s, rotor } = helicopter;
         ctx2.save();
         ctx2.translate(x, y);
-
-        // Badan helikopter
         ctx2.fillStyle = "#3b82f6";
         ctx2.beginPath();
         ctx2.roundRect(-s * 1.1, -s * 0.45, s * 2.2, s * 0.9, 6);
         ctx2.fill();
-
-        // Kaca depan
         ctx2.fillStyle = "#93c5fd";
         ctx2.beginPath();
         ctx2.arc(s * 0.6, 0, s * 0.35, 0, Math.PI * 2);
         ctx2.fill();
-
-        // Ekor panjang
         ctx2.fillStyle = "#3b82f6";
         ctx2.beginPath();
         ctx2.roundRect(-s * 1.6, -s * 0.15, s * 0.7, s * 0.3, 2);
         ctx2.fill();
-
-        // Baling-baling ATAS (berputar cepat)
         ctx2.save();
         ctx2.translate(0, -s * 0.5);
-        ctx2.rotate(helicopter.rotor);
+        ctx2.rotate(rotor);
         ctx2.strokeStyle = "#1e293b";
         ctx2.lineWidth = 2;
         ctx2.beginPath();
@@ -3968,8 +3841,6 @@
         ctx2.lineTo(0, s * 0.3);
         ctx2.stroke();
         ctx2.restore();
-
-        // Kaki pendaratan
         ctx2.strokeStyle = "#64748b";
         ctx2.lineWidth = 2;
         ctx2.beginPath();
@@ -3978,98 +3849,19 @@
         ctx2.moveTo(s * 0.7, s * 0.45);
         ctx2.lineTo(s * 0.5, s * 0.9);
         ctx2.stroke();
-
         ctx2.restore();
       }
 
-      // — ✈️ JET PRIBADI (GERAK BEBAS KELILING CEPAT) —
-      const privateJet = {
-        x: Math.random() * 800,
-        y: Math.random() * 600,
-        speedX: 2.0 + Math.random() * 1.8,
-        speedY: 1.5 + Math.random() * 1.5,
-        size: 26,
-        tilt: 0,
-      };
-      function drawPrivateJet(t) {
-        privateJet.x += privateJet.speedX;
-        privateJet.y += privateJet.speedY;
-        privateJet.tilt = Math.sin(t * 0.003) * 0.15;
-
-        // Pantul pinggir layar
-        if (privateJet.x < -150 || privateJet.x > sc2.width + 150)
-          privateJet.speedX *= -1;
-        if (privateJet.y < 200 || privateJet.y > sc2.height - 100)
-          privateJet.speedY *= -1;
-
-        // Arah jet ikuti gerakan
-        const angle = Math.atan2(privateJet.speedY, privateJet.speedX);
-
-        const x = privateJet.x,
-          y = privateJet.y,
-          s = privateJet.size;
-        ctx2.save();
-        ctx2.translate(x, y);
-        ctx2.rotate(angle + privateJet.tilt);
-
-        // Badan ramping
-        const bodyGrd = ctx2.createLinearGradient(-s * 1.5, 0, s * 1.2, 0);
-        bodyGrd.addColorStop(0, "#f8fafc");
-        bodyGrd.addColorStop(1, "#cbd5e1");
-        ctx2.fillStyle = bodyGrd;
-        ctx2.beginPath();
-        ctx2.moveTo(s * 1.2, 0);
-        ctx2.lineTo(-s * 1.2, s * 0.25);
-        ctx2.lineTo(-s * 1.5, 0);
-        ctx2.lineTo(-s * 1.2, -s * 0.25);
-        ctx2.closePath();
-        ctx2.fill();
-
-        // Sayap tajam
-        ctx2.fillStyle = "#94a3b8";
-        ctx2.beginPath();
-        ctx2.moveTo(-s * 0.2, 0);
-        ctx2.lineTo(-s * 0.8, s * 0.8);
-        ctx2.lineTo(s * 0.3, s * 0.4);
-        ctx2.closePath();
-        ctx2.fill();
-        ctx2.beginPath();
-        ctx2.moveTo(-s * 0.2, 0);
-        ctx2.lineTo(-s * 0.8, -s * 0.8);
-        ctx2.lineTo(s * 0.3, -s * 0.4);
-        ctx2.closePath();
-        ctx2.fill();
-
-        // Semburan api kecepatan
-        const fireGrd = ctx2.createLinearGradient(-s * 1.4, 0, -s * 3, 0);
-        fireGrd.addColorStop(0, "#f97316");
-        fireGrd.addColorStop(0.5, "#ef4444");
-        fireGrd.addColorStop(1, "rgba(239, 68, 68, 0)");
-        ctx2.fillStyle = fireGrd;
-        ctx2.beginPath();
-        ctx2.ellipse(
-          -s * 1.6,
-          0,
-          s * 1.6,
-          s * 0.3 + Math.random() * 0.2,
-          0,
-          0,
-          Math.PI * 2,
-        );
-        ctx2.fill();
-
-        ctx2.restore();
-      }
-
-      // — 🐦 BURUNG TERBANG (GERAK BEBAS KE SEGALA ARAH) —
+      // — BIRDS —
       const birds = [];
       function initBirds() {
-        for (let i = 0; i < 4; i++) {
+        birds.length = 0;
+        for (let i = 0; i < CFG.birdCount; i++) {
           birds.push({
             x: Math.random() * sc2.width,
             y: 60 + Math.random() * 180,
-            speedX: 0.4 + Math.random() * 1.0,
-            speedY: 0.3 + Math.random() * 0.8,
+            speedX: 0.4 + Math.random() * 0.9,
+            speedY: 0.3 + Math.random() * 0.7,
             flap: Math.random() * Math.PI,
             size: 8 + Math.random() * 6,
           });
@@ -4077,32 +3869,22 @@
       }
       initBirds();
       window.addEventListener("resize", initBirds);
-
-      function drawBirds(t) {
+      function drawBirds() {
         birds.forEach((b) => {
           b.x += b.speedX;
           b.y += b.speedY;
-          b.flap += 0.22; // kecepatan kepakan sayap
-
-          // Pantul pinggir layar
+          b.flap += 0.22;
           if (b.x < -20 || b.x > sc2.width + 30) b.speedX *= -1;
           if (b.y < 40 || b.y > 250) b.speedY *= -1;
-
-          const x = b.x,
-            y = b.y,
-            s = b.size;
-          const wingUp = Math.sin(b.flap) * s * 0.7;
-
+          const { x, y, size: s, flap } = b;
+          const wu = Math.sin(flap) * s * 0.7;
           ctx2.fillStyle = "#334155";
-          // Badan
           ctx2.beginPath();
           ctx2.arc(x, y, s * 0.35, 0, Math.PI * 2);
           ctx2.fill();
-          // Kepala
           ctx2.beginPath();
           ctx2.arc(x + s * 0.4, y - s * 0.2, s * 0.25, 0, Math.PI * 2);
           ctx2.fill();
-          // Paruh
           ctx2.fillStyle = "#f59e0b";
           ctx2.beginPath();
           ctx2.moveTo(x + s * 0.6, y - s * 0.2);
@@ -4110,15 +3892,14 @@
           ctx2.lineTo(x + s * 0.9, y - s * 0.1);
           ctx2.closePath();
           ctx2.fill();
-          // Sayap (bergerak naik turun)
           ctx2.fillStyle = "#475569";
           ctx2.beginPath();
           ctx2.moveTo(x, y);
           ctx2.quadraticCurveTo(
             x - s * 1.2,
-            y - s * 0.8 + wingUp,
+            y - s * 0.8 + wu,
             x - s * 1.6,
-            y + wingUp * 0.5,
+            y + wu * 0.5,
           );
           ctx2.quadraticCurveTo(x - s * 0.8, y + s * 0.4, x, y);
           ctx2.fill();
@@ -4128,15 +3909,14 @@
       // — SHOOTING STARS —
       const shoots = [];
       function spawnShoot() {
-        if (Math.random() < 0.003) {
-          const y = Math.random() * sc2.height * 0.6;
+        if (Math.random() < 0.002) {
           shoots.push({
             x: -50,
-            y,
-            vx: 8 + Math.random() * 6,
-            vy: 0.5 + Math.random() * 2,
+            y: Math.random() * sc2.height * 0.6,
+            vx: 8 + Math.random() * 5,
+            vy: 0.5 + Math.random() * 1.5,
             life: 1,
-            len: 80 + Math.random() * 60,
+            len: 70 + Math.random() * 50,
           });
         }
       }
@@ -4165,28 +3945,46 @@
       // — MAIN LOOP —
       let frameT = 0;
       function loop(t) {
+        if (animPaused) {
+          rafId = requestAnimationFrame(loop);
+          return;
+        }
         frameT = t;
         ctx2.clearRect(0, 0, sc2.width, sc2.height);
-        drawStars(t);
+        drawStars();
         drawSun(t);
-        drawMoon(t);
-        drawPlanets(t);
-        drawEarth(t);
-        drawRocket(t);
-        spawnShoot();
-        drawShoots();
-        drawCat(t);
-        drawAirplane(t); // ✈️ Tambah ini
-        drawHelicopter(t); // 🚁 Tambah ini
-        drawPrivateJet(t); // 🛩️ Tambah ini
-        drawBirds(t); // 🐦 Tambah ini
-        requestAnimationFrame(loop);
+        drawMoon();
+        if (CFG.showPlanets) drawPlanets();
+        drawEarth();
+        if (CFG.showRocket) drawRocket();
+        if (CFG.showShoots) {
+          spawnShoot();
+          drawShoots();
+        }
+        if (CFG.showCat) drawCat();
+        if (CFG.showAirplane) drawAirplane(t);
+        if (CFG.showHeli) drawHelicopter(t);
+        if (CFG.showBirds) drawBirds();
+        rafId = requestAnimationFrame(loop);
       }
-      requestAnimationFrame(loop);
+      rafId = requestAnimationFrame(loop);
 
-      // ═══════════════════════════════════════════════
-      //   TYPING
-      // ═══════════════════════════════════════════════
+      // ══════════════════════════════════════════════
+      //  PERFORMANCE TOGGLE BUTTON
+      // ══════════════════════════════════════════════
+      const perfBtn = document.getElementById("perfToggle");
+      perfBtn.addEventListener("click", () => {
+        animPaused = !animPaused;
+        perfBtn.classList.toggle("paused", animPaused);
+        perfBtn.innerHTML = animPaused
+          ? '<i class="fa fa-play"></i>'
+          : '<i class="fa fa-pause"></i>';
+        perfBtn.title = animPaused ? "Resume animasi" : "Pause animasi";
+      });
+
+      // ══════════════════════════════════════════════
+      //  TYPING EFFECT
+      // ══════════════════════════════════════════════
       const txt = "Amanda Sari";
       let ti = 0,
         del = false;
@@ -4217,9 +4015,9 @@
       }
       typeIt();
 
-      // ═══════════════════════════════════════════════
-      //   MOBILE MENU
-      // ═══════════════════════════════════════════════
+      // ══════════════════════════════════════════════
+      //  MOBILE MENU
+      // ══════════════════════════════════════════════
       const ham = document.getElementById("hamburger");
       const mobMenu = document.getElementById("mobileMenu");
       const ov = document.getElementById("overlay");
@@ -4241,9 +4039,9 @@
         .querySelectorAll(".mob-link")
         .forEach((l) => l.addEventListener("click", closeMob));
 
-      // ═══════════════════════════════════════════════
-      //   ACCORDION
-      // ═══════════════════════════════════════════════
+      // ══════════════════════════════════════════════
+      //  ACCORDION
+      // ══════════════════════════════════════════════
       function toggleAccordion(btn) {
         const content = btn.nextElementSibling;
         const arrow = btn.querySelector(".acc-arrow");
@@ -4251,9 +4049,9 @@
         arrow.classList.toggle("open");
       }
 
-      // ═══════════════════════════════════════════════
-      //   IMAGE MODAL
-      // ═══════════════════════════════════════════════
+      // ══════════════════════════════════════════════
+      //  IMAGE MODAL
+      // ══════════════════════════════════════════════
       const modal = document.getElementById("imgModal");
       const mImg = document.getElementById("modalImg");
       const mClose = document.getElementById("modalClose");
@@ -4316,9 +4114,9 @@
         }
       });
 
-      // ═══════════════════════════════════════════════
-      //   PROGRESS BARS
-      // ═══════════════════════════════════════════════
+      // ══════════════════════════════════════════════
+      //  PROGRESS BARS
+      // ══════════════════════════════════════════════
       const progObs = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
@@ -4336,9 +4134,9 @@
         .querySelectorAll("#keahlian .glass-card")
         .forEach((el) => progObs.observe(el));
 
-      // ═══════════════════════════════════════════════
-      //   FADE UP
-      // ═══════════════════════════════════════════════
+      // ══════════════════════════════════════════════
+      //  FADE UP
+      // ══════════════════════════════════════════════
       const fadeObs = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
@@ -4351,9 +4149,9 @@
         .querySelectorAll(".fade-up")
         .forEach((el) => fadeObs.observe(el));
 
-      // ═══════════════════════════════════════════════
-      //   SCROLL TOP
-      // ═══════════════════════════════════════════════
+      // ══════════════════════════════════════════════
+      //  SCROLL TOP
+      // ══════════════════════════════════════════════
       const stBtn = document.getElementById("scrollTop");
       window.addEventListener("scroll", () =>
         stBtn.classList.toggle("show", scrollY > 400),
@@ -4362,9 +4160,9 @@
         window.scrollTo({ top: 0, behavior: "smooth" }),
       );
 
-      // ═══════════════════════════════════════════════
-      //   TOAST
-      // ═══════════════════════════════════════════════
+      // ══════════════════════════════════════════════
+      //  TOAST
+      // ══════════════════════════════════════════════
       function showToast(msg) {
         const t = document.getElementById("toast");
         document.getElementById("toastMsg").textContent = msg;
@@ -4372,9 +4170,9 @@
         setTimeout(() => (t.style.display = "none"), 3500);
       }
 
-      // ═══════════════════════════════════════════════
-      //   CONTACT FORM
-      // ═══════════════════════════════════════════════
+      // ══════════════════════════════════════════════
+      //  CONTACT FORM
+      // ══════════════════════════════════════════════
       document.getElementById("sendBtn").addEventListener("click", () => {
         const n = document.getElementById("fNama").value.trim();
         const e = document.getElementById("fEmail").value.trim();
@@ -4399,14 +4197,10 @@
         showToast("✓ Membuka WhatsApp...");
       });
 
-      // ═══════════════════════════════════════════════
-      //   YEAR
-      // ═══════════════════════════════════════════════
+      // ══════════════════════════════════════════════
+      //  YEAR & NAV ACTIVE
+      // ══════════════════════════════════════════════
       document.getElementById("yr").textContent = new Date().getFullYear();
-
-      // ═══════════════════════════════════════════════
-      //   NAV ACTIVE
-      // ═══════════════════════════════════════════════
       const allSecs = document.querySelectorAll("section[id]");
       const allLinks = document.querySelectorAll(".nav-links a");
       window.addEventListener("scroll", () => {
